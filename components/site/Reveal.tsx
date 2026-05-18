@@ -1,13 +1,12 @@
 "use client";
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { cn } from "@/lib/utils";
 
 interface RevealProps {
   children: ReactNode;
   /** Stagger within a row of reveals — milliseconds. */
   delay?: number;
-  /** Distance to rise from in pixels. Default 32. */
+  /** Distance to rise from in pixels. Default 80 (intentionally large). */
   rise?: number;
   /** Once revealed, stay revealed. Almost always true. */
   once?: boolean;
@@ -19,15 +18,15 @@ interface RevealProps {
 /**
  * IntersectionObserver-driven scroll reveal. Fades + rises content into
  * place when it crosses ~10% from the bottom of the viewport. Honors
- * prefers-reduced-motion by skipping the animation entirely.
+ * prefers-reduced-motion.
  *
- * Used per the Galleria-style scroll choreography — every section reveals
- * once, sets, and stays.
+ * Defaults are tuned for Galleria-style choreography — 80px rise, 1500ms
+ * transition. Motion the user *notices*, not subliminal polish.
  */
 export function Reveal({
   children,
   delay = 0,
-  rise = 32,
+  rise = 80,
   once = true,
   as = "div",
   className,
@@ -36,7 +35,6 @@ export function Reveal({
   const [visible, setVisible] = useState(false);
   const [reduced, setReduced] = useState(false);
 
-  // Detect reduced-motion preference once at mount (and on system changes).
   useEffect(() => {
     if (typeof window === "undefined") return;
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -80,10 +78,9 @@ export function Reveal({
         transitionDelay: `${delay}ms`,
         transform: visible ? "translateY(0)" : `translateY(${rise}px)`,
         opacity: visible ? 1 : 0,
-        // Reduced-motion users get the final state instantly.
         transition: reduced
           ? "none"
-          : "transform 1000ms cubic-bezier(0.2, 0.6, 0.2, 1), opacity 900ms cubic-bezier(0.2, 0.6, 0.2, 1)",
+          : "transform 1500ms cubic-bezier(0.16, 0.84, 0.32, 1), opacity 1200ms cubic-bezier(0.16, 0.84, 0.32, 1)",
         willChange: visible ? "auto" : "transform, opacity",
       }}
       className={className}
