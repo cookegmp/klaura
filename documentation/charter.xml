@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<charter version="1.0" name="kellylaaura-site" status="v1-scoped">
+<charter version="1.0" name="kellylaura-site" status="v1-scoped">
 
   <metadata>
-    <project>kellylaaura.com</project>
+    <project>kellylauraart.com</project>
     <owner>James (development), Kelly (artist / merchant)</owner>
     <type>E-commerce + portfolio</type>
     <target_launch_window>6 weeks from kickoff</target_launch_window>
-    <repository>github.com/[owner]/kellylaaura-web</repository>
+    <repository>github.com/[owner]/kellylaura-web</repository>
     <hosting>Vercel</hosting>
   </metadata>
 
   <purpose>
     <summary>
-      A single, unified-brand e-commerce and portfolio site for Kelly Laaura, a
+      A single, unified-brand e-commerce and portfolio site for Kelly Laura, a
       landscape painter and vintage clothing curator. The site sells original
       paintings and one-of-a-kind vintage clothing directly, accepts commission
       inquiries, and presents her work with the visual seriousness of a small
@@ -535,7 +535,7 @@
         <task>Stripe account moved from test to live mode</task>
         <task>Final content review with Kelly: copy on every page, legal text, product listings</task>
       </tasks>
-      <exit_criteria>kellylaaura.com loads in production with live Stripe keys, real inventory, and Kelly can complete a real-money test transaction.</exit_criteria>
+      <exit_criteria>kellylauraart.com loads in production with live Stripe keys, real inventory, and Kelly can complete a real-money test transaction.</exit_criteria>
     </phase>
 
   </build_phases>
@@ -595,7 +595,7 @@
   </risks>
 
   <deliverables_summary>
-    <item>Production deploy at kellylaaura.com</item>
+    <item>Production deploy at kellylauraart.com</item>
     <item>Sanity Studio accessible to Kelly</item>
     <item>Working purchase flow for paintings and vintage items</item>
     <item>Working commission inquiry flow</item>

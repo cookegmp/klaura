@@ -32,8 +32,8 @@ const schema = z.object({
 
   // Resend
   RESEND_API_KEY: z.string().optional(),
-  RESEND_FROM_ADDRESS: z.string().default("Kelly Laaura <hello@kellylaaura.com>"),
-  KELLY_NOTIFICATION_EMAIL: z.string().default("kelly@kellylaaura.com"),
+  RESEND_FROM_ADDRESS: z.string().default("Kelly Laura <hello@kellylauraart.com>"),
+  KELLY_NOTIFICATION_EMAIL: z.string().default("kelly@kellylauraart.com"),
 
   // Cron
   CRON_SECRET: z.string().default("local-dev-cron-secret"),

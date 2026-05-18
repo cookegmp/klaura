@@ -1,6 +1,6 @@
-# kellylaaura.com
+# kellylauraart.com
 
-Single-brand e-commerce + portfolio for **Kelly Laaura** — landscape painter and vintage clothing curator. Built per [`documentation/charter.xml`](./documentation/charter.xml).
+Single-brand e-commerce + portfolio for **Kelly Laura** — landscape painter and vintage clothing curator. Built per [`documentation/charter.xml`](./documentation/charter.xml).
 
 ## Status
 
@@ -77,7 +77,7 @@ Full list in `.env.example`. Required values when going live:
 | `STRIPE_PUBLISHABLE_KEY` | `PAYMENT_PROVIDER=stripe` | |
 | `STRIPE_WEBHOOK_SECRET` | `PAYMENT_PROVIDER=stripe` | Signature verification |
 | `RESEND_API_KEY` | `EMAIL_PROVIDER=resend` | |
-| `RESEND_FROM_ADDRESS` | `EMAIL_PROVIDER=resend` | e.g. `Kelly Laaura <hello@kellylaaura.com>` |
+| `RESEND_FROM_ADDRESS` | `EMAIL_PROVIDER=resend` | e.g. `Kelly Laura <hello@kellylauraart.com>` |
 | `KELLY_NOTIFICATION_EMAIL` | `EMAIL_PROVIDER=resend` | Where order/commission alerts go |
 | `CRON_SECRET` | always | Bearer token for Vercel Cron auth |
 | `SENTRY_DSN` | optional | If set, server-side errors are reported |
@@ -120,7 +120,7 @@ documentation/charter.xml  # Authoritative project spec
 1. Create a Sanity project at https://sanity.io. Note the project ID.
 2. In the Sanity dashboard, add CORS origin entries for:
    - `http://localhost:3000`
-   - `https://kellylaaura.com`
+   - `https://kellylauraart.com`
    - `https://*.vercel.app` (for previews)
 3. Generate tokens: a read token (optional) and a write token (Editor role).
 4. Set env vars (`.env.local` for dev, Vercel Project Settings for prod):
@@ -156,8 +156,8 @@ documentation/charter.xml  # Authoritative project spec
    ```
    EMAIL_PROVIDER=resend
    RESEND_API_KEY=re_...
-   RESEND_FROM_ADDRESS="Kelly Laaura <hello@kellylaaura.com>"
-   KELLY_NOTIFICATION_EMAIL=kelly@kellylaaura.com
+   RESEND_FROM_ADDRESS="Kelly Laura <hello@kellylauraart.com>"
+   KELLY_NOTIFICATION_EMAIL=kelly@kellylauraart.com
    ```
 
 ### 4. Vercel
@@ -165,7 +165,7 @@ documentation/charter.xml  # Authoritative project spec
 1. Connect this GitHub repo to a Vercel project.
 2. Set all env vars in Vercel Project Settings (Production + Preview).
 3. Confirm the cron at `/api/cron/release-stale-reservations` is picked up from `vercel.json` (it auto-attaches the `Authorization: Bearer ${CRON_SECRET}` header).
-4. Connect `kellylaaura.com` in Domains.
+4. Connect `kellylauraart.com` in Domains.
 
 ## Operations
 

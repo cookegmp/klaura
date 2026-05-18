@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "Kelly Laaura — landscapes and vintage";
+export const alt = "Kelly Laura — landscapes and vintage";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -34,12 +34,12 @@ export default async function OpenGraphImage() {
             color: "#3a3d44",
           }}
         >
-          kellylaaura.com
+          kellylauraart.com
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
           <div style={{ fontSize: 110, fontWeight: 300, lineHeight: 1, letterSpacing: "-0.02em" }}>
             Kelly
-            <span style={{ fontStyle: "italic", color: "#8a5424" }}> Laaura</span>
+            <span style={{ fontStyle: "italic", color: "#8a5424" }}> Laura</span>
           </div>
           <div style={{ fontSize: 32, color: "#3a3d44", maxWidth: 800, lineHeight: 1.35 }}>
             Original paintings and one-of-a-kind vintage. Painted slowly, worn long after.

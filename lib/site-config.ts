@@ -1,11 +1,11 @@
 export const siteConfig = {
-  name: "Kelly Laaura",
-  shortName: "Kelly Laaura",
+  name: "Kelly Laura",
+  shortName: "Kelly Laura",
   description:
-    "Original paintings and one-of-a-kind vintage from Kelly Laaura — landscapes, light, and slow finds.",
+    "Original paintings and one-of-a-kind vintage from Kelly Laura — landscapes, light, and slow finds.",
   url: process.env.SITE_URL ?? "http://localhost:3000",
   instagram: "kellylaaura",
-  contactEmail: "hello@kellylaaura.com",
+  contactEmail: "hello@kellylauraart.com",
 } as const;
 
 export type SiteConfig = typeof siteConfig;

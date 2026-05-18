@@ -6,7 +6,7 @@ import { getCommissionExamples } from "@/lib/sanity/read";
 
 export const metadata: Metadata = {
   title: "Commissions",
-  description: "Commission a painting from Kelly Laaura.",
+  description: "Commission a painting from Kelly Laura.",
 };
 
 const PROCESS = [

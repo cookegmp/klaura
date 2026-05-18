@@ -6,7 +6,7 @@ import { getAllPaintings } from "@/lib/sanity/read";
 
 export const metadata: Metadata = {
   title: "Paintings",
-  description: "Original paintings by Kelly Laaura. Each work is one of one.",
+  description: "Original paintings by Kelly Laura. Each work is one of one.",
 };
 
 type SearchParams = Promise<{

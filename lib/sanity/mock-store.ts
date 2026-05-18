@@ -548,7 +548,7 @@ function seed(): void {
       "Sold once, never again",
     ],
     instagramHandle: "kellylaaura",
-    contactEmail: "hello@kellylaaura.com",
+    contactEmail: "hello@kellylauraart.com",
     shippingFlatRateUS: 45,
     shippingFlatRateIntl: 120,
   };

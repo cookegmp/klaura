@@ -6,7 +6,7 @@ import { getAboutPage } from "@/lib/sanity/read";
 
 export const metadata: Metadata = {
   title: "Studio",
-  description: "About Kelly Laaura — practice, place, and process.",
+  description: "About Kelly Laura — practice, place, and process.",
 };
 
 export default async function StudioPage() {
@@ -25,7 +25,7 @@ export default async function StudioPage() {
         <div className="mb-16">
           <ProductImage
             image={about.hero}
-            alt={about.hero.alt ?? "Kelly Laaura in the studio"}
+            alt={about.hero.alt ?? "Kelly Laura in the studio"}
             seed="about-hero"
             width={1400}
             height={900}

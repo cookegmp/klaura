@@ -36,7 +36,7 @@ export const mockEmail: EmailProvider = {
     const kellyPath = await writeArtifact(
       `${timestamp}-order-kelly-${input.sessionId}.json`,
       {
-        to: "kelly@kellylaaura.com",
+        to: "kelly@kellylauraart.com",
         subject: `Sold: ${input.productTitle}`,
         productTitle: input.productTitle,
         priceUSD: input.productPrice,
@@ -53,7 +53,7 @@ export const mockEmail: EmailProvider = {
     const path = await writeArtifact(
       `${Date.now()}-commission-${input.inquiryId}.json`,
       {
-        to: "kelly@kellylaaura.com",
+        to: "kelly@kellylauraart.com",
         subject: `Commission inquiry — ${input.name}`,
         ...input,
       }

@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
 
   return {
     title: painting.title,
-    description: `${painting.title} — ${painting.medium}, ${painting.year}, by Kelly Laaura.`,
+    description: `${painting.title} — ${painting.medium}, ${painting.year}, by Kelly Laura.`,
     openGraph: {
       title: painting.title,
       type: "website",
@@ -49,7 +49,7 @@ export default async function PaintingDetailPage({ params }: { params: Params })
     description: `${painting.medium}, ${painting.dimensions.heightInches}×${painting.dimensions.widthInches} in, ${painting.year}.`,
     image: painting.primaryImage?.asset?._ref,
     sku: painting._id,
-    brand: { "@type": "Person", name: "Kelly Laaura" },
+    brand: { "@type": "Person", name: "Kelly Laura" },
     offers: {
       "@type": "Offer",
       price: painting.price,

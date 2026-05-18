@@ -6,7 +6,7 @@ import { getAllVintage } from "@/lib/sanity/read";
 
 export const metadata: Metadata = {
   title: "Vintage",
-  description: "One-of-a-kind vintage clothing, curated by Kelly Laaura.",
+  description: "One-of-a-kind vintage clothing, curated by Kelly Laura.",
 };
 
 type SearchParams = Promise<{

@@ -68,7 +68,7 @@ export function Footer() {
 
         <div className="mt-20 pt-8 border-t border-bone/15 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <p className="text-caption text-bone/55">
-            © {new Date().getFullYear()} Kelly Laaura. All works original.
+            © {new Date().getFullYear()} Kelly Laura. All works original.
           </p>
           <ul className="flex flex-wrap gap-x-8 gap-y-2 text-ui text-bone/55">
             <li>

@@ -17,8 +17,8 @@ const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET ?? "production";
 const apiVersion = process.env.NEXT_PUBLIC_SANITY_API_VERSION ?? "2025-01-01";
 
 export default defineConfig({
-  name: "kellylaaura",
-  title: "Kelly Laaura — Studio",
+  name: "kellylaura",
+  title: "Kelly Laura — Studio",
   projectId,
   dataset,
   apiVersion,

@@ -31,9 +31,9 @@ export function Nav() {
           <Link
             href="/"
             className="font-display text-2xl md:text-[1.6rem] tracking-tight leading-none"
-            aria-label="Kelly Laaura — Home"
+            aria-label="Kelly Laura — Home"
           >
-            Kelly <span className="font-display-italic">Laaura</span>
+            Kelly <span className="font-display-italic">Laura</span>
           </Link>
 
           {/* Desktop */}

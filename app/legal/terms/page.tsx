@@ -7,8 +7,8 @@ export default function TermsPage() {
   return (
     <LegalShell title="Terms" subtitle="The basics">
       <p>
-        Use of kellylaaura.com is governed by these terms. All artwork shown is the
-        copyrighted property of Kelly Laaura and may not be reproduced without
+        Use of kellylauraart.com is governed by these terms. All artwork shown is the
+        copyrighted property of Kelly Laura and may not be reproduced without
         permission.
       </p>
       <p>

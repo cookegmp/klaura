@@ -1,4 +1,4 @@
-# CLAUDE.md — kellylaaura.com
+# CLAUDE.md — kellylauraart.com
 
 Project-specific guidance for Claude Code. Treat [`documentation/charter.xml`](./documentation/charter.xml) as authoritative; this file is a quick-reference and notes deviations.
 

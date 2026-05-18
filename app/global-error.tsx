@@ -56,7 +56,7 @@ export default function GlobalError({
               lineHeight: 1.6,
             }}
           >
-            Please try again. If this keeps happening, write to hello@kellylaaura.com.
+            Please try again. If this keeps happening, write to hello@kellylauraart.com.
           </p>
           {error.digest && (
             <p

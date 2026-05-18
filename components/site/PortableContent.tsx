@@ -2,7 +2,7 @@ import { PortableText, type PortableTextComponents } from "@portabletext/react";
 import type { PortableTextBlock } from "@/types/sanity";
 
 /**
- * Portable Text renderer scoped to the kellylaaura look. Headings stay in
+ * Portable Text renderer scoped to the kellylaura look. Headings stay in
  * Fraunces, body in Inter Tight; the italic accent is reserved for the
  * `em` decorator (charter §pairing_rule).
  */
