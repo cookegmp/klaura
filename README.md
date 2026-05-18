@@ -164,7 +164,7 @@ documentation/charter.xml  # Authoritative project spec
 
 1. Connect this GitHub repo to a Vercel project.
 2. Set all env vars in Vercel Project Settings (Production + Preview).
-3. Confirm the cron at `/api/cron/release-stale-reservations` is picked up from `vercel.json` (it auto-attaches the `Authorization: Bearer ${CRON_SECRET}` header).
+3. Confirm the cron at `/api/cron/release-stale-reservations` is picked up from `vercel.json`. **Hobby plan caps crons at daily** — current schedule is `0 9 * * *`. On Pro you can restore tighter cadences (e.g. `*/10 * * * *`). Vercel auto-attaches `Authorization: Bearer ${CRON_SECRET}`.
 4. Connect `kellylauraart.com` in Domains.
 
 ## Operations

@@ -62,10 +62,13 @@ A customer reports they paid but the site still shows the piece as available.
 
 A piece stays in *reserved* status with no sale completing.
 
-1. The cron runs every 10 minutes and releases any reservation past its 30-minute TTL. Wait it out.
-2. To force-release: open in Studio, set **Status → Available**, clear **reservedUntil**, clear **stripeSessionId**, publish.
+1. **The webhook handles this normally.** Stripe sends `checkout.session.expired` ~30 minutes after a session opens; our `/api/webhooks/stripe` releases the reservation immediately.
+2. **The daily cron is the safety net.** Runs at 09:00 UTC (~4–5 AM ET) and releases anything still reserved past its TTL. On the Vercel Hobby plan, daily is the highest frequency allowed — upgrade to Pro to restore the original `*/10 * * * *` cadence (see `vercel.json`).
+3. **To force-release immediately**, two options:
+   - Trigger the cron yourself: `curl -H "Authorization: Bearer $CRON_SECRET" https://kellylaura.com/api/cron/release-stale-reservations`
+   - Or open the document in Studio, set **Status → Available**, clear **reservedUntil** and **stripeSessionId**, publish.
 
-> **Charter §risks:** the cron is defense-in-depth. The webhook is the authoritative path. If you see this happen more than once or twice, check Stripe webhook delivery health.
+> **Charter §risks:** the cron is defense-in-depth. The webhook is the authoritative path. If a reservation needs the cron to clean up more than once or twice in a row, check Stripe webhook delivery health in the dashboard.
 
 ---
 

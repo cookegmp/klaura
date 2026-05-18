@@ -3,7 +3,7 @@
   "crons": [
     {
       "path": "/api/cron/release-stale-reservations",
-      "schedule": "*/10 * * * *"
+      "schedule": "0 9 * * *"
     }
   ]
 }
