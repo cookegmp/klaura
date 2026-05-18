@@ -1,0 +1,54 @@
+import { notFound } from "next/navigation";
+import Link from "next/link";
+import { env } from "@/lib/env";
+import { mock_getSession } from "@/lib/payments/mock";
+import { formatPriceUSD } from "@/lib/utils";
+import { MockCheckoutForm } from "./form";
+
+type Params = Promise<{ id: string }>;
+
+/**
+ * Local stand-in for Stripe's hosted Checkout page. Only routable when
+ * PAYMENT_PROVIDER=mock — in stripe mode users are bounced to checkout.stripe.com
+ * and never see this page.
+ */
+export default async function MockCheckoutPage({ params }: { params: Params }) {
+  if (env().PAYMENT_PROVIDER !== "mock") notFound();
+
+  const { id } = await params;
+  const session = mock_getSession(id);
+  if (!session) notFound();
+
+  return (
+    <div className="min-h-dvh bg-ink text-bone flex items-center">
+      <div className="max-w-md mx-auto w-full p-6 md:p-10">
+        <p className="text-ui text-bone/60 mb-6">Mock checkout · dev only</p>
+        <h1 className="font-display text-3xl leading-tight mb-3">{session.productTitle}</h1>
+        <p className="text-2xl mb-10">{formatPriceUSD(session.priceUSD)}</p>
+
+        <div className="bg-bone/5 border border-bone/15 p-5 mb-8 text-sm">
+          <p className="text-bone/70 mb-2">
+            This is a mock checkout. No card is collected. Press <em>Pay</em> to simulate a
+            successful payment, or <em>Cancel</em> to abandon.
+          </p>
+          <p className="text-bone/50 text-xs">Session: {session.id}</p>
+          <p className="text-bone/50 text-xs">Status: {session.status}</p>
+        </div>
+
+        {session.status === "open" ? (
+          <MockCheckoutForm sessionId={session.id} />
+        ) : (
+          <div className="space-y-4">
+            <p className="text-ochre">This session is {session.status}.</p>
+            <Link
+              href="/paintings"
+              className="text-ui inline-block border-b border-bone hover:text-ochre hover:border-ochre transition-colors"
+            >
+              Back to the gallery
+            </Link>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}

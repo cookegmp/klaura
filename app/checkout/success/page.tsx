@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Container } from "@/components/site/Container";
+import { getPaymentProvider } from "@/lib/payments";
+import { formatPriceUSD } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Order confirmed",
@@ -16,8 +18,22 @@ export default async function CheckoutSuccessPage({
 }) {
   const { session_id } = await searchParams;
 
-  // Phase 3 will server-verify the session via the payments provider here.
-  // Inventory mutation happens in the webhook, NOT this page (charter §step 5).
+  let summary: {
+    productTitle?: string;
+    price?: number;
+    customerEmail?: string | null;
+  } = {};
+
+  if (session_id) {
+    const session = await getPaymentProvider().retrieveSession(session_id);
+    if (session) {
+      summary = {
+        productTitle: session.productTitle,
+        price: session.priceUSD,
+        customerEmail: session.customerEmail,
+      };
+    }
+  }
 
   return (
     <Container width="narrow" className="py-32 md:py-48 text-center">
@@ -25,12 +41,30 @@ export default async function CheckoutSuccessPage({
       <h1 className="font-display font-light text-[length:var(--text-display-md)] md:text-[length:var(--text-display-lg)] leading-[1.05] tracking-[-0.02em]">
         Your piece is <span className="font-display-italic text-ochre-deep">on its way</span>.
       </h1>
-      <p className="mt-8 text-[length:var(--text-body-lg)] text-ink-soft leading-relaxed">
-        We&apos;ve sent a confirmation to your inbox. Kelly will reach out within a few days with shipping details.
+
+      {summary.productTitle && (
+        <div className="mt-12 inline-block border-t border-rule pt-8">
+          <p className="text-ui text-ink-soft mb-2">Order summary</p>
+          <p className="font-display text-2xl">{summary.productTitle}</p>
+          {summary.price && (
+            <p className="text-lg mt-1">{formatPriceUSD(summary.price)}</p>
+          )}
+          {summary.customerEmail && (
+            <p className="text-caption text-ink-soft mt-3">
+              Confirmation sent to {summary.customerEmail}
+            </p>
+          )}
+        </div>
+      )}
+
+      <p className="mt-10 text-[length:var(--text-body-lg)] text-ink-soft leading-relaxed">
+        Kelly will reach out within a few days with shipping details.
       </p>
+
       {session_id && (
         <p className="text-caption text-ink-soft/70 mt-6">Reference: {session_id}</p>
       )}
+
       <div className="mt-12 flex justify-center gap-4">
         <Link
           href="/paintings"
