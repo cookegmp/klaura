@@ -78,6 +78,16 @@
     font-variation-settings: "SOFT" 80;
   }
 
+  /* All-caps Fraunces — used for Galleria-style display headlines that
+     rely on case-as-volume. Tight tracking, slightly heavier strokes via
+     SOFT, line-breaks honored so headlines can fragment across lines. */
+  .font-display-caps {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    font-variation-settings: "SOFT" 60;
+  }
+
   /* Opt into automatic optical-size selection across the document. */
   html {
     font-optical-sizing: auto;
