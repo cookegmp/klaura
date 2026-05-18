@@ -39,34 +39,16 @@ export default async function HomePage() {
   return (
     <>
       {/* Hero ----------------------------------------------------------- */}
-      <section className="relative overflow-hidden pt-12 md:pt-20">
+      <section className="relative overflow-hidden pt-16 md:pt-28">
         <Container width="wide">
-          <div className="grid grid-cols-12 gap-y-12 md:gap-x-10">
-            <div className="col-span-12 md:col-span-7 md:pt-16 lg:pt-28 animate-entrance">
-              <p className="text-ui text-ink-soft mb-6">Montreal painter · based in Ohio</p>
-              <h1 className="font-display font-light text-[length:var(--text-display-lg)] md:text-[length:var(--text-display-xl)] leading-[0.92] tracking-[-0.025em]">
+          <div className="grid grid-cols-12 gap-y-16 md:gap-x-12">
+            <div className="col-span-12 md:col-span-7 md:pt-20 lg:pt-32 animate-entrance">
+              <p className="text-ui text-ink-soft mb-8">Montreal painter · based in Ohio</p>
+              <h1 className="font-display font-light text-[length:var(--text-display-lg)] md:text-[length:var(--text-display-xl)] leading-[0.88] tracking-[-0.03em]">
                 Landscapes that
                 <br />
                 <span className="font-display-italic text-ochre-deep">remember</span> you back.
               </h1>
-              <p className="mt-10 max-w-xl text-[length:var(--text-body-lg)] text-ink-soft leading-relaxed">
-                Original paintings &amp; a small, slowly-gathered collection of vintage clothing —
-                each piece sold only once.
-              </p>
-              <div className="mt-12 flex flex-wrap gap-4">
-                <Link
-                  href="/paintings"
-                  className="text-ui px-7 py-4 bg-ink text-bone hover:bg-ochre-deep transition-colors"
-                >
-                  See the paintings
-                </Link>
-                <Link
-                  href="/vintage"
-                  className="text-ui px-7 py-4 border border-ink hover:bg-ink hover:text-bone transition-colors"
-                >
-                  Browse vintage
-                </Link>
-              </div>
             </div>
 
             <div
