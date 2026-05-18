@@ -554,16 +554,18 @@ function seed(): void {
   };
   store.documents[settings._id] = { ...settings, _type: "siteSettings" };
 
-  // One past commission example (gallery on /commissions)
+  // One past commission example (gallery on /commissions, and seeds the
+  // Commissions tile on the home page).
   const ex1: CommissionExample = {
     _id: "commissionExample.farmhouse",
     _rev: rev(),
     title: "Farmhouse at golden hour",
-    image: {
-      _type: "image",
-      asset: { _ref: "image-placeholder-commission-1", _type: "reference" },
-    },
-    story: "Commissioned as an anniversary gift — the family farmhouse in Ohio, painted from photos taken across one summer.",
+    image: localImage(
+      "img_6868.jpg",
+      "A yellow clapboard house at dusk, photographed in winter, painted for a family anniversary."
+    ),
+    story:
+      "Commissioned as an anniversary gift — the family farmhouse in Ohio, painted from photos taken across one summer.",
     completedYear: 2024,
   };
   store.documents[ex1._id] = { ...ex1, _type: "commissionExample" };

@@ -6,8 +6,11 @@ import { NewsletterCapture } from "@/components/site/NewsletterCapture";
 import { PaintingCard } from "@/components/site/PaintingCard";
 import { ProductImage } from "@/components/site/ProductImage";
 import { PortableContent } from "@/components/site/PortableContent";
+import { SectionTiles } from "@/components/site/SectionTiles";
 import {
   getAboutPage,
+  getAllVintage,
+  getCommissionExamples,
   getFeaturedPaintings,
   getHeroPainting,
   getSiteSettings,
@@ -15,12 +18,23 @@ import {
 import { formatDimensions } from "@/lib/utils";
 
 export default async function HomePage() {
-  const [hero, featured, settings, about] = await Promise.all([
-    getHeroPainting(),
-    getFeaturedPaintings(),
-    getSiteSettings(),
-    getAboutPage(),
-  ]);
+  const [hero, featured, settings, about, commissionExamples, vintage] =
+    await Promise.all([
+      getHeroPainting(),
+      getFeaturedPaintings(),
+      getSiteSettings(),
+      getAboutPage(),
+      getCommissionExamples(),
+      getAllVintage(),
+    ]);
+
+  // First commission example seeds the Commissions tile; first available
+  // painting seeds the Gallery tile (falling back to the hero); first
+  // available vintage item seeds the Shop tile.
+  const commissionsExample = commissionExamples[0] ?? null;
+  const galleryHero = featured[0] ?? hero ?? null;
+  const shopHero =
+    vintage.find((v) => v.status === "available") ?? vintage[0] ?? null;
 
   return (
     <>
@@ -98,39 +112,20 @@ export default async function HomePage() {
         </div>
       )}
 
-      {/* Two-section split --------------------------------------------- */}
-      <section className="py-32 md:py-44">
+      {/* Section tiles — Commissions / Gallery / Shop ------------------- */}
+      <section className="py-28 md:py-40">
         <Container width="wide">
-          <div className="grid md:grid-cols-2 gap-y-20 md:gap-x-20">
-            <div className="md:pt-16">
-              <SectionHeading
-                eyebrow="01"
-                title="Paintings"
-                italicWord="Paintings"
-                description="Oil on linen and soft pastel on sanded paper. Studio work and commissioned portraits of place."
-              />
-              <Link
-                href="/paintings"
-                className="mt-10 inline-block text-ui border-b border-ink pb-1 hover:text-ochre-deep hover:border-ochre-deep transition-colors"
-              >
-                Enter the gallery →
-              </Link>
-            </div>
-            <div className="md:translate-y-24">
-              <SectionHeading
-                eyebrow="02"
-                title="Vintage"
-                italicWord="Vintage"
-                description="Slow finds: knitwear, outerwear, and the occasional dress that should not have survived but did."
-              />
-              <Link
-                href="/vintage"
-                className="mt-10 inline-block text-ui border-b border-ink pb-1 hover:text-ochre-deep hover:border-ochre-deep transition-colors"
-              >
-                Browse the rack →
-              </Link>
-            </div>
+          <div className="flex items-end justify-between mb-14 md:mb-20">
+            <p className="text-ui text-ink-soft">Sections</p>
+            <p className="font-[family-name:var(--font-mono)] text-[0.72rem] tracking-[0.05em] uppercase text-ink-soft/70">
+              003 / 003
+            </p>
           </div>
+          <SectionTiles
+            commissionsExample={commissionsExample}
+            galleryHero={galleryHero}
+            shopHero={shopHero}
+          />
         </Container>
       </section>
 

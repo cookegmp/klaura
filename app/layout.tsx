@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Fraunces, Inter_Tight } from "next/font/google";
+import { Fraunces, Inter_Tight, Space_Mono } from "next/font/google";
 import { Footer } from "@/components/site/Footer";
 import { Nav } from "@/components/site/Nav";
 import { siteConfig } from "@/lib/site-config";
@@ -16,6 +16,16 @@ const interTight = Inter_Tight({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-inter-tight",
+});
+
+// Space Mono — used sparingly as the index/label treatment under the
+// home page section tiles (charter §design_system permits a deliberate
+// monospace accent for the editorial tile composition).
+const spaceMono = Space_Mono({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-space-mono",
+  weight: ["400", "700"],
 });
 
 export const metadata: Metadata = {
@@ -45,7 +55,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${interTight.variable}`}>
+    <html
+      lang="en"
+      className={`${fraunces.variable} ${interTight.variable} ${spaceMono.variable}`}
+    >
       <body className="bg-bone text-ink antialiased flex min-h-dvh flex-col">
         <Nav />
         <main className="flex-1">{children}</main>

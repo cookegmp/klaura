@@ -8,10 +8,14 @@ import { cn } from "@/lib/utils";
 
 type NavLink = { href: string; label: string };
 
+// Section labels were updated in May 2026 to match the home-page tile
+// composition (Commissions / Gallery / Shop). URLs intentionally stay at
+// /paintings and /vintage to avoid breaking bookmarks or in-progress SEO;
+// the label here is the only thing that moves.
 const links: NavLink[] = [
-  { href: "/paintings", label: "Paintings" },
-  { href: "/vintage", label: "Vintage" },
   { href: "/commissions", label: "Commissions" },
+  { href: "/paintings", label: "Gallery" },
+  { href: "/vintage", label: "Shop" },
   { href: "/studio", label: "Studio" },
 ];
 
