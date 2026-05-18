@@ -26,6 +26,7 @@ coverage
 
 # next-env
 next-env.d.ts
+tsconfig.tsbuildinfo
 
 # mock email artifacts (Phase 4 mock email provider writes here)
 /tmp/klaura-emails

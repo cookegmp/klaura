@@ -2,10 +2,26 @@ import Link from "next/link";
 import { Container } from "@/components/site/Container";
 import { SectionHeading } from "@/components/site/SectionHeading";
 import { Marquee } from "@/components/site/Marquee";
-import { FeaturedWorks } from "@/components/site/FeaturedWorks";
 import { NewsletterCapture } from "@/components/site/NewsletterCapture";
+import { PaintingCard } from "@/components/site/PaintingCard";
+import { ProductImage } from "@/components/site/ProductImage";
+import { PortableContent } from "@/components/site/PortableContent";
+import {
+  getAboutPage,
+  getFeaturedPaintings,
+  getHeroPainting,
+  getSiteSettings,
+} from "@/lib/sanity/read";
+import { formatDimensions } from "@/lib/utils";
 
-export default function HomePage() {
+export default async function HomePage() {
+  const [hero, featured, settings, about] = await Promise.all([
+    getHeroPainting(),
+    getFeaturedPaintings(),
+    getSiteSettings(),
+    getAboutPage(),
+  ]);
+
   return (
     <>
       {/* Hero ----------------------------------------------------------- */}
@@ -39,29 +55,48 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Hero image placeholder — replaced by Sanity hero painting */}
-            <div className="col-span-12 md:col-span-5 animate-entrance" style={{ animationDelay: "150ms" }}>
-              <div className="relative aspect-[3/4] w-full bg-bone-deep overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-ochre/40 via-bone-deep to-ink-soft/30" />
-                <div className="absolute inset-x-8 bottom-8">
-                  <p className="text-caption text-ink-soft">Featured work — appears once Sanity is connected</p>
+            <div
+              className="col-span-12 md:col-span-5 animate-entrance"
+              style={{ animationDelay: "150ms" }}
+            >
+              {hero ? (
+                <Link href={`/paintings/${hero.slug.current}`} className="group block">
+                  <div className="relative aspect-[3/4] w-full overflow-hidden">
+                    <ProductImage
+                      image={hero.primaryImage}
+                      alt={hero.primaryImage?.alt ?? hero.title}
+                      seed={hero._id}
+                      width={900}
+                      height={1200}
+                      sizes="(min-width: 1024px) 40vw, 100vw"
+                      priority
+                      className="transition-transform duration-700 ease-[var(--ease-editorial)] group-hover:scale-[1.02]"
+                    />
+                  </div>
+                  <div className="mt-5 flex items-baseline justify-between gap-6">
+                    <p className="font-display text-xl">{hero.title}</p>
+                    <p className="text-caption text-ink-soft">
+                      {hero.medium}
+                      {hero.dimensions ? ` · ${formatDimensions(hero.dimensions)}` : ""}
+                    </p>
+                  </div>
+                </Link>
+              ) : (
+                <div className="relative aspect-[3/4] w-full bg-bone-deep overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-br from-ochre/40 via-bone-deep to-ink-soft/30" />
                 </div>
-              </div>
+              )}
             </div>
           </div>
         </Container>
       </section>
 
       {/* Marquee -------------------------------------------------------- */}
-      <Marquee
-        phrases={[
-          "Painted slowly",
-          "One of one",
-          "Oil &amp; soft pastel",
-          "Worn long after",
-          "Sold once, never again",
-        ]}
-      />
+      {settings?.marqueePhrases && settings.marqueePhrases.length > 0 && (
+        <div className="mt-24 md:mt-32">
+          <Marquee phrases={settings.marqueePhrases} />
+        </div>
+      )}
 
       {/* Two-section split --------------------------------------------- */}
       <section className="py-32 md:py-44">
@@ -100,28 +135,47 @@ export default function HomePage() {
       </section>
 
       {/* Featured works strip ------------------------------------------ */}
-      <section className="py-20 md:py-28 bg-bone-deep">
-        <Container width="wide">
-          <SectionHeading
-            eyebrow="Currently available"
-            title="Featured works"
-            italicWord="Featured"
-            className="mb-14 md:mb-20"
-          />
-          <FeaturedWorks />
-        </Container>
-      </section>
+      {featured.length > 0 && (
+        <section className="py-20 md:py-28 bg-bone-deep">
+          <Container width="wide">
+            <SectionHeading
+              eyebrow="Currently available"
+              title="Featured works"
+              italicWord="Featured"
+              className="mb-14 md:mb-20"
+            />
+            <ul className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">
+              {featured.map((p, i) => (
+                <li key={p._id}>
+                  <PaintingCard painting={p} index={i} />
+                </li>
+              ))}
+            </ul>
+          </Container>
+        </section>
+      )}
 
       {/* About teaser --------------------------------------------------- */}
       <section className="py-32 md:py-44">
         <Container>
           <div className="max-w-2xl">
             <p className="text-ui text-ink-soft mb-6">About</p>
-            <p className="font-display text-[length:var(--text-display-md)] md:text-[length:var(--text-display-lg)] leading-[1.05] font-light tracking-[-0.02em]">
-              Kelly paints from a barn studio in eastern Indiana — long winters,
-              <span className="font-display-italic"> long looks at the same field</span>, a
-              practice rebuilt around what the light is doing at four in the afternoon.
-            </p>
+            {about?.pullQuote ? (
+              <p className="font-display text-[length:var(--text-display-md)] md:text-[length:var(--text-display-lg)] leading-[1.05] font-light tracking-[-0.02em]">
+                <span className="font-display-italic text-ochre-deep">&ldquo;</span>
+                {about.pullQuote}
+                <span className="font-display-italic text-ochre-deep">&rdquo;</span>
+              </p>
+            ) : about?.story ? (
+              <div className="font-display text-[length:var(--text-display-md)] leading-[1.1] font-light tracking-[-0.02em]">
+                <PortableContent value={about.story.slice(0, 1)} />
+              </div>
+            ) : (
+              <p className="font-display text-[length:var(--text-display-md)] md:text-[length:var(--text-display-lg)] leading-[1.05] font-light tracking-[-0.02em]">
+                Kelly paints from a barn studio in eastern Indiana —
+                <span className="font-display-italic"> long looks at the same field</span>.
+              </p>
+            )}
             <Link
               href="/studio"
               className="mt-12 inline-block text-ui border-b border-ink pb-1 hover:text-ochre hover:border-ochre transition-colors"
