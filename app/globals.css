@@ -56,17 +56,26 @@
     min-height: 100dvh;
   }
 
-  /* Fraunces variable axes — opsz tracks size, SOFT softens at large sizes */
+  /* Fraunces variable axes — let the browser pick optical size via
+     font-optical-sizing: auto (declared on html below). Override SOFT only,
+     which has no automatic policy. Hard-pinning opsz to 144 made body-size
+     Fraunces (caption + italic accent) render with display strokes that
+     looked overweight at 12–16px. */
   .font-display {
     font-family: var(--font-display);
-    font-variation-settings: "opsz" 144, "SOFT" 100;
+    font-variation-settings: "SOFT" 80;
   }
 
   /* Italic Fraunces is a deliberate accent (charter §pairing_rule) */
   .font-display-italic {
     font-family: var(--font-display);
     font-style: italic;
-    font-variation-settings: "opsz" 144;
+    font-variation-settings: "SOFT" 80;
+  }
+
+  /* Opt into automatic optical-size selection across the document. */
+  html {
+    font-optical-sizing: auto;
   }
 
   ::selection {

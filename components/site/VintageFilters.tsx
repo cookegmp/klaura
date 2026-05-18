@@ -65,8 +65,10 @@ function FilterRow({
       <Link
         href={hrefFor(null)}
         className={cn(
-          "text-ui pb-1 border-b transition-colors capitalize",
-          !current ? "border-ochre text-ink" : "border-transparent text-ink-soft hover:text-ink"
+          "text-ui inline-flex items-center py-3 min-h-11 border-b transition-colors capitalize",
+          !current
+            ? "border-ochre-deep text-ink"
+            : "border-transparent text-ink-soft hover:text-ink"
         )}
       >
         All
@@ -76,9 +78,9 @@ function FilterRow({
           key={item}
           href={hrefFor(item)}
           className={cn(
-            "text-ui pb-1 border-b transition-colors capitalize",
+            "text-ui inline-flex items-center py-3 min-h-11 border-b transition-colors capitalize",
             current === item
-              ? "border-ochre text-ink"
+              ? "border-ochre-deep text-ink"
               : "border-transparent text-ink-soft hover:text-ink"
           )}
         >

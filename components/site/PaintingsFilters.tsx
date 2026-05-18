@@ -38,13 +38,13 @@ export function PaintingsFilters({ currentStatus, availableCount, soldCount }: P
             key={b.label}
             href={hrefFor(b.value)}
             className={cn(
-              "text-ui pb-1 border-b transition-colors",
+              "text-ui inline-flex items-baseline gap-2 py-3 min-h-11 border-b transition-colors",
               active
-                ? "border-ochre text-ink"
+                ? "border-ochre-deep text-ink"
                 : "border-transparent text-ink-soft hover:text-ink hover:border-rule"
             )}
           >
-            {b.label}{" "}
+            <span>{b.label}</span>
             <span className="text-caption text-ink-soft/70 not-italic">({b.count})</span>
           </Link>
         );

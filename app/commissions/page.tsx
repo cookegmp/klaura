@@ -58,7 +58,7 @@ export default async function CommissionsPage() {
           <ol className="mt-20 grid md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16">
             {PROCESS.map((step) => (
               <li key={step.n}>
-                <p className="text-ui text-ochre mb-3">{step.n}</p>
+                <p className="text-ui text-ochre-deep mb-3">{step.n}</p>
                 <h3 className="font-display text-2xl leading-tight font-light mb-3">
                   {step.title}
                 </h3>

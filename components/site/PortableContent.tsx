@@ -35,7 +35,7 @@ const components: PortableTextComponents = {
         href={value?.href}
         target="_blank"
         rel="noopener noreferrer"
-        className="text-ink underline decoration-ochre underline-offset-2 hover:text-ochre transition-colors"
+        className="text-ink underline decoration-ochre underline-offset-2 hover:text-ochre-deep transition-colors"
       >
         {children}
       </a>

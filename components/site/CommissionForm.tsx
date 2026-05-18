@@ -1,6 +1,12 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import {
+  cloneElement,
+  isValidElement,
+  useState,
+  type FormEvent,
+  type ReactElement,
+} from "react";
 import { z } from "zod";
 
 const schema = z.object({
@@ -64,6 +70,12 @@ export function CommissionForm() {
       setErrors(next);
       setPhase("error");
       setMessage("A couple of fields need attention.");
+      // Focus the first invalid field for keyboard users.
+      const firstKey = Object.keys(next)[0];
+      if (firstKey) {
+        const el = (e.currentTarget.elements.namedItem(firstKey) as HTMLElement | null);
+        el?.focus();
+      }
       return;
     }
 
@@ -109,9 +121,8 @@ export function CommissionForm() {
         </label>
       </div>
 
-      <Field label="Your name" error={errors.name}>
+      <Field name="name" label="Your name" error={errors.name}>
         <input
-          name="name"
           type="text"
           required
           autoComplete="name"
@@ -119,9 +130,8 @@ export function CommissionForm() {
         />
       </Field>
 
-      <Field label="Email" error={errors.email}>
+      <Field name="email" label="Email" error={errors.email}>
         <input
-          name="email"
           type="email"
           required
           autoComplete="email"
@@ -129,9 +139,8 @@ export function CommissionForm() {
         />
       </Field>
 
-      <Field label="What you'd like painted" error={errors.projectType}>
+      <Field name="projectType" label="What you'd like painted" error={errors.projectType}>
         <input
-          name="projectType"
           type="text"
           placeholder="e.g. our family farm, a coastal scene, a portrait of place"
           className="w-full bg-transparent border-b border-ink py-3 outline-none focus:border-ochre placeholder:text-ink-soft/50"
@@ -139,9 +148,8 @@ export function CommissionForm() {
       </Field>
 
       <div className="grid md:grid-cols-2 gap-8">
-        <Field label="Budget range" error={errors.budgetRange}>
+        <Field name="budgetRange" label="Budget range" error={errors.budgetRange}>
           <select
-            name="budgetRange"
             className="w-full bg-transparent border-b border-ink py-3 outline-none focus:border-ochre"
             defaultValue=""
           >
@@ -153,9 +161,8 @@ export function CommissionForm() {
             ))}
           </select>
         </Field>
-        <Field label="Timeline" error={errors.timeline}>
+        <Field name="timeline" label="Timeline" error={errors.timeline}>
           <select
-            name="timeline"
             className="w-full bg-transparent border-b border-ink py-3 outline-none focus:border-ochre"
             defaultValue=""
           >
@@ -169,9 +176,8 @@ export function CommissionForm() {
         </Field>
       </div>
 
-      <Field label="Tell Kelly about the piece" error={errors.message}>
+      <Field name="message" label="Tell Kelly about the piece" error={errors.message}>
         <textarea
-          name="message"
           required
           rows={6}
           className="w-full bg-transparent border border-ink p-4 outline-none focus:border-ochre resize-y"
@@ -190,6 +196,7 @@ export function CommissionForm() {
         {message && (
           <p
             role="status"
+            aria-live="polite"
             className={`text-sm ${phase === "ok" ? "text-ink" : "text-ochre-deep"}`}
           >
             {message}
@@ -200,20 +207,50 @@ export function CommissionForm() {
   );
 }
 
+/**
+ * Field wraps a single form control and links its label + error message via
+ * id / aria-invalid / aria-describedby. Cloning the child input lets us
+ * inject the correct ARIA without callers having to repeat themselves.
+ */
 function Field({
+  name,
   label,
   error,
   children,
 }: {
+  name: string;
   label: string;
   error?: string;
-  children: React.ReactNode;
+  children: ReactElement<{
+    name?: string;
+    id?: string;
+    "aria-invalid"?: boolean;
+    "aria-describedby"?: string;
+  }>;
 }) {
+  const inputId = `field-${name}`;
+  const errorId = error ? `${inputId}-error` : undefined;
+
+  const enhancedChild = isValidElement(children)
+    ? cloneElement(children, {
+        name,
+        id: inputId,
+        "aria-invalid": !!error,
+        "aria-describedby": errorId,
+      })
+    : children;
+
   return (
-    <label className="block">
-      <span className="text-ui text-ink-soft block mb-2">{label}</span>
-      {children}
-      {error && <span className="block mt-2 text-sm text-ochre-deep">{error}</span>}
-    </label>
+    <div className="block">
+      <label htmlFor={inputId} className="text-ui text-ink-soft block mb-2">
+        {label}
+      </label>
+      {enhancedChild}
+      {error && (
+        <span id={errorId} className="block mt-2 text-sm text-ochre-deep">
+          {error}
+        </span>
+      )}
+    </div>
   );
 }

@@ -19,22 +19,22 @@ export function Footer() {
             <h3 className="text-ui text-bone/60 mb-5">Explore</h3>
             <ul className="space-y-3 text-[length:var(--text-body-lg)]">
               <li>
-                <Link href="/paintings" className="hover:text-ochre transition-colors">
+                <Link href="/paintings" className="hover:text-ochre-deep transition-colors">
                   Paintings
                 </Link>
               </li>
               <li>
-                <Link href="/vintage" className="hover:text-ochre transition-colors">
+                <Link href="/vintage" className="hover:text-ochre-deep transition-colors">
                   Vintage
                 </Link>
               </li>
               <li>
-                <Link href="/commissions" className="hover:text-ochre transition-colors">
+                <Link href="/commissions" className="hover:text-ochre-deep transition-colors">
                   Commissions
                 </Link>
               </li>
               <li>
-                <Link href="/studio" className="hover:text-ochre transition-colors">
+                <Link href="/studio" className="hover:text-ochre-deep transition-colors">
                   Studio
                 </Link>
               </li>
@@ -47,7 +47,7 @@ export function Footer() {
               <li>
                 <a
                   href={`mailto:${siteConfig.contactEmail}`}
-                  className="hover:text-ochre transition-colors"
+                  className="hover:text-ochre-deep transition-colors"
                 >
                   {siteConfig.contactEmail}
                 </a>
@@ -57,7 +57,7 @@ export function Footer() {
                   href={`https://instagram.com/${siteConfig.instagram}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-ochre transition-colors"
+                  className="hover:text-ochre-deep transition-colors"
                 >
                   Instagram
                 </a>
@@ -67,27 +67,27 @@ export function Footer() {
         </div>
 
         <div className="mt-20 pt-8 border-t border-bone/15 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-          <p className="text-caption text-bone/55">
+          <p className="text-caption text-bone/70">
             © {new Date().getFullYear()} Kelly Laura. All works original.
           </p>
-          <ul className="flex flex-wrap gap-x-8 gap-y-2 text-ui text-bone/55">
+          <ul className="flex flex-wrap gap-x-8 gap-y-2 text-ui text-bone/70">
             <li>
-              <Link href="/legal/shipping" className="hover:text-ochre transition-colors">
+              <Link href="/legal/shipping" className="hover:text-ochre-deep transition-colors">
                 Shipping
               </Link>
             </li>
             <li>
-              <Link href="/legal/returns" className="hover:text-ochre transition-colors">
+              <Link href="/legal/returns" className="hover:text-ochre-deep transition-colors">
                 Returns
               </Link>
             </li>
             <li>
-              <Link href="/legal/privacy" className="hover:text-ochre transition-colors">
+              <Link href="/legal/privacy" className="hover:text-ochre-deep transition-colors">
                 Privacy
               </Link>
             </li>
             <li>
-              <Link href="/legal/terms" className="hover:text-ochre transition-colors">
+              <Link href="/legal/terms" className="hover:text-ochre-deep transition-colors">
                 Terms
               </Link>
             </li>

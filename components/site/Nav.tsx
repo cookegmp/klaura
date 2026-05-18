@@ -43,11 +43,11 @@ export function Nav() {
             ))}
           </nav>
 
-          {/* Mobile toggle */}
+          {/* Mobile toggle — generous tap area, pulled back into nav padding */}
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
-            className="md:hidden text-ui"
+            className="md:hidden text-ui px-3 py-3 -mr-3 min-h-11 inline-flex items-center"
             aria-expanded={open}
             aria-controls="mobile-nav"
           >
@@ -66,8 +66,8 @@ export function Nav() {
                 href={l.href}
                 onClick={() => setOpen(false)}
                 className={cn(
-                  "font-display text-3xl tracking-tight",
-                  pathname.startsWith(l.href) && "text-ochre"
+                  "font-display text-3xl tracking-tight py-2 -mx-1 px-1 min-h-12 inline-flex items-center",
+                  pathname.startsWith(l.href) && "text-ochre-deep"
                 )}
               >
                 {l.label}
@@ -85,9 +85,12 @@ function NavItem({ link, pathname }: { link: NavLink; pathname: string }) {
   return (
     <Link
       href={link.href}
+      // py-3 gives the link a ~44px touch target without disturbing the
+      // visual position of the underline (which is keyed to text bottom via
+      // bottom-3 below).
       className={cn(
-        "text-ui relative pb-1",
-        "transition-colors hover:text-ochre",
+        "text-ui relative inline-flex items-center py-3 min-h-11",
+        "transition-colors hover:text-ochre-deep",
         active ? "text-ink" : "text-ink-soft"
       )}
     >
@@ -95,7 +98,7 @@ function NavItem({ link, pathname }: { link: NavLink; pathname: string }) {
       <span
         aria-hidden
         className={cn(
-          "absolute left-0 right-0 bottom-0 h-px bg-ochre origin-left transition-transform duration-300",
+          "absolute left-0 right-0 bottom-2 h-px bg-ochre-deep origin-left transition-transform duration-300",
           active ? "scale-x-100" : "scale-x-0"
         )}
       />

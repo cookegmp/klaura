@@ -111,7 +111,7 @@ export default async function HomePage() {
               />
               <Link
                 href="/paintings"
-                className="mt-10 inline-block text-ui border-b border-ink pb-1 hover:text-ochre hover:border-ochre transition-colors"
+                className="mt-10 inline-block text-ui border-b border-ink pb-1 hover:text-ochre-deep hover:border-ochre-deep transition-colors"
               >
                 Enter the gallery →
               </Link>
@@ -125,7 +125,7 @@ export default async function HomePage() {
               />
               <Link
                 href="/vintage"
-                className="mt-10 inline-block text-ui border-b border-ink pb-1 hover:text-ochre hover:border-ochre transition-colors"
+                className="mt-10 inline-block text-ui border-b border-ink pb-1 hover:text-ochre-deep hover:border-ochre-deep transition-colors"
               >
                 Browse the rack →
               </Link>
@@ -178,7 +178,7 @@ export default async function HomePage() {
             )}
             <Link
               href="/studio"
-              className="mt-12 inline-block text-ui border-b border-ink pb-1 hover:text-ochre hover:border-ochre transition-colors"
+              className="mt-12 inline-block text-ui border-b border-ink pb-1 hover:text-ochre-deep hover:border-ochre-deep transition-colors"
             >
               Read more →
             </Link>

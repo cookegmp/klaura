@@ -63,7 +63,7 @@ export function NewsletterCapture() {
           <button
             type="submit"
             disabled={state === "submitting"}
-            className="text-ui px-2 py-3 hover:text-ochre transition-colors disabled:opacity-50"
+            className="text-ui px-2 py-3 hover:text-ochre-deep transition-colors disabled:opacity-50"
           >
             {state === "submitting" ? "Sending…" : "Subscribe →"}
           </button>
