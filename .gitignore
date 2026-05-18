@@ -1,0 +1,32 @@
+node_modules
+.pnpm-store
+.next
+out
+build
+dist
+
+# env
+.env
+.env.local
+.env.*.local
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# misc
+.DS_Store
+*.pem
+.vercel
+.vscode
+.idea
+coverage
+
+# next-env
+next-env.d.ts
+
+# mock email artifacts (Phase 4 mock email provider writes here)
+/tmp/klaura-emails
+.klaura-mock-state.json

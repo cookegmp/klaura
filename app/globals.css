@@ -1,0 +1,153 @@
+@import "tailwindcss";
+
+/* -----------------------------------------------------------------------
+   Design tokens — sourced directly from documentation/charter.xml
+   §design_system. Tailwind v4 reads these as @theme variables and
+   generates utilities automatically (bg-bone, text-ink, font-display,
+   text-display-xl, etc.).
+   ----------------------------------------------------------------------- */
+@theme {
+  /* Palette */
+  --color-bone: #f4efe6;
+  --color-bone-deep: #ebe4d6;
+  --color-ink: #1a1d24;
+  --color-ink-soft: #3a3d44;
+  --color-ochre: #b87333;
+  --color-ochre-deep: #8a5424;
+  --color-rule: #d9d1bf;
+  --color-sold-overlay: rgba(26, 29, 36, 0.55);
+
+  /* Typography — fonts are injected via next/font in app/layout.tsx */
+  --font-display: var(--font-fraunces), Georgia, serif;
+  --font-body: var(--font-inter-tight), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  /* Type scale (charter §typography) */
+  --text-display-xl: clamp(3.5rem, 8.5vw, 8.5rem);
+  --text-display-xl--line-height: 0.95;
+  --text-display-xl--letter-spacing: -0.02em;
+  --text-display-lg: clamp(2.5rem, 5vw, 4.5rem);
+  --text-display-lg--line-height: 1;
+  --text-display-lg--letter-spacing: -0.02em;
+  --text-display-md: 2.5rem;
+  --text-display-md--line-height: 1.05;
+  --text-body-lg: 1.05rem;
+  --text-body-lg--line-height: 1.65;
+  --text-ui: 0.82rem;
+  --text-ui--letter-spacing: 0.12em;
+  --text-caption: 0.78rem;
+
+  /* Motion (charter §motion) */
+  --ease-editorial: cubic-bezier(0.2, 0.6, 0.2, 1);
+}
+
+/* -----------------------------------------------------------------------
+   Base — bone background, ink text, Fraunces optical-size-aware display.
+   ----------------------------------------------------------------------- */
+@layer base {
+  html {
+    background: var(--color-bone);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    min-height: 100dvh;
+  }
+
+  /* Fraunces variable axes — opsz tracks size, SOFT softens at large sizes */
+  .font-display {
+    font-family: var(--font-display);
+    font-variation-settings: "opsz" 144, "SOFT" 100;
+  }
+
+  /* Italic Fraunces is a deliberate accent (charter §pairing_rule) */
+  .font-display-italic {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-variation-settings: "opsz" 144;
+  }
+
+  ::selection {
+    background: var(--color-ochre);
+    color: var(--color-bone);
+  }
+
+  /* Hairline rules use the dedicated token */
+  hr {
+    border: 0;
+    border-top: 1px solid var(--color-rule);
+  }
+
+  /* Focus rings (charter §accessibility) */
+  *:focus-visible {
+    outline: 2px solid var(--color-ochre);
+    outline-offset: 3px;
+    border-radius: 1px;
+  }
+}
+
+/* -----------------------------------------------------------------------
+   Utilities
+   ----------------------------------------------------------------------- */
+@layer utilities {
+  .text-ui {
+    font-size: var(--text-ui);
+    letter-spacing: var(--text-ui--letter-spacing);
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .text-caption {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: var(--text-caption);
+  }
+
+  /* Sold-state overlay (charter §risks / §design) */
+  .sold-overlay::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--color-sold-overlay);
+    pointer-events: none;
+  }
+
+  /* Hero entrance — staggered fade-up (charter §motion) */
+  @keyframes entrance-rise {
+    from {
+      opacity: 0;
+      transform: translateY(1.25rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-entrance {
+    animation: entrance-rise 600ms var(--ease-editorial) both;
+  }
+
+  /* Marquee */
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  .animate-marquee {
+    animation: marquee 60s linear infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-entrance,
+    .animate-marquee {
+      animation: none;
+    }
+  }
+}
