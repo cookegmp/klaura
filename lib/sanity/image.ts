@@ -4,9 +4,12 @@ import { env } from "@/lib/env";
 import type { SanityImage } from "@/types/sanity";
 
 /**
- * Sanity image URL builder. Falls back to a tonal placeholder gradient when
- * the project is in mock mode and the image ref starts with
- * "image-placeholder-…".
+ * Sanity image URL builder. Two non-Sanity ref conventions are recognised:
+ *
+ *   - `local-image:<filename>`     → served from `/sample-art/<filename>`
+ *                                    (used by the mock-store seed paintings)
+ *   - `image-placeholder-…`        → no image at all; ProductImage falls back
+ *                                    to a tonal gradient placeholder
  */
 
 let _builder: ReturnType<typeof imageUrlBuilder> | undefined;
@@ -26,7 +29,21 @@ export function urlFor(source: SanityImageSource) {
   return builder().image(source);
 }
 
+const PLACEHOLDER_PREFIX = "image-placeholder-";
+const LOCAL_PREFIX = "local-image:";
+
 export function isPlaceholderImage(image: SanityImage | undefined | null): boolean {
   if (!image) return true;
-  return image.asset?._ref?.startsWith("image-placeholder-") ?? false;
+  const ref = image.asset?._ref ?? "";
+  // Real Sanity images, the local-image: convention, and anything else with
+  // a meaningful asset ref are NOT placeholders.
+  return ref.startsWith(PLACEHOLDER_PREFIX);
+}
+
+export function localImageUrl(image: SanityImage | undefined | null): string | null {
+  if (!image) return null;
+  const ref = image.asset?._ref ?? "";
+  if (!ref.startsWith(LOCAL_PREFIX)) return null;
+  const filename = ref.slice(LOCAL_PREFIX.length);
+  return `/sample-art/${filename}`;
 }

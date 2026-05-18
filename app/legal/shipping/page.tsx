@@ -7,7 +7,7 @@ export default function ShippingPage() {
   return (
     <LegalShell title="Shipping" subtitle="How your piece gets to you">
       <p>
-        Original paintings ship from Richmond, Indiana via insured ground service. Most
+        Original paintings ship from the studio in Ohio via insured ground service. Most
         pieces arrive within 7–10 business days of purchase. Larger or framed works may
         require additional crating time — Kelly will email you with specifics before
         anything leaves the studio.

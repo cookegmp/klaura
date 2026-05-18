@@ -136,7 +136,7 @@ documentation/charter.xml  # Authoritative project spec
 
 ### 2. Stripe
 
-1. Create a Stripe account, enable Stripe Tax (Indiana for v1).
+1. Create a Stripe account, enable Stripe Tax (registered in Kelly's home state — Ohio at v1).
 2. Wire `lib/payments/stripe.ts` — the file has the implementation outline in comments.
 3. Set:
    ```

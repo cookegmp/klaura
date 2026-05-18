@@ -62,6 +62,24 @@ function nowIso(): string {
   return new Date().toISOString();
 }
 
+/**
+ * Build a fake Sanity image reference that points at a file in `/public/sample-art/`.
+ * `ProductImage` recognises the `local-image:` prefix and serves the file
+ * directly from the public folder. This lets the dev experience use Kelly's
+ * actual paintings as seed art without a Sanity project.
+ */
+function localImage(filename: string, alt: string): {
+  _type: "image";
+  asset: { _ref: string; _type: "reference" };
+  alt: string;
+} {
+  return {
+    _type: "image",
+    asset: { _ref: `local-image:${filename}`, _type: "reference" },
+    alt,
+  };
+}
+
 export function bumpRev(): string {
   return rev();
 }
@@ -187,76 +205,236 @@ function seed(): void {
   };
   store.documents[placesSeries._id] = { ...placesSeries, _type: "series" };
 
-  // Paintings (3, charter §exit_criteria Phase 1)
-  const p1: Painting = {
-    _id: "painting.first-snow",
-    _rev: rev(),
-    title: "First snow",
-    slug: { current: "first-snow" },
-    year: 2024,
-    medium: "Oil on linen",
-    dimensions: { widthInches: 30, heightInches: 24, framed: false },
-    weightOz: 64,
-    price: 2400,
-    status: "available",
-    primaryImage: {
-      _type: "image",
-      asset: { _ref: "image-placeholder-first-snow", _type: "reference" },
-      alt: "First snow falling between conifers, a copper-leafed path running diagonally to a clearing.",
+  // Paintings. Seed images live in /public/sample-art and are referenced via
+  // a custom `local-image:<filename>` ref convention that ProductImage knows
+  // to translate into a public URL. Lets us run the entire site against real
+  // artwork without a Sanity project.
+  const paintings: Painting[] = [
+    {
+      _id: "painting.first-snow",
+      _rev: rev(),
+      title: "First snow",
+      slug: { current: "first-snow" },
+      year: 2024,
+      medium: "Oil on linen",
+      dimensions: { widthInches: 30, heightInches: 24, framed: false },
+      weightOz: 64,
+      price: 2400,
+      status: "available",
+      primaryImage: localImage(
+        "img_7050.jpg",
+        "Snowy stream winding between conifers at golden hour."
+      ),
+      tags: [{ _ref: winterTag._id }],
+      series: { _ref: placesSeries._id },
+      featured: true,
+      featuredOrder: 1,
+      createdAt: nowIso(),
     },
-    story: undefined,
-    tags: [{ _ref: winterTag._id }],
-    series: { _ref: placesSeries._id },
-    featured: true,
-    featuredOrder: 1,
-    createdAt: nowIso(),
-    shippingNotes: undefined,
-  };
-  const p2: Painting = {
-    _id: "painting.cottage-with-geese",
-    _rev: rev(),
-    title: "Cottage with geese",
-    slug: { current: "cottage-with-geese" },
-    year: 2024,
-    medium: "Soft pastel on sanded paper",
-    dimensions: { widthInches: 16, heightInches: 20 },
-    price: 1600,
-    status: "available",
-    primaryImage: {
-      _type: "image",
-      asset: { _ref: "image-placeholder-cottage", _type: "reference" },
-      alt: "A stone cottage half-hidden by trees, a path of geese walking up to the door.",
+    {
+      _id: "painting.cottage-with-geese",
+      _rev: rev(),
+      title: "Cottage with geese",
+      slug: { current: "cottage-with-geese" },
+      year: 2024,
+      medium: "Soft pastel on sanded paper",
+      dimensions: { widthInches: 16, heightInches: 20 },
+      price: 1600,
+      status: "available",
+      primaryImage: localImage(
+        "img_0521.jpg",
+        "Stone cottage half-hidden by trees, a flock of geese walking up to the door."
+      ),
+      tags: [{ _ref: englishTag._id }, { _ref: animalsTag._id }],
+      featured: true,
+      featuredOrder: 2,
+      createdAt: nowIso(),
     },
-    tags: [{ _ref: englishTag._id }, { _ref: animalsTag._id }],
-    featured: true,
-    featuredOrder: 2,
-    createdAt: nowIso(),
-  };
-  const p3: Painting = {
-    _id: "painting.three-cattle",
-    _rev: rev(),
-    title: "Three cattle on the heath",
-    slug: { current: "three-cattle-on-the-heath" },
-    year: 2025,
-    medium: "Oil on linen",
-    dimensions: { widthInches: 36, heightInches: 48 },
-    weightOz: 144,
-    price: 4800,
-    status: "available",
-    primaryImage: {
-      _type: "image",
-      asset: { _ref: "image-placeholder-cattle", _type: "reference" },
-      alt: "Three pale cattle on a heather-covered hillside under a stormy violet sky.",
+    {
+      _id: "painting.three-cattle",
+      _rev: rev(),
+      title: "Highland cattle, evening sky",
+      slug: { current: "highland-cattle-evening-sky" },
+      year: 2025,
+      medium: "Oil on linen",
+      dimensions: { widthInches: 24, heightInches: 36 },
+      weightOz: 144,
+      price: 4800,
+      status: "available",
+      primaryImage: localImage(
+        "img_7051.jpg",
+        "Three pale cattle on a heather-covered hillside under a stormy violet sky."
+      ),
+      tags: [{ _ref: animalsTag._id }],
+      featured: true,
+      featuredOrder: 3,
+      createdAt: nowIso(),
+      shippingNotes: "Oversized — crating required; ships within 10 business days.",
     },
-    tags: [{ _ref: animalsTag._id }],
-    featured: true,
-    featuredOrder: 3,
-    createdAt: nowIso(),
-    shippingNotes: "Oversized — crating required; ships within 10 business days.",
-  };
-  store.documents[p1._id] = { ...p1, _type: "painting" };
-  store.documents[p2._id] = { ...p2, _type: "painting" };
-  store.documents[p3._id] = { ...p3, _type: "painting" };
+    {
+      _id: "painting.birches-and-creek",
+      _rev: rev(),
+      title: "Birches and creek",
+      slug: { current: "birches-and-creek" },
+      year: 2024,
+      medium: "Oil on linen",
+      dimensions: { widthInches: 24, heightInches: 18 },
+      weightOz: 48,
+      price: 1900,
+      status: "available",
+      primaryImage: localImage(
+        "img_1517.jpg",
+        "Sun on bare birches above a dark winding creek in early spring snow."
+      ),
+      tags: [{ _ref: winterTag._id }],
+      series: { _ref: placesSeries._id },
+      featured: true,
+      featuredOrder: 4,
+      createdAt: nowIso(),
+    },
+    {
+      _id: "painting.pine-path",
+      _rev: rev(),
+      title: "Pine path, autumn",
+      slug: { current: "pine-path-autumn" },
+      year: 2024,
+      medium: "Oil on linen",
+      dimensions: { widthInches: 18, heightInches: 24 },
+      weightOz: 48,
+      price: 1750,
+      status: "available",
+      primaryImage: localImage(
+        "img_1497.jpg",
+        "Mountain path through pines turning russet, granite peak in low cloud beyond."
+      ),
+      createdAt: nowIso(),
+    },
+    {
+      _id: "painting.dolomites-meadow",
+      _rev: rev(),
+      title: "Dolomites meadow",
+      slug: { current: "dolomites-meadow" },
+      year: 2023,
+      medium: "Oil on linen",
+      dimensions: { widthInches: 30, heightInches: 24 },
+      weightOz: 80,
+      price: 3200,
+      status: "sold",
+      soldAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 60).toISOString(),
+      primaryImage: localImage(
+        "img_7441.jpg",
+        "Alpine meadow rolling toward grey-pink Dolomite peaks, two stone huts in the middle distance."
+      ),
+      createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 220).toISOString(),
+    },
+    {
+      _id: "painting.bratislava-old-town",
+      _rev: rev(),
+      title: "Old town, after rain",
+      slug: { current: "old-town-after-rain" },
+      year: 2024,
+      medium: "Oil on canvas",
+      dimensions: { widthInches: 24, heightInches: 30 },
+      weightOz: 64,
+      price: 2900,
+      status: "available",
+      primaryImage: localImage(
+        "img_0514.jpg",
+        "Looking up through a Central European old town to a cathedral with copper roofs."
+      ),
+      createdAt: nowIso(),
+    },
+    {
+      _id: "painting.canyon-overlook",
+      _rev: rev(),
+      title: "Canyon overlook",
+      slug: { current: "canyon-overlook" },
+      year: 2024,
+      medium: "Oil on linen",
+      dimensions: { widthInches: 24, heightInches: 30 },
+      weightOz: 64,
+      price: 2600,
+      status: "available",
+      primaryImage: localImage(
+        "img_7443.jpg",
+        "Wide Southwest canyon view with red rock formations, green scrub in the foreground."
+      ),
+      createdAt: nowIso(),
+    },
+    {
+      _id: "painting.horses-in-meadow",
+      _rev: rev(),
+      title: "Three horses, summer field",
+      slug: { current: "three-horses-summer-field" },
+      year: 2024,
+      medium: "Oil on linen",
+      dimensions: { widthInches: 18, heightInches: 24 },
+      weightOz: 48,
+      price: 2100,
+      status: "available",
+      primaryImage: localImage(
+        "img_7560.jpg",
+        "Three horses grazing in a yellow summer meadow with a heavy mountain ridge behind."
+      ),
+      tags: [{ _ref: animalsTag._id }],
+      createdAt: nowIso(),
+    },
+    {
+      _id: "painting.yellow-house-green-car",
+      _rev: rev(),
+      title: "Yellow house, green car",
+      slug: { current: "yellow-house-green-car" },
+      year: 2024,
+      medium: "Oil on canvas",
+      dimensions: { widthInches: 20, heightInches: 24 },
+      weightOz: 48,
+      price: 2200,
+      status: "available",
+      primaryImage: localImage(
+        "img_6868.jpg",
+        "A yellow clapboard house at dusk in winter, a teal sedan parked at the curb."
+      ),
+      createdAt: nowIso(),
+    },
+    {
+      _id: "painting.lake-bare-tree",
+      _rev: rev(),
+      title: "Lake with bare tree",
+      slug: { current: "lake-with-bare-tree" },
+      year: 2023,
+      medium: "Acrylic on canvas",
+      dimensions: { widthInches: 14, heightInches: 11 },
+      weightOz: 20,
+      price: 950,
+      status: "available",
+      primaryImage: localImage(
+        "img_5464.jpg",
+        "A still lake at the edge of winter, a single bare tree on the near shore."
+      ),
+      createdAt: nowIso(),
+    },
+    {
+      _id: "painting.deer-in-lilacs",
+      _rev: rev(),
+      title: "Deer in lilacs",
+      slug: { current: "deer-in-lilacs" },
+      year: 2024,
+      medium: "Soft pastel on sanded paper",
+      dimensions: { widthInches: 14, heightInches: 18 },
+      weightOz: 24,
+      price: 1450,
+      status: "available",
+      primaryImage: localImage(
+        "img_8827.jpg",
+        "A young buck in front of a lilac hedge in full bloom."
+      ),
+      tags: [{ _ref: animalsTag._id }],
+      createdAt: nowIso(),
+    },
+  ];
+  for (const p of paintings) {
+    store.documents[p._id] = { ...p, _type: "painting" };
+  }
 
   // Vintage (3)
   const v1: VintageItem = {
@@ -345,7 +523,7 @@ function seed(): void {
           {
             _type: "span",
             _key: "s1",
-            text: "Kelly paints from a barn studio in eastern Indiana. The light here moves slowly through long winters, and slowness is the practice.",
+            text: "Kelly is a Montreal-born painter currently working from a studio in Ohio. The light here moves slowly through long winters, and slowness is the practice.",
           },
         ],
         markDefs: [],
@@ -361,7 +539,7 @@ function seed(): void {
   const settings: SiteSettings = {
     _id: "siteSettings.singleton",
     _rev: rev(),
-    featuredHeroPainting: { _ref: p1._id },
+    featuredHeroPainting: { _ref: paintings[0]!._id },
     marqueePhrases: [
       "Painted slowly",
       "One of one",

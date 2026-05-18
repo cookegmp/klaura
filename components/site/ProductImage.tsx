@@ -1,12 +1,12 @@
 import Image from "next/image";
-import { isPlaceholderImage, urlFor } from "@/lib/sanity/image";
+import { isPlaceholderImage, localImageUrl, urlFor } from "@/lib/sanity/image";
 import type { SanityImage } from "@/types/sanity";
 import { cn } from "@/lib/utils";
 
 interface ProductImageProps {
   image: SanityImage | undefined;
   alt: string;
-  /** Used to seed deterministic placeholder colour. */
+  /** Used to seed the deterministic gradient when no real image exists. */
   seed?: string;
   width: number;
   height: number;
@@ -16,10 +16,15 @@ interface ProductImageProps {
 }
 
 /**
- * Single image renderer used everywhere on the storefront. Falls back to a
- * deterministic tonal gradient when no real Sanity asset is connected
- * (mock-mode dev). This keeps the editorial design language intact even
- * with empty data.
+ * Single image renderer used everywhere on the storefront. Three branches:
+ *
+ *   1. Real Sanity image — built via @sanity/image-url
+ *   2. Local sample-art image — served directly from /public/sample-art/
+ *      (the mock-store seed paintings)
+ *   3. No image / placeholder ref — tonal gradient, deterministic per seed
+ *
+ * In every branch the rendered <Image> uses the same aspect-ratio container
+ * so layout shift is impossible.
  */
 export function ProductImage({
   image,
@@ -31,24 +36,42 @@ export function ProductImage({
   priority,
   className,
 }: ProductImageProps) {
-  if (isPlaceholderImage(image)) {
+  const localUrl = localImageUrl(image);
+  const isPlaceholder = isPlaceholderImage(image);
+
+  if (isPlaceholder) {
     const gradient = pickGradient(seed ?? alt);
     return (
       <div
         role="img"
         aria-label={alt}
-        className={cn(
-          "relative w-full overflow-hidden bg-bone-deep",
-          gradient,
-          className
-        )}
+        className={cn("relative w-full overflow-hidden bg-bone-deep", gradient, className)}
         style={{ aspectRatio: `${width} / ${height}` }}
       />
     );
   }
 
-  const url = urlFor(image!).width(width * 2).fit("max").auto("format").url();
+  if (localUrl) {
+    return (
+      <Image
+        src={localUrl}
+        alt={alt}
+        width={width}
+        height={height}
+        sizes={sizes}
+        priority={priority}
+        className={cn("w-full h-full object-cover", className)}
+        // Sample artwork lives in `/public` so disable next/image optimisation
+        // server requests (it would re-encode through sharp, which we don't
+        // have in dev). The browser still gets the original JPEG with the
+        // requested width prop.
+        unoptimized
+      />
+    );
+  }
 
+  // Real Sanity image path.
+  const url = urlFor(image!).width(width * 2).fit("max").auto("format").url();
   return (
     <Image
       src={url}
@@ -57,7 +80,7 @@ export function ProductImage({
       height={height}
       sizes={sizes}
       priority={priority}
-      className={cn("w-full h-auto", className)}
+      className={cn("w-full h-full object-cover", className)}
     />
   );
 }

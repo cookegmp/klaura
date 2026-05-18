@@ -31,3 +31,8 @@ tsconfig.tsbuildinfo
 # mock email artifacts (Phase 4 mock email provider writes here)
 /tmp/klaura-emails
 .klaura-mock-state.json
+
+# transient artifacts from local dev tooling
+.playwright-mcp/
+*.png
+!public/**/*.png

@@ -164,7 +164,7 @@ export default async function PaintingDetailPage({ params }: { params: Params })
               <Disclosure label="Shipping & care">
                 <div className="space-y-3 mt-3 text-sm">
                   <p>
-                    Ships from Richmond, Indiana via insured ground service. Most pieces
+                    Ships from the studio in Ohio via insured ground service. Most pieces
                     arrive in 7–10 business days. Larger or framed works may require
                     additional crating time.
                   </p>

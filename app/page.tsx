@@ -29,7 +29,7 @@ export default async function HomePage() {
         <Container width="wide">
           <div className="grid grid-cols-12 gap-y-12 md:gap-x-10">
             <div className="col-span-12 md:col-span-7 md:pt-16 lg:pt-28 animate-entrance">
-              <p className="text-ui text-ink-soft mb-6">Studio practice · Richmond, IN</p>
+              <p className="text-ui text-ink-soft mb-6">Montreal painter · based in Ohio</p>
               <h1 className="font-display font-light text-[length:var(--text-display-lg)] md:text-[length:var(--text-display-xl)] leading-[0.92] tracking-[-0.025em]">
                 Landscapes that
                 <br />
@@ -172,7 +172,7 @@ export default async function HomePage() {
               </div>
             ) : (
               <p className="font-display text-[length:var(--text-display-md)] md:text-[length:var(--text-display-lg)] leading-[1.05] font-light tracking-[-0.02em]">
-                Kelly paints from a barn studio in eastern Indiana —
+                Kelly paints from a studio in Ohio, far from Montreal —
                 <span className="font-display-italic"> long looks at the same field</span>.
               </p>
             )}

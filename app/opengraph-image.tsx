@@ -55,10 +55,10 @@ export default async function OpenGraphImage() {
           }}
         >
           <div style={{ fontSize: 22, letterSpacing: "0.12em", textTransform: "uppercase" }}>
-            Studio practice
+            Montreal painter
           </div>
           <div style={{ fontSize: 22, fontStyle: "italic", color: "#8a5424" }}>
-            Richmond, IN
+            currently based in Ohio
           </div>
         </div>
       </div>
