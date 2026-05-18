@@ -1,0 +1,606 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<charter version="1.0" name="kellylaaura-site" status="v1-scoped">
+
+  <metadata>
+    <project>kellylaaura.com</project>
+    <owner>James (development), Kelly (artist / merchant)</owner>
+    <type>E-commerce + portfolio</type>
+    <target_launch_window>6 weeks from kickoff</target_launch_window>
+    <repository>github.com/[owner]/kellylaaura-web</repository>
+    <hosting>Vercel</hosting>
+  </metadata>
+
+  <purpose>
+    <summary>
+      A single, unified-brand e-commerce and portfolio site for Kelly Laaura, a
+      landscape painter and vintage clothing curator. The site sells original
+      paintings and one-of-a-kind vintage clothing directly, accepts commission
+      inquiries, and presents her work with the visual seriousness of a small
+      gallery website.
+    </summary>
+    <success_criteria>
+      <criterion>Kelly can independently publish a new painting or vintage item via Sanity Studio in under 5 minutes, without developer involvement.</criterion>
+      <criterion>A customer can complete a purchase (original painting OR vintage item) end-to-end on mobile in under 3 minutes, including shipping address entry.</criterion>
+      <criterion>Each product is unique inventory (qty=1); the site never sells the same physical object twice.</criterion>
+      <criterion>Commission inquiries arrive in Kelly's inbox as structured email within 60 seconds of submission.</criterion>
+      <criterion>Lighthouse mobile performance score >= 90 on home, gallery, and product detail pages.</criterion>
+      <criterion>All product imagery is served via next/image with appropriate sizes; no raw img tags in the codebase.</criterion>
+    </success_criteria>
+    <explicitly_out_of_scope>
+      <item>Customer accounts / login</item>
+      <item>Wishlists, favorites, reviews</item>
+      <item>Prints, reproductions, or product variants (each item is one-of-a-kind)</item>
+      <item>Multi-currency or international tax calculation beyond Stripe defaults</item>
+      <item>Blog / journal / studio diary (deferred to v1.1)</item>
+      <item>Newsletter signup wired to ESP (capture email to Sanity in v1, integrate later)</item>
+      <item>Search (browse is sufficient at launch inventory volume)</item>
+      <item>Returns automation (manual process, contact form sufficient)</item>
+    </explicitly_out_of_scope>
+  </purpose>
+
+  <stack>
+    <framework>
+      <name>Next.js</name>
+      <version>15.x</version>
+      <router>App Router</router>
+      <language>TypeScript (strict)</language>
+      <rendering>Server Components by default; Client Components only where interactivity requires</rendering>
+    </framework>
+
+    <styling>
+      <css>Tailwind CSS v4</css>
+      <components>shadcn/ui (selective; do not adopt wholesale)</components>
+      <fonts>
+        <display>Fraunces (variable, opsz + SOFT axes), self-hosted via next/font/google</display>
+        <body>Inter Tight, self-hosted via next/font/google</body>
+      </fonts>
+    </styling>
+
+    <cms>
+      <name>Sanity</name>
+      <hosting>Sanity-hosted (Growth plan or below)</hosting>
+      <studio_location>/studio route, mounted in the same Next.js app</studio_location>
+      <dataset>production (and development for local work)</dataset>
+    </cms>
+
+    <commerce>
+      <payments>Stripe Checkout (hosted, not Elements) for v1</payments>
+      <reasoning>
+        Hosted Checkout removes PCI scope, gives us Apple Pay / Google Pay / Link
+        with no extra work, and is the right default for a low-volume, high-AOV
+        store. Migrate to Elements later only if checkout customization becomes
+        a real constraint.
+      </reasoning>
+      <inventory_model>
+        Each product is qty=1, one-of-a-kind. Inventory state lives in Sanity
+        (status field: available | reserved | sold). Stripe is payment only,
+        not inventory.
+      </inventory_model>
+    </commerce>
+
+    <email>
+      <transactional>Resend</transactional>
+      <templating>React Email</templating>
+      <flows>
+        <flow>Order confirmation to customer</flow>
+        <flow>Order notification to Kelly</flow>
+        <flow>Commission inquiry to Kelly</flow>
+      </flows>
+    </email>
+
+    <observability>
+      <analytics>Vercel Analytics + Vercel Speed Insights</analytics>
+      <error_tracking>Sentry (free tier)</error_tracking>
+      <logging>Vercel runtime logs; structured console.log with request IDs</logging>
+    </observability>
+
+    <forbidden>
+      <item reason="Conflicts with stack decision">Shopify, BigCommerce, Snipcart, any commerce platform other than Stripe</item>
+      <item reason="Generic AI aesthetic">Inter (UI body), Roboto, system fonts as primary</item>
+      <item reason="Bundle bloat">Material UI, Chakra, Ant Design, Bootstrap</item>
+      <item reason="Unnecessary at this scale">Redux, Zustand, MobX (React Server Components + URL state + form actions are sufficient)</item>
+      <item reason="Wrong primitive">localStorage / sessionStorage for cart state (use cookies via server actions)</item>
+    </forbidden>
+  </stack>
+
+  <information_architecture>
+    <route path="/" name="Home">
+      <purpose>Brand introduction, hero painting, two-section split into Paintings and Vintage, featured works strip, about teaser, newsletter capture.</purpose>
+      <data>Sanity: featured paintings (4), hero work (1), about-strip excerpt</data>
+    </route>
+
+    <route path="/paintings" name="Paintings Index">
+      <purpose>Browse all available paintings. Filterable by status (available / sold) and series/tag.</purpose>
+      <data>Sanity: all paintings, sorted by createdAt desc by default</data>
+      <ui>Asymmetric editorial grid; varied aspect ratios respected; sold pieces are visible but visually distinct (subtle overlay + "Sold" label).</ui>
+    </route>
+
+    <route path="/paintings/[slug]" name="Painting Detail">
+      <purpose>Single painting product page. Primary purchase surface for originals.</purpose>
+      <data>Sanity: full painting record; related works (3, by tag overlap)</data>
+      <elements>
+        <element>Full-bleed primary image with secondary detail images in a vertical strip</element>
+        <element>Title, year, medium, dimensions, price</element>
+        <element>Artist statement / story (optional rich text)</element>
+        <element>Shipping &amp; care expandable section (shared component)</element>
+        <element>Buy button -> Stripe Checkout (sold-out state if unavailable)</element>
+        <element>Related works strip</element>
+      </elements>
+    </route>
+
+    <route path="/vintage" name="Vintage Index">
+      <purpose>Browse vintage clothing. Filterable by category (dresses, outerwear, knitwear, etc.), size, and era.</purpose>
+      <data>Sanity: all vintage items, available first</data>
+    </route>
+
+    <route path="/vintage/[slug]" name="Vintage Detail">
+      <purpose>Single vintage item product page.</purpose>
+      <elements>
+        <element>Multiple photos including condition close-ups and measurement reference</element>
+        <element>Era, size (with flat measurements, not just label size), material, condition notes</element>
+        <element>Price, buy button</element>
+        <element>"Notes on vintage sizing" link (shared content)</element>
+      </elements>
+    </route>
+
+    <route path="/commissions" name="Commissions">
+      <purpose>Explain Kelly's commission process; submit an inquiry.</purpose>
+      <elements>
+        <element>Process explanation (3-5 steps, prose)</element>
+        <element>Typical timeline and price ranges (not a price list)</element>
+        <element>Gallery of past commissions (Sanity)</element>
+        <element>Inquiry form: name, email, project type, budget range, timeline, message, optional reference image upload</element>
+      </elements>
+    </route>
+
+    <route path="/studio" name="About / Studio">
+      <purpose>Kelly's story, practice, location, influences. Editorial long-form.</purpose>
+      <data>Sanity: about page (singleton)</data>
+    </route>
+
+    <route path="/checkout/success" name="Checkout Success">
+      <purpose>Post-purchase confirmation; triggered by Stripe redirect.</purpose>
+      <behavior>Verifies session via Stripe API; updates Sanity item status to "sold"; sends email via Resend.</behavior>
+    </route>
+
+    <route path="/checkout/cancel" name="Checkout Cancel">
+      <purpose>Graceful return after abandoned checkout. Restores reservation state if applicable.</purpose>
+    </route>
+
+    <route path="/api/checkout" name="Checkout Session API" type="route_handler">
+      <purpose>Creates Stripe Checkout session; reserves inventory in Sanity.</purpose>
+    </route>
+
+    <route path="/api/webhooks/stripe" name="Stripe Webhook" type="route_handler">
+      <purpose>Authoritative inventory state update. Handles checkout.session.completed and checkout.session.expired.</purpose>
+    </route>
+
+    <route path="/api/commission-inquiry" name="Commission Form Handler" type="route_handler">
+      <purpose>Validates inquiry; sends email via Resend; stores submission in Sanity.</purpose>
+    </route>
+
+    <route path="/studio-admin/[[...tool]]" name="Sanity Studio">
+      <purpose>Mounted Sanity Studio for Kelly's content editing.</purpose>
+      <auth>Sanity's own auth; no app-level auth required</auth>
+    </route>
+
+    <route path="/legal/shipping" name="Shipping Policy" />
+    <route path="/legal/returns" name="Returns Policy" />
+    <route path="/legal/privacy" name="Privacy Policy" />
+    <route path="/legal/terms" name="Terms" />
+  </information_architecture>
+
+  <data_model>
+    <sanity_schemas>
+
+      <schema name="painting" type="document">
+        <field name="title" type="string" required="true" />
+        <field name="slug" type="slug" source="title" required="true" />
+        <field name="year" type="number" required="true" />
+        <field name="medium" type="string" description="e.g., Oil on linen, Soft pastel on sanded paper" required="true" />
+        <field name="dimensions" type="object">
+          <subfield name="widthInches" type="number" required="true" />
+          <subfield name="heightInches" type="number" required="true" />
+          <subfield name="depthInches" type="number" />
+          <subfield name="framed" type="boolean" />
+        </field>
+        <field name="weightOz" type="number" description="For shipping cost calculation" />
+        <field name="price" type="number" required="true" description="USD, integer dollars" />
+        <field name="status" type="string" required="true" options="available|reserved|sold|nfs" default="available" />
+        <field name="reservedUntil" type="datetime" description="Set when checkout session opens; cleared on completion or expiry" />
+        <field name="stripeSessionId" type="string" description="Active checkout session, if any" />
+        <field name="primaryImage" type="image" required="true" hotspot="true" />
+        <field name="detailImages" type="array" of="image" />
+        <field name="story" type="blockContent" description="Optional artist statement" />
+        <field name="tags" type="array" of="reference -> tag" />
+        <field name="series" type="reference -> series" />
+        <field name="featured" type="boolean" default="false" />
+        <field name="featuredOrder" type="number" />
+        <field name="createdAt" type="datetime" required="true" />
+        <field name="soldAt" type="datetime" />
+        <field name="shippingNotes" type="text" description="Optional per-piece shipping notes (oversized, etc.)" />
+      </schema>
+
+      <schema name="vintageItem" type="document">
+        <field name="title" type="string" required="true" />
+        <field name="slug" type="slug" source="title" required="true" />
+        <field name="category" type="string" required="true" options="dress|top|bottom|outerwear|knitwear|accessory|other" />
+        <field name="era" type="string" options="pre-1960|1960s|1970s|1980s|1990s|2000s|unknown" />
+        <field name="labelSize" type="string" description="As marked on garment, may be empty" />
+        <field name="measurements" type="object">
+          <subfield name="chestFlat" type="number" />
+          <subfield name="waistFlat" type="number" />
+          <subfield name="hipFlat" type="number" />
+          <subfield name="length" type="number" />
+          <subfield name="sleeve" type="number" />
+          <subfield name="shoulder" type="number" />
+          <subfield name="notes" type="text" />
+        </field>
+        <field name="material" type="string" />
+        <field name="condition" type="string" required="true" options="excellent|very-good|good|fair" />
+        <field name="conditionNotes" type="text" />
+        <field name="price" type="number" required="true" />
+        <field name="status" type="string" required="true" options="available|reserved|sold" default="available" />
+        <field name="reservedUntil" type="datetime" />
+        <field name="stripeSessionId" type="string" />
+        <field name="primaryImage" type="image" required="true" hotspot="true" />
+        <field name="detailImages" type="array" of="image" />
+        <field name="description" type="blockContent" />
+        <field name="weightOz" type="number" required="true" />
+        <field name="createdAt" type="datetime" required="true" />
+        <field name="soldAt" type="datetime" />
+      </schema>
+
+      <schema name="series" type="document">
+        <field name="title" type="string" required="true" />
+        <field name="slug" type="slug" />
+        <field name="description" type="text" />
+      </schema>
+
+      <schema name="tag" type="document">
+        <field name="title" type="string" required="true" />
+        <field name="slug" type="slug" />
+      </schema>
+
+      <schema name="commissionInquiry" type="document">
+        <field name="submittedAt" type="datetime" required="true" />
+        <field name="name" type="string" required="true" />
+        <field name="email" type="string" required="true" />
+        <field name="projectType" type="string" />
+        <field name="budgetRange" type="string" />
+        <field name="timeline" type="string" />
+        <field name="message" type="text" required="true" />
+        <field name="referenceImages" type="array" of="image" />
+        <field name="status" type="string" options="new|responded|in-progress|completed|declined" default="new" />
+        <field name="internalNotes" type="text" />
+      </schema>
+
+      <schema name="commissionExample" type="document" description="Past commission for the public gallery">
+        <field name="title" type="string" required="true" />
+        <field name="image" type="image" required="true" />
+        <field name="story" type="text" />
+        <field name="completedYear" type="number" />
+      </schema>
+
+      <schema name="aboutPage" type="document" singleton="true">
+        <field name="hero" type="image" />
+        <field name="story" type="blockContent" required="true" />
+        <field name="pullQuote" type="text" />
+        <field name="studioImages" type="array" of="image" />
+      </schema>
+
+      <schema name="siteSettings" type="document" singleton="true">
+        <field name="featuredHeroPainting" type="reference -> painting" />
+        <field name="marqueePhrases" type="array" of="string" />
+        <field name="shippingPolicy" type="blockContent" />
+        <field name="returnsPolicy" type="blockContent" />
+        <field name="privacyPolicy" type="blockContent" />
+        <field name="terms" type="blockContent" />
+        <field name="instagramHandle" type="string" />
+        <field name="contactEmail" type="string" required="true" />
+        <field name="shippingFlatRateUS" type="number" default="45" />
+        <field name="shippingFlatRateIntl" type="number" default="120" />
+      </schema>
+
+      <schema name="newsletterSignup" type="document">
+        <field name="email" type="string" required="true" />
+        <field name="submittedAt" type="datetime" required="true" />
+        <field name="source" type="string" />
+      </schema>
+
+    </sanity_schemas>
+  </data_model>
+
+  <inventory_and_checkout_flow>
+    <description>
+      Critical: every product is one-of-a-kind. The race condition between two
+      customers initiating checkout simultaneously is the single most important
+      correctness concern in this system. Spec follows.
+    </description>
+
+    <step n="1" name="Initiate Checkout">
+      <trigger>Customer clicks Buy on a product detail page.</trigger>
+      <action>
+        POST /api/checkout with productType + productId. Server reads current
+        product status from Sanity. If status != "available", return 409. If
+        available, atomically set status="reserved", reservedUntil=now+30min,
+        stripeSessionId=null (pending), and only then create the Stripe Checkout
+        session with metadata { productType, productId, sanityRevisionId }.
+        Persist sessionId back to Sanity. Return Stripe Checkout URL.
+      </action>
+      <atomicity_note>
+        Use Sanity's optimistic concurrency via the patch().ifRevisionId() API.
+        If the patch fails because another request beat us, return 409 to the
+        customer with a "just sold" message.
+      </atomicity_note>
+    </step>
+
+    <step n="2" name="Customer Pays at Stripe">
+      <trigger>Customer completes Stripe-hosted Checkout.</trigger>
+      <action>Stripe redirects to /checkout/success?session_id=...</action>
+    </step>
+
+    <step n="3" name="Webhook Confirms Sale">
+      <trigger>Stripe sends checkout.session.completed to /api/webhooks/stripe.</trigger>
+      <action>
+        Verify webhook signature. Look up product by sessionId in Sanity.
+        Set status="sold", soldAt=now, clear reservedUntil and stripeSessionId.
+        Trigger Resend emails (customer confirmation, Kelly notification).
+      </action>
+      <idempotency>
+        Webhook handler must be idempotent. Stripe retries on non-2xx. If product
+        is already "sold" with matching sessionId, return 200 without changes.
+      </idempotency>
+    </step>
+
+    <step n="4" name="Expiry / Cancel">
+      <trigger>Stripe sends checkout.session.expired, OR scheduled cron runs.</trigger>
+      <action>
+        Find products where reservedUntil < now AND status = "reserved".
+        Reset status to "available", clear reservation fields.
+      </action>
+      <cron>
+        Vercel Cron at /api/cron/release-stale-reservations every 10 minutes.
+        Defense in depth; webhook is primary.
+      </cron>
+    </step>
+
+    <step n="5" name="Success Page UX">
+      <action>
+        /checkout/success verifies session via Stripe API server-side. Does NOT
+        update inventory (webhook owns that). Renders confirmation with order
+        summary. Safe to refresh.
+      </action>
+    </step>
+  </inventory_and_checkout_flow>
+
+  <design_system>
+    <tokens>
+      <color name="bone" value="#f4efe6" role="page background" />
+      <color name="bone-deep" value="#ebe4d6" role="secondary surface" />
+      <color name="ink" value="#1a1d24" role="primary text, dark sections" />
+      <color name="ink-soft" value="#3a3d44" role="secondary text" />
+      <color name="ochre" value="#b87333" role="accent" />
+      <color name="ochre-deep" value="#8a5424" role="accent hover, links" />
+      <color name="rule" value="#d9d1bf" role="hairlines, dividers" />
+      <color name="sold-overlay" value="rgba(26, 29, 36, 0.55)" role="sold-state veil" />
+    </tokens>
+
+    <typography>
+      <scale base="16px">
+        <step name="display-xl" size="clamp(3.5rem, 8.5vw, 8.5rem)" family="Fraunces" weight="300" tracking="-0.02em" />
+        <step name="display-lg" size="clamp(2.5rem, 5vw, 4.5rem)" family="Fraunces" weight="300" tracking="-0.02em" />
+        <step name="display-md" size="2.5rem" family="Fraunces" weight="300" />
+        <step name="body-lg" size="1.05rem" family="Inter Tight" weight="400" leading="1.65" />
+        <step name="body" size="1rem" family="Inter Tight" weight="400" leading="1.6" />
+        <step name="ui" size="0.82rem" family="Inter Tight" weight="500" tracking="0.12em" transform="uppercase" />
+        <step name="caption" size="0.78rem" family="Fraunces" weight="400" style="italic" />
+      </scale>
+      <pairing_rule>Italic Fraunces is a deliberate accent, not a default. Use for captions, key phrases inside display headings, and section labels.</pairing_rule>
+    </typography>
+
+    <spatial>
+      <grid>12-column desktop, 4-column mobile</grid>
+      <gutter>2rem desktop, 1.25rem mobile</gutter>
+      <section_padding>8rem vertical desktop, 5rem mobile</section_padding>
+      <philosophy>
+        Asymmetry over symmetry. Vertical offsets between adjacent items in
+        editorial grids. Generous negative space around hero imagery. Never
+        center-align large blocks of body text.
+      </philosophy>
+    </spatial>
+
+    <motion>
+      <principle>Restraint. One well-orchestrated entrance per section beats five micro-interactions.</principle>
+      <hero_entrance>Staggered fade-up on load, 150ms increments, cubic-bezier(0.2, 0.6, 0.2, 1)</hero_entrance>
+      <hover>Image scale 1.03 on 600ms ease for product cards; underline-grow on nav links</hover>
+      <forbidden>Bouncy springs, page-load spinners on Server Component routes, parallax scrolling, scroll-jacking</forbidden>
+    </motion>
+
+    <reference>
+      A working static mockup of the homepage exists and reflects the agreed-upon
+      direction. Treat it as the source of truth for visual decisions. Where the
+      mockup uses inline SVG placeholders, the production build uses Sanity
+      images through next/image.
+    </reference>
+  </design_system>
+
+  <integrations>
+    <integration name="Sanity">
+      <env>NEXT_PUBLIC_SANITY_PROJECT_ID, NEXT_PUBLIC_SANITY_DATASET, SANITY_API_READ_TOKEN, SANITY_API_WRITE_TOKEN</env>
+      <client>@sanity/client; use next-sanity helpers; cache fetches with Next.js cache tags</client>
+      <revalidation>On-demand revalidation via Sanity webhook -> /api/revalidate. Tag-based: paintings, vintage, about, settings.</revalidation>
+    </integration>
+
+    <integration name="Stripe">
+      <env>STRIPE_SECRET_KEY, STRIPE_PUBLISHABLE_KEY, STRIPE_WEBHOOK_SECRET</env>
+      <mode>Checkout Sessions (hosted)</mode>
+      <products>Created dynamically per session; do not pre-create Stripe products for one-off inventory</products>
+      <shipping>Use Stripe's shipping address collection; flat-rate options pulled from Sanity siteSettings</shipping>
+      <tax>Stripe Tax enabled; Kelly registers in Indiana initially</tax>
+    </integration>
+
+    <integration name="Resend">
+      <env>RESEND_API_KEY, RESEND_FROM_ADDRESS</env>
+      <templates>OrderConfirmation, OrderNotification (to Kelly), CommissionInquiry (to Kelly)</templates>
+    </integration>
+
+    <integration name="Vercel">
+      <env>VERCEL_URL handled automatically; set SITE_URL for production</env>
+      <crons>/api/cron/release-stale-reservations every 10 minutes</crons>
+    </integration>
+  </integrations>
+
+  <build_phases>
+
+    <phase number="0" name="Foundation" duration="3 days">
+      <goal>Project scaffolded, deployed, fonts and tokens loading, empty pages routable.</goal>
+      <tasks>
+        <task>create-next-app with TypeScript, Tailwind v4, App Router</task>
+        <task>Configure ESLint + Prettier + strict TS settings</task>
+        <task>Set up Vercel project, connect repo, configure preview deploys</task>
+        <task>Add design tokens to globals.css via @theme directive (Tailwind v4)</task>
+        <task>Wire next/font for Fraunces and Inter Tight</task>
+        <task>Scaffold all routes from information_architecture as empty pages</task>
+        <task>Build shared Nav and Footer components matching the mockup</task>
+      </tasks>
+      <exit_criteria>Production deploy at temporary Vercel URL loads with correct typography and palette on every route, even if pages are stubs.</exit_criteria>
+    </phase>
+
+    <phase number="1" name="Sanity + Schemas" duration="3 days">
+      <goal>Sanity project live, all schemas defined, Studio mounted, sample content seeded.</goal>
+      <tasks>
+        <task>Create Sanity project; configure CORS for local + production origins</task>
+        <task>Implement all schemas from data_model section</task>
+        <task>Mount Studio at /studio-admin route</task>
+        <task>Write GROQ queries for: paintings list, painting by slug, vintage list, vintage by slug, featured paintings, site settings, about page</task>
+        <task>Set up next-sanity client with cache tags and revalidation webhook</task>
+        <task>Seed 3 paintings and 3 vintage items for development</task>
+      </tasks>
+      <exit_criteria>Kelly can log into Studio, create a painting with images, and see it appear at /paintings/[slug] on the dev deploy within 30 seconds.</exit_criteria>
+    </phase>
+
+    <phase number="2" name="Storefront Pages" duration="6 days">
+      <goal>All public-facing pages built and matching mockup quality.</goal>
+      <tasks>
+        <task>Home page: hero, marquee, two-section split, featured works grid, about strip, newsletter capture</task>
+        <task>Paintings index with filter UI (status, series, tag) via URL search params</task>
+        <task>Painting detail page with image gallery, metadata, Buy button (non-functional placeholder)</task>
+        <task>Vintage index and detail pages</task>
+        <task>Studio/About page from singleton</task>
+        <task>Legal pages (rendered from siteSettings block content)</task>
+        <task>Mobile responsive pass on every page</task>
+        <task>Metadata, OpenGraph, structured data (Product schema) per page</task>
+      </tasks>
+      <exit_criteria>Site is fully browsable. Buy buttons present but route to a "checkout coming soon" placeholder. Lighthouse mobile >= 90 on home, paintings index, painting detail.</exit_criteria>
+    </phase>
+
+    <phase number="3" name="Commerce" duration="5 days">
+      <goal>End-to-end checkout works, including the inventory race condition handling.</goal>
+      <tasks>
+        <task>Implement /api/checkout with Sanity optimistic concurrency reservation</task>
+        <task>Stripe Checkout session creation with product metadata</task>
+        <task>Webhook handler at /api/webhooks/stripe with signature verification and idempotency</task>
+        <task>Vercel Cron job for stale reservation cleanup</task>
+        <task>Resend integration with React Email templates</task>
+        <task>/checkout/success page with session verification</task>
+        <task>/checkout/cancel page</task>
+        <task>Sold-state UI on product cards and detail pages</task>
+        <task>Test the race: open two browsers, click Buy simultaneously, verify exactly one wins</task>
+      </tasks>
+      <exit_criteria>A test purchase using a Stripe test card completes: Sanity status flips to sold, both emails arrive, success page shows order summary. Race condition test passes.</exit_criteria>
+    </phase>
+
+    <phase number="4" name="Commissions" duration="2 days">
+      <goal>Commission inquiry flow live.</goal>
+      <tasks>
+        <task>/commissions page with process, examples gallery, inquiry form</task>
+        <task>Form with client-side validation, optional image upload to Sanity</task>
+        <task>/api/commission-inquiry handler: validate, store in Sanity, email Kelly via Resend</task>
+        <task>Spam protection: honeypot field + rate limiting by IP</task>
+      </tasks>
+      <exit_criteria>A submitted inquiry creates a Sanity record and arrives in Kelly's inbox within 60 seconds.</exit_criteria>
+    </phase>
+
+    <phase number="5" name="Pre-Launch Hardening" duration="3 days">
+      <goal>Production-ready.</goal>
+      <tasks>
+        <task>Sentry integration for client and server errors</task>
+        <task>Custom 404 and 500 pages matching brand</task>
+        <task>robots.txt, sitemap.xml (dynamic from Sanity)</task>
+        <task>Cookie banner if analytics requires (Vercel Analytics + Plausible may not)</task>
+        <task>Accessibility audit: keyboard nav, focus states, alt text on every image, color contrast on all text</task>
+        <task>Performance audit: bundle analysis, image sizes, font loading strategy</task>
+        <task>Domain setup, SSL, DNS</task>
+        <task>Stripe account moved from test to live mode</task>
+        <task>Final content review with Kelly: copy on every page, legal text, product listings</task>
+      </tasks>
+      <exit_criteria>kellylaaura.com loads in production with live Stripe keys, real inventory, and Kelly can complete a real-money test transaction.</exit_criteria>
+    </phase>
+
+  </build_phases>
+
+  <conventions>
+    <code>
+      <rule>Server Components are the default. Add "use client" only when state, effects, or browser APIs are required.</rule>
+      <rule>Data fetching lives in /lib/sanity/queries.ts. No fetch() calls in components.</rule>
+      <rule>All Sanity queries are typed via sanity-codegen or hand-written types in /types/sanity.ts.</rule>
+      <rule>Route handlers return NextResponse with explicit status codes. Never throw to the framework.</rule>
+      <rule>Environment variables accessed only through /lib/env.ts, validated at boot with zod.</rule>
+      <rule>No client-side state libraries. URL search params for filters, server actions for forms, cookies for cart-equivalent state.</rule>
+    </code>
+
+    <git>
+      <rule>Conventional commits (feat:, fix:, chore:, refactor:, docs:)</rule>
+      <rule>Trunk-based; feature branches short-lived; PRs preferred for any change touching commerce or webhooks</rule>
+      <rule>Never commit secrets; .env.local gitignored; production secrets only in Vercel dashboard</rule>
+    </git>
+
+    <testing>
+      <philosophy>
+        Test the parts that hurt when they break. Inventory race conditions and
+        webhook handlers must have tests. Pixel-perfect UI tests are out of scope.
+      </philosophy>
+      <required_tests>
+        <test>Inventory reservation: concurrent requests, only one succeeds</test>
+        <test>Stripe webhook idempotency: duplicate delivery does not double-update</test>
+        <test>Stale reservation cleanup: reservation older than 30min is released</test>
+        <test>Commission form validation</test>
+      </required_tests>
+      <runner>Vitest for unit/integration; Playwright optional for one end-to-end checkout flow</runner>
+    </testing>
+  </conventions>
+
+  <risks>
+    <risk severity="high" name="Concurrent checkout race">
+      <description>Two customers click Buy at the same moment. Without proper concurrency control, both proceed to Stripe and one will pay for a product the other has already bought.</description>
+      <mitigation>Optimistic concurrency in Sanity via ifRevisionId; webhook as final authority; 30-minute reservation TTL.</mitigation>
+    </risk>
+    <risk severity="high" name="Webhook delivery failures">
+      <description>If Stripe webhook fails to deliver, Sanity inventory stays "reserved" while the customer has paid.</description>
+      <mitigation>Idempotent handler; Stripe retries automatically; defense-in-depth cron job; Sentry alert on webhook errors.</mitigation>
+    </risk>
+    <risk severity="medium" name="Image size on art-heavy pages">
+      <description>Paintings deserve large, high-quality images, but bandwidth and Core Web Vitals push the other way.</description>
+      <mitigation>next/image with appropriate sizes; AVIF/WebP via Sanity image pipeline; LCP image preloaded on detail pages.</mitigation>
+    </risk>
+    <risk severity="medium" name="Shipping cost variability">
+      <description>Flat-rate shipping in v1 will under- or over-charge for some pieces. Large paintings cost much more to ship than small ones.</description>
+      <mitigation>Per-piece shippingNotes field; Kelly can refund difference manually for v1; revisit calculated shipping in v1.1.</mitigation>
+    </risk>
+    <risk severity="low" name="Content lock-in to Sanity">
+      <description>If Sanity changes pricing or terms, migration is non-trivial.</description>
+      <mitigation>Accepted. Sanity is mature, has a stable API, and Portable Text is widely supported. Migration path exists if ever needed.</mitigation>
+    </risk>
+  </risks>
+
+  <deliverables_summary>
+    <item>Production deploy at kellylaaura.com</item>
+    <item>Sanity Studio accessible to Kelly</item>
+    <item>Working purchase flow for paintings and vintage items</item>
+    <item>Working commission inquiry flow</item>
+    <item>README with local setup, env variable list, deployment notes</item>
+    <item>RUNBOOK with: how to add a product, how to handle a failed payment, how to release a stuck reservation, how to refund</item>
+  </deliverables_summary>
+
+</charter>
