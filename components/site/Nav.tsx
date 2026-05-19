@@ -8,14 +8,15 @@ import { cn } from "@/lib/utils";
 
 type NavLink = { href: string; label: string };
 
-// Gallery now points at /gallery (the five-rooms index). The legacy
-// /paintings catalogue page still exists and is linked from /gallery as
-// "Full catalogue" so any in-flight bookmarks keep working.
+// The five-rooms doorway experience lives at the site root, so "Gallery"
+// points to /. /paintings remains as the full-catalogue escape hatch and
+// /gallery redirects to / for any in-flight bookmarks. "About" surfaces
+// the rich practice / process content at /studio.
 const links: NavLink[] = [
   { href: "/commissions", label: "Commissions" },
-  { href: "/gallery", label: "Gallery" },
+  { href: "/", label: "Gallery" },
   { href: "/vintage", label: "Shop" },
-  { href: "/studio", label: "Studio" },
+  { href: "/studio", label: "About" },
 ];
 
 export function Nav() {
@@ -70,7 +71,9 @@ export function Nav() {
                 onClick={() => setOpen(false)}
                 className={cn(
                   "font-display text-3xl tracking-tight py-2 -mx-1 px-1 min-h-12 inline-flex items-center",
-                  pathname.startsWith(l.href) && "text-ochre-deep"
+                  (l.href === "/"
+                    ? pathname === "/"
+                    : pathname.startsWith(l.href)) && "text-ochre-deep"
                 )}
               >
                 {l.label}

@@ -1,301 +1,102 @@
 import Link from "next/link";
 import { CategoryDoorways } from "@/components/site/CategoryDoorways";
 import { Container } from "@/components/site/Container";
-import { Marquee } from "@/components/site/Marquee";
 import { NewsletterCapture } from "@/components/site/NewsletterCapture";
-import { ProductImage } from "@/components/site/ProductImage";
-import { Parallax } from "@/components/site/Parallax";
-import { PortableContent } from "@/components/site/PortableContent";
 import { Reveal } from "@/components/site/Reveal";
-import { FullBleedFeature } from "@/components/site/FullBleedFeature";
-import {
-  getAboutPage,
-  getAllPaintings,
-  getCategorySummaries,
-  getHeroPainting,
-  getSiteSettings,
-} from "@/lib/sanity/read";
+import { getCategorySummaries } from "@/lib/sanity/read";
 
 /**
- * Home — Galleria-style with substantive scroll choreography.
+ * Home — built around the "Choose a doorway" concept.
  *
- * Signature scroll moments:
- *   • Hero painting drifts via parallax as you scroll past
- *   • Full-bleed feature painting between hero and gallery — fills the
- *     viewport, parallax inside, big mono caption
- *   • Selected Works = horizontal-scroll gallery: vertical scroll inside
- *     the section translates the painting strip sideways
- *   • Artist section has a sticky image column with stats scrolling next
- *     to it
- *   • Heavy Reveal entrance animations on every section heading
+ * The five rooms are the page. The rich introduction to Kelly's practice
+ * lives at /studio. /gallery redirects here so any bookmarks resolve.
  */
 export default async function HomePage() {
-  const [hero, allPaintings, settings, about, categorySummaries] =
-    await Promise.all([
-      getHeroPainting(),
-      getAllPaintings(),
-      getSiteSettings(),
-      getAboutPage(),
-      getCategorySummaries(),
-    ]);
-
-  const fullBleedFeature =
-    allPaintings.find(
-      (p) =>
-        p._id !== hero?._id &&
-        p.status !== "nfs" &&
-        // Keep the marquee-to-doorways transition tonal — don't surface a
-        // mature-room cover at full-bleed before the visitor has chosen.
-        p.category !== "eighteen-plus"
-    ) ??
-    hero ??
-    null;
+  const summaries = await getCategorySummaries();
 
   return (
     <>
-      {/* 1. HERO ------------------------------------------------------- */}
-      <section className="relative overflow-hidden pt-16 md:pt-28 pb-24 md:pb-32">
-        <Container width="wide">
-          <div className="grid grid-cols-12 gap-y-16 md:gap-x-12 items-end">
-            <div className="col-span-12 md:col-span-8">
-              <Reveal delay={0} rise={40}>
-                <p className="text-ui text-ink-soft mb-10 md:mb-14">
-                  Montreal painter · based in Ohio · est. 2018
-                </p>
-              </Reveal>
-              <Reveal delay={120} rise={120}>
-                <h1 className="font-display-caps font-light text-[length:var(--text-display-lg)] md:text-[length:var(--text-display-xl)] leading-[0.85] tracking-[-0.03em]">
-                  Landscapes
-                  <br />
-                  that{" "}
-                  <span className="font-display-italic text-ochre-deep normal-case">
-                    remember
-                  </span>
-                  <br />
-                  you back.
-                </h1>
-              </Reveal>
-            </div>
-
-            <div className="col-span-12 md:col-span-4">
-              <Reveal delay={280} rise={120}>
-                {hero ? (
-                  <Link
-                    href={`/paintings/${hero.slug.current}`}
-                    className="group block"
-                  >
-                    <Parallax amount={0.12}>
-                      <div className="relative aspect-[3/4] w-full overflow-hidden">
-                        <ProductImage
-                          image={hero.primaryImage}
-                          alt={hero.primaryImage?.alt ?? hero.title}
-                          seed={hero._id}
-                          width={900}
-                          height={1200}
-                          sizes="(min-width: 1024px) 33vw, 100vw"
-                          priority
-                          className="transition-transform duration-[1200ms] ease-[var(--ease-editorial)] group-hover:scale-[1.04]"
-                        />
-                      </div>
-                    </Parallax>
-                    <div className="mt-4 flex items-baseline justify-between gap-6 font-[family-name:var(--font-mono)] text-[0.74rem] uppercase tracking-[0.06em] text-ink-soft">
-                      <span className="text-ink">{hero.title}</span>
-                      <span>{hero.year}</span>
-                    </div>
-                  </Link>
-                ) : null}
-              </Reveal>
-            </div>
-          </div>
-        </Container>
-      </section>
-
-      {/* 2. Marquee --------------------------------------------------- */}
-      {settings?.marqueePhrases && settings.marqueePhrases.length > 0 && (
-        <Marquee phrases={settings.marqueePhrases} />
-      )}
-
-      {/* 3. FULL-BLEED FEATURE PAINTING (signature scroll moment #1) -- */}
-      {fullBleedFeature && <FullBleedFeature painting={fullBleedFeature} />}
-
-      {/* 4. ABOUT STRIP ----------------------------------------------- */}
-      <section className="py-32 md:py-48 border-t border-rule/60">
-        <Container width="wide">
-          <div className="grid grid-cols-12 gap-y-12 md:gap-x-16">
-            <Reveal
-              as="div"
-              className="col-span-12 md:col-span-3 md:sticky md:top-32 md:self-start"
-            >
-              <div className="flex items-baseline gap-4 font-[family-name:var(--font-mono)] text-[0.74rem] uppercase tracking-[0.08em] text-ink-soft">
-                <span>§ 01</span>
-                <span>The studio</span>
-              </div>
-            </Reveal>
-            <div className="col-span-12 md:col-span-9 max-w-3xl">
-              <Reveal delay={100}>
-                <h2 className="font-display-caps font-light text-[length:var(--text-display-md)] md:text-[length:var(--text-display-lg)] leading-[0.95] tracking-[-0.025em]">
-                  A practice rebuilt around
-                  <br />
-                  <span className="font-display-italic text-ochre-deep normal-case">
-                    what the light is doing
-                  </span>
-                  <br />
-                  at four in the afternoon.
-                </h2>
-              </Reveal>
-              <Reveal delay={200} className="mt-10">
-                {about?.story ? (
-                  <div className="max-w-xl text-[length:var(--text-body-lg)] text-ink-soft leading-relaxed">
-                    <PortableContent value={about.story.slice(0, 1)} />
-                  </div>
-                ) : (
-                  <p className="max-w-xl text-[length:var(--text-body-lg)] text-ink-soft leading-relaxed">
-                    Kelly paints from a studio in Ohio, far from Montreal — long winters,
-                    long looks at the same field.
-                  </p>
-                )}
-                <Link
-                  href="/studio"
-                  className="mt-10 inline-block text-ui border-b border-ink pb-1 hover:text-ochre-deep hover:border-ochre-deep transition-colors"
-                >
-                  Read about the studio →
-                </Link>
-              </Reveal>
-            </div>
-          </div>
-        </Container>
-      </section>
-
-      {/* 5. THE FIVE ROOMS — gallery doorways (signature moment #2) --- */}
-      <section className="border-t border-rule/60 pt-24 md:pt-32 pb-32 md:pb-48">
+      {/* 1. DOORWAY HERO --------------------------------------------- */}
+      <section className="pt-20 md:pt-32 pb-20 md:pb-28">
         <Container width="wide">
           <Reveal>
-            <div className="flex items-end justify-between mb-12 md:mb-20">
-              <div className="flex items-baseline gap-4 font-[family-name:var(--font-mono)] text-[0.74rem] uppercase tracking-[0.08em] text-ink-soft">
-                <span>§ 02</span>
-                <span>Five rooms</span>
+            <p className="text-ui text-ink-soft mb-8 md:mb-10">
+              § Kelly Laura · five rooms
+            </p>
+          </Reveal>
+          <Reveal delay={120} rise={48}>
+            <h1 className="font-display-caps font-light text-[length:var(--text-display-lg)] md:text-[length:var(--text-display-xl)] leading-[0.85] tracking-[-0.03em] max-w-5xl">
+              Choose a
+              <br />
+              <span className="font-display-italic text-ochre-deep normal-case">
+                doorway
+              </span>
+              .
+            </h1>
+          </Reveal>
+          <Reveal delay={220}>
+            <p className="mt-12 max-w-xl text-[length:var(--text-body-lg)] text-ink-soft leading-relaxed">
+              The work is grouped into five rooms. Each one keeps its own pace.
+              The Eighteen+ room is age-restricted; you&rsquo;ll be asked to
+              confirm before you enter.
+            </p>
+          </Reveal>
+        </Container>
+      </section>
+
+      {/* 2. THE FIVE ROOMS ------------------------------------------- */}
+      <section className="pb-32 md:pb-48">
+        <Container width="wide">
+          <CategoryDoorways summaries={summaries} />
+        </Container>
+      </section>
+
+      {/* 3. ESCAPE HATCH — full catalogue ---------------------------- */}
+      <section className="pb-24 md:pb-32 border-t border-rule/60 pt-16 md:pt-20">
+        <Container width="wide">
+          <Reveal>
+            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+              <div>
+                <p className="text-ui text-ink-soft mb-4">§ Or</p>
+                <p className="font-display text-2xl md:text-3xl leading-tight max-w-xl">
+                  See every available work in one long catalogue.
+                </p>
               </div>
               <Link
-                href="/gallery"
-                className="text-ui pb-1 border-b border-ink hover:text-ochre-deep hover:border-ochre-deep transition-colors"
+                href="/paintings"
+                className="text-ui pb-1 border-b border-ink hover:text-ochre-deep hover:border-ochre-deep transition-colors self-start md:self-auto"
               >
-                Open the gallery →
+                Full catalogue →
               </Link>
             </div>
           </Reveal>
-          <CategoryDoorways summaries={categorySummaries} />
         </Container>
       </section>
 
-      {/* 6. ARTIST — STICKY IMAGE COLUMN (signature moment #3) -------- */}
-      <section className="py-32 md:py-48 border-t border-rule/60 bg-bone-deep">
+      {/* 4. QUIET LINK TO THE ABOUT-THE-ARTIST PAGE ------------------ */}
+      <section className="pb-24 md:pb-32 border-t border-rule/60 pt-16 md:pt-20">
         <Container width="wide">
-          <div className="grid grid-cols-12 gap-y-16 md:gap-x-12">
-            <div className="col-span-12 md:col-span-5">
-              <Reveal>
-                <div className="flex items-baseline gap-4 font-[family-name:var(--font-mono)] text-[0.74rem] uppercase tracking-[0.08em] text-ink-soft mb-10">
-                  <span>§ 03</span>
-                  <span>The artist</span>
-                </div>
-              </Reveal>
-              <Reveal delay={100} rise={100}>
-                <h2 className="font-display-caps font-light text-[length:var(--text-display-md)] md:text-[length:var(--text-display-lg)] leading-[0.95] tracking-[-0.025em]">
-                  Kelly
-                  <br />
-                  <span className="font-display-italic text-ochre-deep normal-case">
-                    Laura
-                  </span>
-                </h2>
-              </Reveal>
-              <Reveal delay={220} className="mt-10 space-y-12">
-                {about?.pullQuote && (
-                  <p className="font-display italic text-2xl md:text-3xl leading-snug text-ink-soft max-w-md">
-                    &ldquo;{about.pullQuote}&rdquo;
-                  </p>
-                )}
-                <dl className="grid grid-cols-2 gap-y-4 max-w-md font-[family-name:var(--font-mono)] text-[0.78rem] uppercase tracking-[0.06em] text-ink-soft">
-                  <dt>Working since</dt>
-                  <dd className="text-ink">2018</dd>
-                  <dt>Studio</dt>
-                  <dd className="text-ink">Ohio</dd>
-                  <dt>Born</dt>
-                  <dd className="text-ink">Montréal</dd>
-                  <dt>Media</dt>
-                  <dd className="text-ink">Oil · Soft pastel</dd>
-                </dl>
-                <Link
-                  href="/studio"
-                  className="inline-block text-ui border-b border-ink pb-1 hover:text-ochre-deep hover:border-ochre-deep transition-colors"
-                >
-                  Read more →
-                </Link>
-              </Reveal>
-            </div>
-
-            <div className="col-span-12 md:col-span-6 md:col-start-7">
-              <div className="md:sticky md:top-28">
-                <Reveal delay={150} rise={100}>
-                  {about?.hero ? (
-                    <ProductImage
-                      image={about.hero}
-                      alt={about.hero.alt ?? "Kelly Laura in the studio"}
-                      seed="about-hero"
-                      width={1000}
-                      height={1250}
-                      sizes="(min-width: 1024px) 45vw, 100vw"
-                      className="w-full"
-                    />
-                  ) : hero ? (
-                    <ProductImage
-                      image={hero.primaryImage}
-                      alt={hero.primaryImage?.alt ?? hero.title}
-                      seed={`artist-${hero._id}`}
-                      width={1000}
-                      height={1250}
-                      sizes="(min-width: 1024px) 45vw, 100vw"
-                      className="w-full"
-                    />
-                  ) : null}
-                </Reveal>
+          <Reveal>
+            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+              <div>
+                <p className="text-ui text-ink-soft mb-4">§ Also</p>
+                <p className="font-display text-2xl md:text-3xl leading-tight max-w-xl">
+                  About the artist — practice, place, and process.
+                </p>
               </div>
+              <Link
+                href="/studio"
+                className="text-ui pb-1 border-b border-ink hover:text-ochre-deep hover:border-ochre-deep transition-colors self-start md:self-auto"
+              >
+                Read about Kelly →
+              </Link>
             </div>
-          </div>
-        </Container>
-      </section>
-
-      {/* 7. CLOSING CTA ---------------------------------------------- */}
-      <section className="py-32 md:py-56 border-t border-rule/60 text-center">
-        <Container width="wide">
-          <Reveal rise={40}>
-            <p className="text-ui text-ink-soft mb-8">§ 04 · A painting for your place</p>
-          </Reveal>
-          <Reveal delay={100} rise={120}>
-            <h2 className="font-display-caps font-light text-[length:var(--text-display-lg)] md:text-[length:var(--text-display-xl)] leading-[0.88] tracking-[-0.03em] max-w-5xl mx-auto">
-              Begin a
-              <br />
-              <span className="font-display-italic text-ochre-deep normal-case">
-                commission
-              </span>
-              .
-            </h2>
-          </Reveal>
-          <Reveal delay={260}>
-            <p className="mt-10 md:mt-14 max-w-xl mx-auto text-[length:var(--text-body-lg)] text-ink-soft leading-relaxed">
-              Landscapes of a place you love, painted from your photos or a visit. A
-              limited number of commissions each season.
-            </p>
-            <Link
-              href="/commissions"
-              className="mt-12 inline-block text-ui px-9 py-5 bg-ink text-bone hover:bg-ochre-deep transition-colors"
-            >
-              Begin an inquiry →
-            </Link>
           </Reveal>
         </Container>
       </section>
 
-      {/* 8. Newsletter ----------------------------------------------- */}
-      <section className="pb-32 md:pb-44 border-t border-rule/60 pt-32 md:pt-44">
+      {/* 5. Newsletter ---------------------------------------------- */}
+      <section className="pb-32 md:pb-44 border-t border-rule/60 pt-24 md:pt-32">
         <Container>
           <NewsletterCapture />
         </Container>
