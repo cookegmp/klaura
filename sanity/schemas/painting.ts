@@ -18,6 +18,24 @@ export const paintingSchema = defineType({
       validation: (Rule) => Rule.required().max(120),
     }),
     defineField({
+      name: "category",
+      type: "string",
+      group: "core",
+      description: "Which gallery section this painting belongs to.",
+      initialValue: "landscapes",
+      options: {
+        list: [
+          { title: "Landscapes", value: "landscapes" },
+          { title: "Houses", value: "houses" },
+          { title: "Animals & Pets", value: "animals" },
+          { title: "Eighteen+ (nudity, figures)", value: "eighteen-plus" },
+          { title: "Miscellaneous", value: "miscellaneous" },
+        ],
+        layout: "radio",
+      },
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
       name: "slug",
       type: "slug",
       group: "core",

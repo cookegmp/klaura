@@ -5,8 +5,28 @@
 
 export const PAINTINGS_LIST = /* groq */ `
   *[_type == "painting"] | order(createdAt desc) {
-    _id, _rev, title, slug, year, medium, dimensions, price, status,
+    _id, _rev, title, slug, category, year, medium, dimensions, price, status,
     primaryImage, tags, series, featured, featuredOrder, createdAt
+  }
+`;
+
+export const PAINTINGS_BY_CATEGORY = /* groq */ `
+  *[_type == "painting" && category == $category] | order(createdAt desc) {
+    _id, _rev, title, slug, category, year, medium, dimensions, price, status,
+    primaryImage, "series": series->{ _id, title, slug, description },
+    featured, featuredOrder, createdAt
+  }
+`;
+
+export const PAINTINGS_COVER_BY_CATEGORY = /* groq */ `
+  {
+    "byCategory": *[_type == "painting"] | order(featuredOrder asc, createdAt desc) {
+      category,
+      _id,
+      title,
+      slug,
+      primaryImage
+    }
   }
 `;
 

@@ -194,7 +194,9 @@ function seed(): void {
   store.documents[animalsTag._id] = { ...animalsTag, _type: "tag" };
   store.documents[englishTag._id] = { ...englishTag, _type: "tag" };
 
-  // Series
+  // Series — sub-collections that live inside categories.
+  //   Places, Nighttime         → within Landscapes
+  //   Anticipation, Gateway     → within Eighteen+
   const placesSeries: Series = {
     _id: "series.places",
     _rev: rev(),
@@ -203,7 +205,30 @@ function seed(): void {
     description:
       "Studio practice from a single winter — the same field, the same hour, painted thirty different ways.",
   };
-  store.documents[placesSeries._id] = { ...placesSeries, _type: "series" };
+  const nighttimeSeries: Series = {
+    _id: "series.nighttime",
+    _rev: rev(),
+    title: "Nighttime",
+    slug: { current: "nighttime" },
+    description: "Landscapes after dusk — long looks at how the dark behaves.",
+  };
+  const anticipationSeries: Series = {
+    _id: "series.anticipation",
+    _rev: rev(),
+    title: "Anticipation",
+    slug: { current: "anticipation" },
+    description: "Figure work — the moment before.",
+  };
+  const gatewaySeries: Series = {
+    _id: "series.gateway",
+    _rev: rev(),
+    title: "Gateway",
+    slug: { current: "gateway" },
+    description: "Closer studies. Explicit by intention.",
+  };
+  for (const s of [placesSeries, nighttimeSeries, anticipationSeries, gatewaySeries]) {
+    store.documents[s._id] = { ...s, _type: "series" };
+  }
 
   // Paintings. Seed images live in /public/sample-art and are referenced via
   // a custom `local-image:<filename>` ref convention that ProductImage knows
@@ -215,6 +240,7 @@ function seed(): void {
       _rev: rev(),
       title: "First snow",
       slug: { current: "first-snow" },
+      category: "landscapes",
       year: 2024,
       medium: "Oil on linen",
       dimensions: { widthInches: 30, heightInches: 24, framed: false },
@@ -236,6 +262,7 @@ function seed(): void {
       _rev: rev(),
       title: "Cottage with geese",
       slug: { current: "cottage-with-geese" },
+      category: "houses",
       year: 2024,
       medium: "Soft pastel on sanded paper",
       dimensions: { widthInches: 16, heightInches: 20 },
@@ -255,6 +282,7 @@ function seed(): void {
       _rev: rev(),
       title: "Highland cattle, evening sky",
       slug: { current: "highland-cattle-evening-sky" },
+      category: "animals",
       year: 2025,
       medium: "Oil on linen",
       dimensions: { widthInches: 24, heightInches: 36 },
@@ -276,6 +304,7 @@ function seed(): void {
       _rev: rev(),
       title: "Birches and creek",
       slug: { current: "birches-and-creek" },
+      category: "landscapes",
       year: 2024,
       medium: "Oil on linen",
       dimensions: { widthInches: 24, heightInches: 18 },
@@ -297,6 +326,7 @@ function seed(): void {
       _rev: rev(),
       title: "Pine path, autumn",
       slug: { current: "pine-path-autumn" },
+      category: "landscapes",
       year: 2024,
       medium: "Oil on linen",
       dimensions: { widthInches: 18, heightInches: 24 },
@@ -314,6 +344,7 @@ function seed(): void {
       _rev: rev(),
       title: "Dolomites meadow",
       slug: { current: "dolomites-meadow" },
+      category: "landscapes",
       year: 2023,
       medium: "Oil on linen",
       dimensions: { widthInches: 30, heightInches: 24 },
@@ -332,6 +363,7 @@ function seed(): void {
       _rev: rev(),
       title: "Old town, after rain",
       slug: { current: "old-town-after-rain" },
+      category: "houses",
       year: 2024,
       medium: "Oil on canvas",
       dimensions: { widthInches: 24, heightInches: 30 },
@@ -349,6 +381,7 @@ function seed(): void {
       _rev: rev(),
       title: "Canyon overlook",
       slug: { current: "canyon-overlook" },
+      category: "landscapes",
       year: 2024,
       medium: "Oil on linen",
       dimensions: { widthInches: 24, heightInches: 30 },
@@ -366,6 +399,7 @@ function seed(): void {
       _rev: rev(),
       title: "Three horses, summer field",
       slug: { current: "three-horses-summer-field" },
+      category: "animals",
       year: 2024,
       medium: "Oil on linen",
       dimensions: { widthInches: 18, heightInches: 24 },
@@ -384,6 +418,7 @@ function seed(): void {
       _rev: rev(),
       title: "Yellow house, green car",
       slug: { current: "yellow-house-green-car" },
+      category: "houses",
       year: 2024,
       medium: "Oil on canvas",
       dimensions: { widthInches: 20, heightInches: 24 },
@@ -401,6 +436,7 @@ function seed(): void {
       _rev: rev(),
       title: "Lake with bare tree",
       slug: { current: "lake-with-bare-tree" },
+      category: "miscellaneous",
       year: 2023,
       medium: "Acrylic on canvas",
       dimensions: { widthInches: 14, heightInches: 11 },
@@ -418,6 +454,7 @@ function seed(): void {
       _rev: rev(),
       title: "Deer in lilacs",
       slug: { current: "deer-in-lilacs" },
+      category: "animals",
       year: 2024,
       medium: "Soft pastel on sanded paper",
       dimensions: { widthInches: 14, heightInches: 18 },
@@ -429,6 +466,49 @@ function seed(): void {
         "A young buck in front of a lilac hedge in full bloom."
       ),
       tags: [{ _ref: animalsTag._id }],
+      createdAt: nowIso(),
+    },
+    // Eighteen+ placeholders — image refs intentionally route to the tonal
+    // gradient fallback in ProductImage. Kelly replaces them with real
+    // figure work via Sanity Studio.
+    {
+      _id: "painting.anticipation-no-1",
+      _rev: rev(),
+      title: "Anticipation, no. 1",
+      slug: { current: "anticipation-no-1" },
+      category: "eighteen-plus",
+      year: 2025,
+      medium: "Soft pastel on sanded paper",
+      dimensions: { widthInches: 18, heightInches: 24 },
+      weightOz: 32,
+      price: 1850,
+      status: "available",
+      primaryImage: {
+        _type: "image",
+        asset: { _ref: "image-placeholder-figure-01", _type: "reference" },
+        alt: "A figure study, the moment before. Tonal placeholder.",
+      },
+      series: { _ref: anticipationSeries._id },
+      createdAt: nowIso(),
+    },
+    {
+      _id: "painting.gateway-no-1",
+      _rev: rev(),
+      title: "Gateway, no. 1",
+      slug: { current: "gateway-no-1" },
+      category: "eighteen-plus",
+      year: 2025,
+      medium: "Oil on linen",
+      dimensions: { widthInches: 24, heightInches: 30 },
+      weightOz: 64,
+      price: 2600,
+      status: "nfs",
+      primaryImage: {
+        _type: "image",
+        asset: { _ref: "image-placeholder-figure-02", _type: "reference" },
+        alt: "A closer figure study, explicit by intention. Tonal placeholder.",
+      },
+      series: { _ref: gatewaySeries._id },
       createdAt: nowIso(),
     },
   ];

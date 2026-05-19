@@ -7,6 +7,35 @@
 export type ProductStatus = "available" | "reserved" | "sold" | "nfs";
 export type VintageStatus = "available" | "reserved" | "sold";
 
+export type PaintingCategory =
+  | "landscapes"
+  | "houses"
+  | "animals"
+  | "eighteen-plus"
+  | "miscellaneous";
+
+export const PAINTING_CATEGORIES: ReadonlyArray<{
+  slug: PaintingCategory;
+  label: string;
+  shortLabel: string;
+  mature?: true;
+}> = [
+  { slug: "landscapes", label: "Landscapes", shortLabel: "Landscapes" },
+  { slug: "houses", label: "Houses", shortLabel: "Houses" },
+  { slug: "animals", label: "Animals & Pets", shortLabel: "Animals" },
+  {
+    slug: "eighteen-plus",
+    label: "Eighteen+",
+    shortLabel: "18+",
+    mature: true,
+  },
+  {
+    slug: "miscellaneous",
+    label: "Miscellaneous",
+    shortLabel: "Misc.",
+  },
+] as const;
+
 export interface SanityImage {
   _type: "image";
   asset: {
@@ -29,6 +58,7 @@ export interface Painting {
   _rev: string;
   title: string;
   slug: { current: string };
+  category: PaintingCategory;
   year: number;
   medium: string;
   dimensions: {

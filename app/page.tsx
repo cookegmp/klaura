@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { CategoryDoorways } from "@/components/site/CategoryDoorways";
 import { Container } from "@/components/site/Container";
 import { Marquee } from "@/components/site/Marquee";
 import { NewsletterCapture } from "@/components/site/NewsletterCapture";
@@ -6,12 +7,11 @@ import { ProductImage } from "@/components/site/ProductImage";
 import { Parallax } from "@/components/site/Parallax";
 import { PortableContent } from "@/components/site/PortableContent";
 import { Reveal } from "@/components/site/Reveal";
-import { HorizontalGallery } from "@/components/site/HorizontalGallery";
 import { FullBleedFeature } from "@/components/site/FullBleedFeature";
 import {
   getAboutPage,
   getAllPaintings,
-  getFeaturedPaintings,
+  getCategorySummaries,
   getHeroPainting,
   getSiteSettings,
 } from "@/lib/sanity/read";
@@ -30,26 +30,24 @@ import {
  *   • Heavy Reveal entrance animations on every section heading
  */
 export default async function HomePage() {
-  const [hero, featured, allPaintings, settings, about] = await Promise.all([
-    getHeroPainting(),
-    getFeaturedPaintings(),
-    getAllPaintings(),
-    getSiteSettings(),
-    getAboutPage(),
-  ]);
-
-  const selectedIds = new Set<string>();
-  const selected: typeof allPaintings = [];
-  for (const p of [...featured, ...allPaintings]) {
-    if (selected.length >= 6) break;
-    if (selectedIds.has(p._id)) continue;
-    if (p.status === "nfs") continue;
-    selectedIds.add(p._id);
-    selected.push(p);
-  }
+  const [hero, allPaintings, settings, about, categorySummaries] =
+    await Promise.all([
+      getHeroPainting(),
+      getAllPaintings(),
+      getSiteSettings(),
+      getAboutPage(),
+      getCategorySummaries(),
+    ]);
 
   const fullBleedFeature =
-    allPaintings.find((p) => p._id !== hero?._id && p.status !== "nfs") ??
+    allPaintings.find(
+      (p) =>
+        p._id !== hero?._id &&
+        p.status !== "nfs" &&
+        // Keep the marquee-to-doorways transition tonal — don't surface a
+        // mature-room cover at full-bleed before the visitor has chosen.
+        p.category !== "eighteen-plus"
+    ) ??
     hero ??
     null;
 
@@ -168,25 +166,25 @@ export default async function HomePage() {
         </Container>
       </section>
 
-      {/* 5. SELECTED WORKS — HORIZONTAL SCROLL (signature moment #2) -- */}
-      <section className="border-t border-rule/60 pt-24 md:pt-32 pb-20">
+      {/* 5. THE FIVE ROOMS — gallery doorways (signature moment #2) --- */}
+      <section className="border-t border-rule/60 pt-24 md:pt-32 pb-32 md:pb-48">
         <Container width="wide">
           <Reveal>
             <div className="flex items-end justify-between mb-12 md:mb-20">
               <div className="flex items-baseline gap-4 font-[family-name:var(--font-mono)] text-[0.74rem] uppercase tracking-[0.08em] text-ink-soft">
                 <span>§ 02</span>
-                <span>Selected works</span>
+                <span>Five rooms</span>
               </div>
               <Link
-                href="/paintings"
+                href="/gallery"
                 className="text-ui pb-1 border-b border-ink hover:text-ochre-deep hover:border-ochre-deep transition-colors"
               >
-                Full catalogue →
+                Open the gallery →
               </Link>
             </div>
           </Reveal>
+          <CategoryDoorways summaries={categorySummaries} />
         </Container>
-        {selected.length > 0 && <HorizontalGallery paintings={selected} />}
       </section>
 
       {/* 6. ARTIST — STICKY IMAGE COLUMN (signature moment #3) -------- */}

@@ -8,13 +8,12 @@ import { cn } from "@/lib/utils";
 
 type NavLink = { href: string; label: string };
 
-// Section labels were updated in May 2026 to match the home-page tile
-// composition (Commissions / Gallery / Shop). URLs intentionally stay at
-// /paintings and /vintage to avoid breaking bookmarks or in-progress SEO;
-// the label here is the only thing that moves.
+// Gallery now points at /gallery (the five-rooms index). The legacy
+// /paintings catalogue page still exists and is linked from /gallery as
+// "Full catalogue" so any in-flight bookmarks keep working.
 const links: NavLink[] = [
   { href: "/commissions", label: "Commissions" },
-  { href: "/paintings", label: "Gallery" },
+  { href: "/gallery", label: "Gallery" },
   { href: "/vintage", label: "Shop" },
   { href: "/studio", label: "Studio" },
 ];
