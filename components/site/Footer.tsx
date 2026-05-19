@@ -20,7 +20,7 @@ export function Footer() {
             <ul className="space-y-3 text-[length:var(--text-body-lg)]">
               <li>
                 <Link href="/paintings" className="hover:text-ochre-deep transition-colors">
-                  Gallery
+                  Full catalogue
                 </Link>
               </li>
               <li>

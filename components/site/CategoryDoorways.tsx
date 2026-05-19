@@ -80,6 +80,7 @@ function DoorwayTile({
             width={1100}
             height={1375}
             sizes="(min-width: 1024px) 45vw, 100vw"
+            priority={index === 0}
             className="transition-transform duration-[1100ms] ease-[var(--ease-editorial)] group-hover:scale-[1.04]"
           />
         ) : (
@@ -119,19 +120,19 @@ function DoorwayTile({
         <div className="absolute inset-x-0 bottom-0 p-5 md:p-7 bg-gradient-to-t from-ink/80 via-ink/40 to-transparent">
           <div className="flex items-end justify-between gap-6">
             <div>
-              <p className="font-display-caps font-light text-bone text-3xl md:text-5xl leading-[0.9] tracking-[-0.02em]">
+              <h2 className="font-display-caps font-light text-bone text-3xl md:text-5xl leading-[0.9] tracking-[-0.02em]">
                 {label}
-              </p>
+              </h2>
               <p className="mt-2 font-[family-name:var(--font-mono)] text-[0.72rem] uppercase tracking-[0.08em] text-bone/80">
                 {count} {count === 1 ? "work" : "works"}
                 {mature ? " · age-restricted" : ""}
               </p>
             </div>
             <span
-              className="hidden sm:inline-flex items-center gap-2 text-ui text-bone/90 group-hover:text-ochre transition-colors"
+              className="inline-flex items-center gap-2 text-ui text-bone/90 group-hover:text-ochre transition-colors"
               aria-hidden
             >
-              Enter
+              <span className="hidden sm:inline">Enter</span>
               <span className="transition-transform group-hover:translate-x-1">→</span>
             </span>
           </div>

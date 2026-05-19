@@ -21,7 +21,7 @@ interface AgeGateProps {
  * a real legal age gate (charter §commerce / payments) this would need to
  * pair with the consent + anonymity flow that's still on the roadmap.
  */
-export function AgeGate({ children, declineHref = "/gallery" }: AgeGateProps) {
+export function AgeGate({ children, declineHref = "/" }: AgeGateProps) {
   const router = useRouter();
   const [confirmed, setConfirmed] = useState<boolean | null>(null);
 
@@ -71,8 +71,7 @@ function GatePanel({
 }) {
   return (
     <section
-      role="dialog"
-      aria-modal="true"
+      role="region"
       aria-labelledby="age-gate-title"
       aria-describedby="age-gate-body"
       className="min-h-[80vh] flex items-center justify-center px-6 py-24 md:py-32"

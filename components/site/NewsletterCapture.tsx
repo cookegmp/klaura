@@ -58,7 +58,7 @@ export function NewsletterCapture() {
             required
             placeholder="you@somewhere.com"
             autoComplete="email"
-            className="flex-1 bg-transparent py-3 outline-none placeholder:text-ink-soft/60"
+            className="flex-1 bg-transparent py-3 outline-none placeholder:text-ink-soft"
           />
           <button
             type="submit"

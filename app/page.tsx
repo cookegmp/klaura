@@ -51,51 +51,38 @@ export default async function HomePage() {
         </Container>
       </section>
 
-      {/* 3. ESCAPE HATCH — full catalogue ---------------------------- */}
+      {/* 3. ALSO — full catalogue + about, single closing band ------ */}
       <section className="pb-24 md:pb-32 border-t border-rule/60 pt-16 md:pt-20">
         <Container width="wide">
           <Reveal>
-            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
-              <div>
-                <p className="text-ui text-ink-soft mb-4">§ Or</p>
-                <p className="font-display text-2xl md:text-3xl leading-tight max-w-xl">
-                  See every available work in one long catalogue.
-                </p>
-              </div>
-              <Link
-                href="/paintings"
-                className="text-ui pb-1 border-b border-ink hover:text-ochre-deep hover:border-ochre-deep transition-colors self-start md:self-auto"
-              >
-                Full catalogue →
-              </Link>
-            </div>
-          </Reveal>
-        </Container>
-      </section>
-
-      {/* 4. QUIET LINK TO THE ABOUT-THE-ARTIST PAGE ------------------ */}
-      <section className="pb-24 md:pb-32 border-t border-rule/60 pt-16 md:pt-20">
-        <Container width="wide">
-          <Reveal>
-            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-10">
               <div>
                 <p className="text-ui text-ink-soft mb-4">§ Also</p>
                 <p className="font-display text-2xl md:text-3xl leading-tight max-w-xl">
-                  About the artist — practice, place, and process.
+                  See every available work in one long catalogue, or read about the
+                  artist.
                 </p>
               </div>
-              <Link
-                href="/studio"
-                className="text-ui pb-1 border-b border-ink hover:text-ochre-deep hover:border-ochre-deep transition-colors self-start md:self-auto"
-              >
-                Read about Kelly →
-              </Link>
+              <div className="flex flex-col sm:flex-row gap-5 sm:gap-10 self-start md:self-end">
+                <Link
+                  href="/paintings"
+                  className="text-ui pb-1 border-b border-ink hover:text-ochre-deep hover:border-ochre-deep transition-colors"
+                >
+                  Full catalogue →
+                </Link>
+                <Link
+                  href="/studio"
+                  className="text-ui pb-1 border-b border-ink hover:text-ochre-deep hover:border-ochre-deep transition-colors"
+                >
+                  About Kelly →
+                </Link>
+              </div>
             </div>
           </Reveal>
         </Container>
       </section>
 
-      {/* 5. Newsletter ---------------------------------------------- */}
+      {/* 4. Newsletter ---------------------------------------------- */}
       <section className="pb-32 md:pb-44 border-t border-rule/60 pt-24 md:pt-32">
         <Container>
           <NewsletterCapture />

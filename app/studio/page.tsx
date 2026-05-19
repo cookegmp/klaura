@@ -60,14 +60,14 @@ export default async function StudioPage() {
               </Reveal>
               <Reveal delay={120} rise={120}>
                 <h1 className="font-display-caps font-light text-[length:var(--text-display-lg)] md:text-[length:var(--text-display-xl)] leading-[0.85] tracking-[-0.03em]">
-                  Landscapes
+                  A painter.
                   <br />
-                  that{" "}
+                  A{" "}
                   <span className="font-display-italic text-ochre-deep normal-case">
-                    remember
+                    studio
                   </span>
                   <br />
-                  you back.
+                  in Ohio.
                 </h1>
               </Reveal>
             </div>
