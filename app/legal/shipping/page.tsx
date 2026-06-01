@@ -20,7 +20,7 @@ export default function ShippingPage() {
         International shipping is available on request. Reach out and we&apos;ll quote
         rates for your destination.
       </p>
-      <p className="text-caption text-ink-soft/80">
+      <p className="text-caption text-bone-deep/80">
         This is placeholder copy — final policy is sourced from Sanity site settings in
         Phase 2.
       </p>

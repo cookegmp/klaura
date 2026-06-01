@@ -4,7 +4,7 @@ import { siteConfig } from "@/lib/site-config";
 
 export function Footer() {
   return (
-    <footer className="bg-ink text-bone mt-32">
+    <footer className="bg-ink-soft text-bone border-t border-rule mt-32">
       <Container width="wide" className="py-20">
         <div className="grid gap-12 md:grid-cols-3 md:gap-16">
           <div className="md:col-span-1">
@@ -16,7 +16,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="text-ui text-bone/60 mb-5">Explore</h3>
+            <h3 className="text-ui text-bone-deep mb-5">Explore</h3>
             <ul className="space-y-3 text-[length:var(--text-body-lg)]">
               <li>
                 <Link href="/paintings" className="hover:text-ochre-deep transition-colors">
@@ -42,7 +42,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="text-ui text-bone/60 mb-5">Elsewhere</h3>
+            <h3 className="text-ui text-bone-deep mb-5">Elsewhere</h3>
             <ul className="space-y-3 text-[length:var(--text-body-lg)]">
               <li>
                 <a
@@ -66,11 +66,11 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-20 pt-8 border-t border-bone/15 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-          <p className="text-caption text-bone/70">
+        <div className="mt-20 pt-8 border-t border-rule flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+          <p className="text-caption text-bone-deep">
             © {new Date().getFullYear()} Kelly Laura. All works original.
           </p>
-          <ul className="flex flex-wrap gap-x-8 gap-y-2 text-ui text-bone/70">
+          <ul className="flex flex-wrap gap-x-8 gap-y-2 text-ui text-bone-deep">
             <li>
               <Link href="/legal/shipping" className="hover:text-ochre-deep transition-colors">
                 Shipping

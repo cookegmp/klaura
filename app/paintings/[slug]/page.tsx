@@ -93,7 +93,7 @@ export default async function PaintingDetailPage({ params }: { params: Params })
                 priority
               />
               {painting.status === "sold" && (
-                <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 text-ui text-bone bg-ink/85 px-5 py-3">
+                <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 text-ui text-ink bg-bone/85 px-5 py-3">
                   Sold
                 </span>
               )}
@@ -119,11 +119,11 @@ export default async function PaintingDetailPage({ params }: { params: Params })
 
           {/* Metadata + buy */}
           <aside className="col-span-12 md:col-span-5 lg:col-span-4 md:sticky md:top-28 md:self-start">
-            <p className="text-ui text-ink-soft mb-4">{painting.year}</p>
+            <p className="text-ui text-bone-deep mb-4">{painting.year}</p>
             <h1 className="font-display font-light text-[length:var(--text-display-md)] leading-[1.05] tracking-[-0.02em]">
               {painting.title}
             </h1>
-            <dl className="mt-8 space-y-2 text-ink-soft">
+            <dl className="mt-8 space-y-2 text-bone-deep">
               <div className="flex justify-between">
                 <dt className="text-ui">Medium</dt>
                 <dd className="text-right">{painting.medium}</dd>
@@ -140,7 +140,7 @@ export default async function PaintingDetailPage({ params }: { params: Params })
               )}
               <div className="flex justify-between border-t border-rule mt-6 pt-6">
                 <dt className="text-ui">Price</dt>
-                <dd className="text-right text-xl font-display text-ink">
+                <dd className="text-right text-xl font-display text-bone">
                   {formatPriceUSD(painting.price)}
                 </dd>
               </div>
@@ -169,10 +169,10 @@ export default async function PaintingDetailPage({ params }: { params: Params })
                     additional crating time.
                   </p>
                   {painting.shippingNotes && (
-                    <p className="text-caption text-ink-soft">{painting.shippingNotes}</p>
+                    <p className="text-caption text-bone-deep">{painting.shippingNotes}</p>
                   )}
                   {settings?.shippingFlatRateUS != null && (
-                    <p className="text-caption text-ink-soft">
+                    <p className="text-caption text-bone-deep">
                       Flat US rate: {formatPriceUSD(settings.shippingFlatRateUS)}
                     </p>
                   )}
@@ -184,7 +184,7 @@ export default async function PaintingDetailPage({ params }: { params: Params })
       </Container>
 
       {related.length > 0 && (
-        <section className="py-24 md:py-32 bg-bone-deep">
+        <section className="py-24 md:py-32 bg-ink-soft">
           <Container width="wide">
             <h2 className="font-display text-3xl md:text-4xl font-light tracking-tight mb-12">
               Related <span className="font-display-italic">works</span>

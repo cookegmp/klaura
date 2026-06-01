@@ -37,38 +37,38 @@ export default async function CheckoutSuccessPage({
 
   return (
     <Container width="narrow" className="py-32 md:py-48 text-center">
-      <p className="text-ui text-ink-soft mb-6">Thank you</p>
+      <p className="text-ui text-bone-deep mb-6">Thank you</p>
       <h1 className="font-display font-light text-[length:var(--text-display-md)] md:text-[length:var(--text-display-lg)] leading-[1.05] tracking-[-0.02em]">
         Your piece is <span className="font-display-italic text-ochre-deep">on its way</span>.
       </h1>
 
       {summary.productTitle && (
         <div className="mt-12 inline-block border-t border-rule pt-8">
-          <p className="text-ui text-ink-soft mb-2">Order summary</p>
+          <p className="text-ui text-bone-deep mb-2">Order summary</p>
           <p className="font-display text-2xl">{summary.productTitle}</p>
           {summary.price && (
             <p className="text-lg mt-1">{formatPriceUSD(summary.price)}</p>
           )}
           {summary.customerEmail && (
-            <p className="text-caption text-ink-soft mt-3">
+            <p className="text-caption text-bone-deep mt-3">
               Confirmation sent to {summary.customerEmail}
             </p>
           )}
         </div>
       )}
 
-      <p className="mt-10 text-[length:var(--text-body-lg)] text-ink-soft leading-relaxed">
+      <p className="mt-10 text-[length:var(--text-body-lg)] text-bone-deep leading-relaxed">
         Kelly will reach out within a few days with shipping details.
       </p>
 
       {session_id && (
-        <p className="text-caption text-ink-soft/70 mt-6">Reference: {session_id}</p>
+        <p className="text-caption text-bone-deep/70 mt-6">Reference: {session_id}</p>
       )}
 
       <div className="mt-12 flex justify-center gap-4">
         <Link
           href="/paintings"
-          className="text-ui px-7 py-4 bg-ink text-bone hover:bg-ochre-deep transition-colors"
+          className="text-ui px-7 py-4 bg-bone text-ink hover:bg-ochre-deep transition-colors"
         >
           Back to the gallery
         </Link>

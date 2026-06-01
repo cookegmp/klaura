@@ -77,7 +77,7 @@ export default async function VintageDetailPage({ params }: { params: Params }) 
                 priority
               />
               {item.status === "sold" && (
-                <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 text-ui text-bone bg-ink/85 px-5 py-3">
+                <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 text-ui text-ink bg-bone/85 px-5 py-3">
                   Sold
                 </span>
               )}
@@ -101,14 +101,14 @@ export default async function VintageDetailPage({ params }: { params: Params }) 
           </div>
 
           <aside className="col-span-12 md:col-span-5 lg:col-span-4 md:sticky md:top-28 md:self-start">
-            <p className="text-ui text-ink-soft mb-4 capitalize">
+            <p className="text-ui text-bone-deep mb-4 capitalize">
               {item.era ?? "Vintage"} · {item.category}
             </p>
             <h1 className="font-display font-light text-[length:var(--text-display-md)] leading-[1.05] tracking-[-0.02em]">
               {item.title}
             </h1>
 
-            <dl className="mt-8 space-y-2 text-ink-soft text-sm">
+            <dl className="mt-8 space-y-2 text-bone-deep text-sm">
               {item.material && (
                 <div className="flex justify-between">
                   <dt className="text-ui">Material</dt>
@@ -127,7 +127,7 @@ export default async function VintageDetailPage({ params }: { params: Params }) 
               </div>
               <div className="flex justify-between border-t border-rule mt-6 pt-6">
                 <dt className="text-ui">Price</dt>
-                <dd className="text-right text-xl font-display text-ink">
+                <dd className="text-right text-xl font-display text-bone">
                   {formatPriceUSD(item.price)}
                 </dd>
               </div>
@@ -148,9 +148,9 @@ export default async function VintageDetailPage({ params }: { params: Params }) 
             )}
 
             {item.conditionNotes && (
-              <div className="mt-8 p-5 bg-bone-deep">
-                <p className="text-ui text-ink-soft mb-2">Condition notes</p>
-                <p className="text-sm text-ink-soft leading-relaxed">{item.conditionNotes}</p>
+              <div className="mt-8 p-5 bg-ink-soft">
+                <p className="text-ui text-bone-deep mb-2">Condition notes</p>
+                <p className="text-sm text-bone-deep leading-relaxed">{item.conditionNotes}</p>
               </div>
             )}
 
@@ -165,7 +165,7 @@ export default async function VintageDetailPage({ params }: { params: Params }) 
                       </div>
                     ) : null
                   )}
-                  {m?.notes && <p className="pt-3 text-caption text-ink-soft">{m.notes}</p>}
+                  {m?.notes && <p className="pt-3 text-caption text-bone-deep">{m.notes}</p>}
                 </dl>
               </Disclosure>
               <Disclosure label="Shipping & care">
@@ -175,7 +175,7 @@ export default async function VintageDetailPage({ params }: { params: Params }) 
                     US. Tracking included.
                   </p>
                   {settings?.shippingFlatRateUS != null && (
-                    <p className="text-caption text-ink-soft">
+                    <p className="text-caption text-bone-deep">
                       Flat US rate: {formatPriceUSD(settings.shippingFlatRateUS)}
                     </p>
                   )}

@@ -77,7 +77,7 @@ function GatePanel({
       className="min-h-[80vh] flex items-center justify-center px-6 py-24 md:py-32"
     >
       <div className="max-w-2xl w-full text-center">
-        <p className="text-ui text-ink-soft mb-6">§ Eighteen+</p>
+        <p className="text-ui text-bone-deep mb-6">§ Eighteen+</p>
         <h1
           id="age-gate-title"
           className="font-display-caps font-light text-[length:var(--text-display-md)] md:text-[length:var(--text-display-lg)] leading-[0.9] tracking-[-0.025em]"
@@ -91,7 +91,7 @@ function GatePanel({
         </h1>
         <p
           id="age-gate-body"
-          className="mt-10 text-[length:var(--text-body-lg)] text-ink-soft leading-relaxed max-w-lg mx-auto"
+          className="mt-10 text-[length:var(--text-body-lg)] text-bone-deep leading-relaxed max-w-lg mx-auto"
         >
           Figure work and explicit pieces. Please confirm you are eighteen or older
           before continuing.
@@ -101,7 +101,7 @@ function GatePanel({
             type="button"
             onClick={onConfirm}
             disabled={busy}
-            className="text-ui px-9 py-5 bg-ink text-bone hover:bg-ochre-deep transition-colors disabled:opacity-50"
+            className="text-ui px-9 py-5 bg-bone text-ink hover:bg-ochre-deep transition-colors disabled:opacity-50"
           >
             I am 18 or older — enter
           </button>
@@ -109,12 +109,12 @@ function GatePanel({
             type="button"
             onClick={onDecline}
             disabled={busy}
-            className="text-ui px-9 py-5 border border-ink text-ink hover:bg-bone-deep transition-colors disabled:opacity-50"
+            className="text-ui px-9 py-5 border border-bone text-bone hover:bg-ink-soft transition-colors disabled:opacity-50"
           >
             Take me back
           </button>
         </div>
-        <p className="mt-12 font-[family-name:var(--font-mono)] text-[0.74rem] uppercase tracking-[0.06em] text-ink-soft">
+        <p className="mt-12 font-[family-name:var(--font-mono)] text-[0.74rem] uppercase tracking-[0.06em] text-bone-deep">
           This choice applies for the current browser session.
         </p>
       </div>

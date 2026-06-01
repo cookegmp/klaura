@@ -5,14 +5,9 @@ export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 /**
- * Default Open Graph image. Brand-matched: bone background, ochre italic
- * accent, generous Fraunces-feeling serif via Georgia fall-back.
- *
- * Note: Fraunces variable TTF was tried here but `next/og`'s satori renderer
- * has known issues with multi-axis variable fonts (opsz + SOFT + wght +
- * WONK). Static Fraunces cuts aren't published as TTF (only WOFF/WOFF2).
- * Georgia is the closest stock serif with good optical sizing; OG images
- * are small, viewed at thumbnail size on social, so the trade-off is fine.
+ * Default Open Graph image. Matches the dark editorial palette: deep
+ * charcoal surface, warm cream type, ochre italic accent. Hex values are
+ * hand-mirrored from app/globals.css because satori does not read tokens.
  */
 export default async function OpenGraphImage() {
   return new ImageResponse(
@@ -25,8 +20,8 @@ export default async function OpenGraphImage() {
           flexDirection: "column",
           justifyContent: "space-between",
           padding: "80px",
-          background: "#f4efe6",
-          color: "#1a1d24",
+          background: "#0d0d0f",
+          color: "#ebe4d6",
           fontFamily: "Georgia, serif",
         }}
       >
@@ -35,7 +30,7 @@ export default async function OpenGraphImage() {
             fontSize: 22,
             letterSpacing: "0.15em",
             textTransform: "uppercase",
-            color: "#3a3d44",
+            color: "#a8a094",
             fontFamily: "sans-serif",
           }}
         >
@@ -48,13 +43,13 @@ export default async function OpenGraphImage() {
               fontSize: 140,
               fontWeight: 300,
               lineHeight: 0.95,
-              letterSpacing: "-0.03em",
+              letterSpacing: "-0.02em",
             }}
           >
             <span>Kelly</span>
-            <span style={{ fontStyle: "italic", color: "#8a5424" }}>&nbsp;Laura</span>
+            <span style={{ fontStyle: "italic", color: "#d6964a" }}>&nbsp;Laura</span>
           </div>
-          <div style={{ fontSize: 30, color: "#3a3d44", maxWidth: 820, lineHeight: 1.35, fontFamily: "sans-serif" }}>
+          <div style={{ fontSize: 30, color: "#a8a094", maxWidth: 820, lineHeight: 1.35, fontFamily: "sans-serif" }}>
             Original paintings and one-of-a-kind vintage. Painted slowly, worn long after.
           </div>
         </div>
@@ -63,7 +58,7 @@ export default async function OpenGraphImage() {
             display: "flex",
             justifyContent: "space-between",
             alignItems: "baseline",
-            borderTop: "1px solid #d9d1bf",
+            borderTop: "1px solid #2a2a2e",
             paddingTop: 24,
             fontFamily: "sans-serif",
           }}
@@ -75,7 +70,7 @@ export default async function OpenGraphImage() {
             style={{
               fontSize: 26,
               fontStyle: "italic",
-              color: "#8a5424",
+              color: "#d6964a",
               fontFamily: "Georgia, serif",
             }}
           >

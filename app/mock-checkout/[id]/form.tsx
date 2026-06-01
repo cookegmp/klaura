@@ -45,7 +45,7 @@ export function MockCheckoutForm({ sessionId }: { sessionId: string }) {
       className="space-y-6"
     >
       <div>
-        <label htmlFor="mock-email" className="text-ui text-bone/60 block mb-2">
+        <label htmlFor="mock-email" className="text-ui text-ink/60 block mb-2">
           Customer email
         </label>
         <input
@@ -55,7 +55,7 @@ export function MockCheckoutForm({ sessionId }: { sessionId: string }) {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
-          className="w-full bg-transparent border-b border-bone/30 focus:border-ochre py-2 text-bone outline-none"
+          className="w-full bg-transparent border-b border-ink/30 focus:border-ochre py-2 text-ink outline-none"
         />
       </div>
 
@@ -63,7 +63,7 @@ export function MockCheckoutForm({ sessionId }: { sessionId: string }) {
         <button
           type="submit"
           disabled={busy !== null}
-          className="text-ui px-7 py-4 bg-ochre text-ink hover:bg-ochre-deep hover:text-bone transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+          className="text-ui px-7 py-4 bg-ochre text-bone hover:bg-ochre-deep hover:text-ink transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
         >
           {busy === "pay" ? "Processing…" : "Pay"}
         </button>
@@ -71,7 +71,7 @@ export function MockCheckoutForm({ sessionId }: { sessionId: string }) {
           type="button"
           onClick={() => void cancel()}
           disabled={busy !== null}
-          className="text-ui px-7 py-4 border border-bone/30 hover:bg-bone hover:text-ink transition-colors disabled:opacity-60"
+          className="text-ui px-7 py-4 border border-ink/30 hover:bg-ink hover:text-bone transition-colors disabled:opacity-60"
         >
           {busy === "cancel" ? "Cancelling…" : "Cancel"}
         </button>

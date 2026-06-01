@@ -20,7 +20,7 @@ export default async function HomePage() {
       <section className="pt-20 md:pt-32 pb-20 md:pb-28">
         <Container width="wide">
           <Reveal>
-            <p className="text-ui text-ink-soft mb-8 md:mb-10">
+            <p className="text-ui text-bone-deep mb-8 md:mb-10">
               § Kelly Laura · five rooms
             </p>
           </Reveal>
@@ -35,7 +35,7 @@ export default async function HomePage() {
             </h1>
           </Reveal>
           <Reveal delay={220}>
-            <p className="mt-12 max-w-xl text-[length:var(--text-body-lg)] text-ink-soft leading-relaxed">
+            <p className="mt-12 max-w-xl text-[length:var(--text-body-lg)] text-bone-deep leading-relaxed">
               The work is grouped into five rooms. Each one keeps its own pace.
               The Eighteen+ room is age-restricted; you&rsquo;ll be asked to
               confirm before you enter.
@@ -57,7 +57,7 @@ export default async function HomePage() {
           <Reveal>
             <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-10">
               <div>
-                <p className="text-ui text-ink-soft mb-4">§ Also</p>
+                <p className="text-ui text-bone-deep mb-4">§ Also</p>
                 <p className="font-display text-2xl md:text-3xl leading-tight max-w-xl">
                   See every available work in one long catalogue, or read about the
                   artist.
@@ -66,13 +66,13 @@ export default async function HomePage() {
               <div className="flex flex-col sm:flex-row gap-5 sm:gap-10 self-start md:self-end">
                 <Link
                   href="/paintings"
-                  className="text-ui pb-1 border-b border-ink hover:text-ochre-deep hover:border-ochre-deep transition-colors"
+                  className="text-ui pb-1 border-b border-bone hover:text-ochre-deep hover:border-ochre-deep transition-colors"
                 >
                   Full catalogue →
                 </Link>
                 <Link
                   href="/studio"
-                  className="text-ui pb-1 border-b border-ink hover:text-ochre-deep hover:border-ochre-deep transition-colors"
+                  className="text-ui pb-1 border-b border-bone hover:text-ochre-deep hover:border-ochre-deep transition-colors"
                 >
                   About Kelly →
                 </Link>

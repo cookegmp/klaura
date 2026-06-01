@@ -28,7 +28,7 @@ export function VintageCard({ item, index = 0 }: VintageCardProps) {
           className="transition-transform duration-700 ease-[var(--ease-editorial)] group-hover:scale-[1.03]"
         />
         {sold && (
-          <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 text-ui text-bone bg-ink/85 px-4 py-2">
+          <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 text-ui text-ink bg-bone/85 px-4 py-2">
             Sold
           </span>
         )}
@@ -36,12 +36,12 @@ export function VintageCard({ item, index = 0 }: VintageCardProps) {
       <div className="mt-5 flex items-start justify-between gap-6">
         <div className="flex flex-col gap-1">
           <p className="font-display text-lg leading-tight">{item.title}</p>
-          <p className="text-caption text-ink-soft capitalize">
+          <p className="text-caption text-bone-deep capitalize">
             {item.era ?? "—"} · {item.category} · {item.condition.replace("-", " ")}
           </p>
         </div>
         {!sold && (
-          <p className="text-ui text-ink shrink-0">{formatPriceUSD(item.price)}</p>
+          <p className="text-ui text-bone shrink-0">{formatPriceUSD(item.price)}</p>
         )}
       </div>
     </Link>

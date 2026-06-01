@@ -29,8 +29,9 @@ export function FullBleedFeature({ painting }: { painting: Painting }) {
         </div>
       </Parallax>
 
-      {/* Vignette + caption overlay */}
-      <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-ink/55 via-transparent to-ink/15" />
+      {/* Vignette + caption overlay — dark wash bottom + soft dark wash
+          top so caption metadata stays legible on any cover. */}
+      <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-ink/85 via-transparent to-ink/35" />
 
       <div className="absolute inset-x-0 bottom-0 z-10 px-6 md:px-12 lg:px-20 pb-10 md:pb-16">
         <div className="flex flex-wrap items-end justify-between gap-y-4 gap-x-12 text-bone">
@@ -40,7 +41,7 @@ export function FullBleedFeature({ painting }: { painting: Painting }) {
           >
             {painting.title}
           </Link>
-          <div className="font-[family-name:var(--font-mono)] text-[0.74rem] uppercase tracking-[0.08em] text-bone/80 flex flex-wrap items-baseline gap-x-8 gap-y-2">
+          <div className="font-[family-name:var(--font-mono)] text-[0.74rem] uppercase tracking-[0.08em] text-bone-deep flex flex-wrap items-baseline gap-x-8 gap-y-2">
             <span>{painting.year}</span>
             <span>{painting.medium}</span>
             <span>{formatDimensions(painting.dimensions)}</span>
@@ -53,7 +54,7 @@ export function FullBleedFeature({ painting }: { painting: Painting }) {
 
       {/* Top tag */}
       <div className="absolute top-8 md:top-12 left-6 md:left-12 lg:left-20 z-10">
-        <p className="font-[family-name:var(--font-mono)] text-[0.72rem] uppercase tracking-[0.1em] text-bone/80">
+        <p className="font-[family-name:var(--font-mono)] text-[0.72rem] uppercase tracking-[0.1em] text-bone-deep">
           § Now on the wall · {painting.year}
         </p>
       </div>

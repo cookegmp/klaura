@@ -45,7 +45,7 @@ export function ProductImage({
       <div
         role="img"
         aria-label={alt}
-        className={cn("relative w-full overflow-hidden bg-bone-deep", gradient, className)}
+        className={cn("relative w-full overflow-hidden bg-ink-soft", gradient, className)}
         style={{ aspectRatio: `${width} / ${height}` }}
       />
     );
@@ -90,12 +90,12 @@ export function ProductImage({
    tone, so a piece keeps its identity across renders.
    ----------------------------------------------------------------------- */
 const GRADIENTS = [
-  "bg-gradient-to-br from-ochre/40 via-bone-deep to-ink-soft/30",
-  "bg-gradient-to-br from-ink-soft/35 via-bone-deep to-ochre/30",
-  "bg-gradient-to-tr from-ochre-deep/40 via-bone to-ink-soft/25",
-  "bg-gradient-to-bl from-bone-deep via-ochre/30 to-ink-soft/40",
-  "bg-gradient-to-tl from-ochre/35 via-bone via-bone-deep to-ink-soft/30",
-  "bg-gradient-to-r from-ink-soft/25 via-bone-deep to-ochre-deep/35",
+  "bg-gradient-to-br from-ochre/40 via-ink-soft to-bone-deep/30",
+  "bg-gradient-to-br from-bone-deep/35 via-ink-soft to-ochre/30",
+  "bg-gradient-to-tr from-ochre-deep/40 via-ink to-bone-deep/25",
+  "bg-gradient-to-bl from-ink-soft via-ochre/30 to-bone-deep/40",
+  "bg-gradient-to-tl from-ochre/35 via-ink via-ink-soft to-bone-deep/30",
+  "bg-gradient-to-r from-bone-deep/25 via-ink-soft to-ochre-deep/35",
 ] as const;
 
 function pickGradient(seed: string): string {

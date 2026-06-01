@@ -106,7 +106,7 @@ function CategoryBody({
       <section className="pt-20 md:pt-32 pb-16 md:pb-24">
         <Container width="wide">
           <Reveal>
-            <p className="text-ui text-ink-soft mb-8 md:mb-10">
+            <p className="text-ui text-bone-deep mb-8 md:mb-10">
               § Gallery / {definition.shortLabel}
             </p>
           </Reveal>
@@ -116,12 +116,12 @@ function CategoryBody({
             </h1>
           </Reveal>
           <Reveal delay={220}>
-            <div className="mt-12 flex flex-wrap items-baseline gap-x-8 gap-y-3 font-[family-name:var(--font-mono)] text-[0.78rem] uppercase tracking-[0.06em] text-ink-soft">
+            <div className="mt-12 flex flex-wrap items-baseline gap-x-8 gap-y-3 font-[family-name:var(--font-mono)] text-[0.78rem] uppercase tracking-[0.06em] text-bone-deep">
               <span>{paintings.length.toString().padStart(2, "0")} works</span>
               <span>· {availableCount} available</span>
               <Link
                 href="/gallery"
-                className="ml-auto text-ink hover:text-ochre-deep transition-colors"
+                className="ml-auto text-bone hover:text-ochre-deep transition-colors"
               >
                 ← All rooms
               </Link>
@@ -172,7 +172,7 @@ function SeriesSection({
           <Reveal>
             <div className="grid grid-cols-12 gap-x-8 pt-16 md:pt-24 pb-10 md:pb-14">
               <div className="col-span-12 md:col-span-3 md:sticky md:top-32 md:self-start">
-                <div className="flex items-baseline gap-4 font-[family-name:var(--font-mono)] text-[0.74rem] uppercase tracking-[0.08em] text-ink-soft">
+                <div className="flex items-baseline gap-4 font-[family-name:var(--font-mono)] text-[0.74rem] uppercase tracking-[0.08em] text-bone-deep">
                   <span>§ 0{sectionIdx + 1}</span>
                   <span>
                     {series
@@ -184,7 +184,7 @@ function SeriesSection({
                 </div>
               </div>
               {series?.description && (
-                <p className="col-span-12 md:col-span-8 mt-6 md:mt-0 max-w-2xl text-[length:var(--text-body-lg)] text-ink-soft leading-relaxed">
+                <p className="col-span-12 md:col-span-8 mt-6 md:mt-0 max-w-2xl text-[length:var(--text-body-lg)] text-bone-deep leading-relaxed">
                   {series.description}
                 </p>
               )}
@@ -213,14 +213,14 @@ function EmptyState({ categorySlug }: { categorySlug: PaintingCategory }) {
             <p className="font-display text-2xl md:text-3xl leading-tight">
               No works in this room yet.
             </p>
-            <p className="mt-4 text-[length:var(--text-body-lg)] text-ink-soft leading-relaxed">
+            <p className="mt-4 text-[length:var(--text-body-lg)] text-bone-deep leading-relaxed">
               {categorySlug === "miscellaneous"
                 ? "One-off pieces that don't belong to a series will appear here as they're finished."
                 : "Kelly is working on this. Check back, or visit another room."}
             </p>
             <Link
               href="/gallery"
-              className="mt-8 inline-block text-ui border-b border-ink pb-1 hover:text-ochre-deep hover:border-ochre-deep transition-colors"
+              className="mt-8 inline-block text-ui border-b border-bone pb-1 hover:text-ochre-deep hover:border-ochre-deep transition-colors"
             >
               ← Back to rooms
             </Link>

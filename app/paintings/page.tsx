@@ -22,7 +22,7 @@ export default async function PaintingsIndexPage() {
       <section className="pt-20 md:pt-32 pb-16 md:pb-24">
         <Container width="wide">
           <Reveal>
-            <p className="text-ui text-ink-soft mb-8 md:mb-10">§ Gallery · the catalogue</p>
+            <p className="text-ui text-bone-deep mb-8 md:mb-10">§ Gallery · the catalogue</p>
           </Reveal>
           <Reveal delay={120} rise={48}>
             <h1 className="font-display-caps font-light text-[length:var(--text-display-lg)] md:text-[length:var(--text-display-xl)] leading-[0.85] tracking-[-0.03em] max-w-5xl">
@@ -32,7 +32,7 @@ export default async function PaintingsIndexPage() {
             </h1>
           </Reveal>
           <Reveal delay={220}>
-            <p className="mt-12 max-w-xl text-[length:var(--text-body-lg)] text-ink-soft leading-relaxed">
+            <p className="mt-12 max-w-xl text-[length:var(--text-body-lg)] text-bone-deep leading-relaxed">
               Each work is original and sold only once. Pieces that have already found a home
               stay in the archive — visible, quieted, dated.
             </p>
@@ -78,11 +78,11 @@ function SectionMarker({
 }) {
   return (
     <div className="flex items-end justify-between pt-12 md:pt-20 pb-10 md:pb-16">
-      <div className="flex items-baseline gap-4 font-[family-name:var(--font-mono)] text-[0.74rem] uppercase tracking-[0.08em] text-ink-soft">
+      <div className="flex items-baseline gap-4 font-[family-name:var(--font-mono)] text-[0.74rem] uppercase tracking-[0.08em] text-bone-deep">
         <span>§ {index}</span>
         <span>{label}</span>
       </div>
-      <span className="font-[family-name:var(--font-mono)] text-[0.74rem] uppercase tracking-[0.06em] text-ink-soft">
+      <span className="font-[family-name:var(--font-mono)] text-[0.74rem] uppercase tracking-[0.06em] text-bone-deep">
         {count.toString().padStart(2, "0")} works
       </span>
     </div>
@@ -97,21 +97,21 @@ function CatalogueTable({
   archive?: boolean;
 }) {
   return (
-    <ul className="border-t border-ink">
+    <ul className="border-t border-bone">
       {rows.map((p, i) => (
         <Reveal key={p._id} as="li" delay={Math.min(i * 60, 480)} rise={20}>
           <Link
             href={`/paintings/${p.slug.current}`}
-            className="group grid grid-cols-12 gap-x-6 items-center py-6 md:py-8 border-b border-rule/60 hover:bg-bone-deep/60 transition-colors px-2 -mx-2"
+            className="group grid grid-cols-12 gap-x-6 items-center py-6 md:py-8 border-b border-rule/60 hover:bg-ink-soft/60 transition-colors px-2 -mx-2"
           >
             {/* Year — far left, mono, prominent */}
-            <span className="col-span-2 md:col-span-1 font-[family-name:var(--font-mono)] text-[0.78rem] uppercase tracking-[0.06em] text-ink-soft">
+            <span className="col-span-2 md:col-span-1 font-[family-name:var(--font-mono)] text-[0.78rem] uppercase tracking-[0.06em] text-bone-deep">
               {p.year}
             </span>
 
             {/* Thumbnail — small square peek of the painting */}
             <div className="col-span-2 md:col-span-1">
-              <div className="relative w-14 h-14 md:w-16 md:h-16 overflow-hidden bg-bone-deep">
+              <div className="relative w-14 h-14 md:w-16 md:h-16 overflow-hidden bg-ink-soft">
                 <ProductImage
                   image={p.primaryImage}
                   alt={p.primaryImage?.alt ?? p.title}
@@ -126,23 +126,23 @@ function CatalogueTable({
 
             {/* Title — italic Fraunces, the largest piece of the row */}
             <h3 className="col-span-8 md:col-span-4 font-display text-xl md:text-3xl font-light leading-tight tracking-[-0.01em]">
-              <span className={archive ? "text-ink-soft" : "text-ink"}>
+              <span className={archive ? "text-bone-deep" : "text-bone"}>
                 {p.title}
               </span>
             </h3>
 
             {/* Medium — middle column on desktop only */}
-            <span className="hidden md:block md:col-span-3 text-caption text-ink-soft">
+            <span className="hidden md:block md:col-span-3 text-caption text-bone-deep">
               {p.medium}
             </span>
 
             {/* Size — desktop only */}
-            <span className="hidden md:block md:col-span-2 text-caption text-ink-soft">
+            <span className="hidden md:block md:col-span-2 text-caption text-bone-deep">
               {formatDimensions(p.dimensions)}
             </span>
 
             {/* Price / Sold — far right */}
-            <span className="col-span-12 md:col-span-1 text-right font-[family-name:var(--font-mono)] text-[0.78rem] uppercase tracking-[0.06em] text-ink">
+            <span className="col-span-12 md:col-span-1 text-right font-[family-name:var(--font-mono)] text-[0.78rem] uppercase tracking-[0.06em] text-bone">
               {p.status === "sold" ? "Sold" : formatPriceUSD(p.price)}
             </span>
           </Link>

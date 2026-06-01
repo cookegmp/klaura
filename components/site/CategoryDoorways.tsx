@@ -64,14 +64,14 @@ function DoorwayTile({
   return (
     <Link
       href={`/gallery/${slug}`}
-      className="group block focus:outline-none focus-visible:ring-2 focus-visible:ring-ochre-deep focus-visible:ring-offset-4 focus-visible:ring-offset-bone"
+      className="group block focus:outline-none focus-visible:ring-2 focus-visible:ring-ochre focus-visible:ring-offset-4 focus-visible:ring-offset-ink"
       aria-label={
         mature
           ? `${label} — age-restricted section, ${count} works`
           : `${label} — ${count} works`
       }
     >
-      <div className={`relative w-full ${aspect} overflow-hidden bg-bone-deep`}>
+      <div className={`relative w-full ${aspect} overflow-hidden bg-ink-soft`}>
         {cover ? (
           <ProductImage
             image={cover.primaryImage}
@@ -87,49 +87,50 @@ function DoorwayTile({
           <div
             role="img"
             aria-label={`${label} — no works yet`}
-            className="absolute inset-0 bg-gradient-to-br from-ochre/30 via-bone-deep to-ink-soft/30"
+            className="absolute inset-0 bg-gradient-to-br from-ochre/30 via-ink-soft to-bone-deep/30"
           />
         )}
 
         {/* Veil for the 18+ tile so the cover never feels exposed at the
             doorway. The age gate handles the actual content beyond. */}
         {mature && (
-          <div className="absolute inset-0 bg-ink/55 mix-blend-multiply" aria-hidden />
+          <div className="absolute inset-0 bg-ink/70" aria-hidden />
         )}
 
         {/* Mature badge */}
         {mature && (
           <span
-            className="absolute top-5 left-5 inline-flex items-center text-ui text-bone bg-ochre-deep/95 px-3 py-1.5"
+            className="absolute top-5 left-5 inline-flex items-center text-ui text-ink bg-ochre/95 px-3 py-1.5"
             aria-hidden
           >
             18+
           </span>
         )}
 
-        {/* Section number — small mono, top-right, always visible */}
+        {/* Section number — small mono, top-right. Cream on dark scrim for
+            consistent legibility regardless of cover tone. */}
         <span
-          className="absolute top-5 right-5 font-[family-name:var(--font-mono)] text-[0.72rem] uppercase tracking-[0.08em] text-bone/90"
+          className="absolute top-5 right-5 font-[family-name:var(--font-mono)] text-[0.72rem] uppercase tracking-[0.08em] text-bone/90 bg-ink/40 backdrop-blur-sm px-2 py-1 rounded-sm"
           aria-hidden
         >
           № 0{index + 1}
         </span>
 
-        {/* Bottom block: label + enter affordance. Sits over a soft gradient
-            for legibility on any cover. */}
-        <div className="absolute inset-x-0 bottom-0 p-5 md:p-7 bg-gradient-to-t from-ink/80 via-ink/40 to-transparent">
+        {/* Bottom block: label + enter affordance. Dark gradient → readable
+            cream caption, matches the dark editorial palette. */}
+        <div className="absolute inset-x-0 bottom-0 p-5 md:p-7 bg-gradient-to-t from-ink/95 via-ink/70 to-transparent">
           <div className="flex items-end justify-between gap-6">
             <div>
               <h2 className="font-display-caps font-light text-bone text-3xl md:text-5xl leading-[0.9] tracking-[-0.02em]">
                 {label}
               </h2>
-              <p className="mt-2 font-[family-name:var(--font-mono)] text-[0.72rem] uppercase tracking-[0.08em] text-bone/80">
+              <p className="mt-2 font-[family-name:var(--font-mono)] text-[0.72rem] uppercase tracking-[0.08em] text-bone-deep">
                 {count} {count === 1 ? "work" : "works"}
                 {mature ? " · age-restricted" : ""}
               </p>
             </div>
             <span
-              className="inline-flex items-center gap-2 text-ui text-bone/90 group-hover:text-ochre transition-colors"
+              className="inline-flex items-center gap-2 text-ui text-bone group-hover:text-ochre transition-colors"
               aria-hidden
             >
               <span className="hidden sm:inline">Enter</span>

@@ -29,7 +29,7 @@ export function Nav() {
   }
 
   return (
-    <header className="sticky top-0 z-40 bg-bone/85 backdrop-blur-md border-b border-rule/60">
+    <header className="sticky top-0 z-40 bg-ink/85 backdrop-blur-md border-b border-rule/60">
       <Container width="wide">
         <div className="flex items-center justify-between py-5 md:py-6">
           <Link
@@ -97,7 +97,7 @@ function NavItem({ link, pathname }: { link: NavLink; pathname: string }) {
       className={cn(
         "text-ui relative inline-flex items-center py-3 min-h-11",
         "transition-colors hover:text-ochre-deep",
-        active ? "text-ink" : "text-ink-soft"
+        active ? "text-bone" : "text-bone-deep"
       )}
     >
       {link.label}

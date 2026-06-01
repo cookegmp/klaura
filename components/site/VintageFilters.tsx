@@ -61,14 +61,14 @@ function FilterRow({
 }) {
   return (
     <div className="flex flex-wrap items-baseline gap-x-8 gap-y-2">
-      <span className="text-caption text-ink-soft min-w-20">{label}</span>
+      <span className="text-caption text-bone-deep min-w-20">{label}</span>
       <Link
         href={hrefFor(null)}
         className={cn(
           "text-ui inline-flex items-center py-3 min-h-11 border-b transition-colors capitalize",
           !current
-            ? "border-ochre-deep text-ink"
-            : "border-transparent text-ink-soft hover:text-ink"
+            ? "border-ochre-deep text-bone"
+            : "border-transparent text-bone-deep hover:text-bone"
         )}
       >
         All
@@ -80,8 +80,8 @@ function FilterRow({
           className={cn(
             "text-ui inline-flex items-center py-3 min-h-11 border-b transition-colors capitalize",
             current === item
-              ? "border-ochre-deep text-ink"
-              : "border-transparent text-ink-soft hover:text-ink"
+              ? "border-ochre-deep text-bone"
+              : "border-transparent text-bone-deep hover:text-bone"
           )}
         >
           {item.replace(/-/g, " ")}

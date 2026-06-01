@@ -20,19 +20,19 @@ export default async function MockCheckoutPage({ params }: { params: Params }) {
   if (!session) notFound();
 
   return (
-    <div className="min-h-dvh bg-ink text-bone flex items-center">
+    <div className="min-h-dvh bg-bone text-ink flex items-center">
       <div className="max-w-md mx-auto w-full p-6 md:p-10">
-        <p className="text-ui text-bone/60 mb-6">Mock checkout · dev only</p>
+        <p className="text-ui text-ink/60 mb-6">Mock checkout · dev only</p>
         <h1 className="font-display text-3xl leading-tight mb-3">{session.productTitle}</h1>
         <p className="text-2xl mb-10">{formatPriceUSD(session.priceUSD)}</p>
 
-        <div className="bg-bone/5 border border-bone/15 p-5 mb-8 text-sm">
-          <p className="text-bone/70 mb-2">
+        <div className="bg-ink/5 border border-ink/15 p-5 mb-8 text-sm">
+          <p className="text-ink/70 mb-2">
             This is a mock checkout. No card is collected. Press <em>Pay</em> to simulate a
             successful payment, or <em>Cancel</em> to abandon.
           </p>
-          <p className="text-bone/50 text-xs">Session: {session.id}</p>
-          <p className="text-bone/50 text-xs">Status: {session.status}</p>
+          <p className="text-ink/50 text-xs">Session: {session.id}</p>
+          <p className="text-ink/50 text-xs">Status: {session.status}</p>
         </div>
 
         {session.status === "open" ? (
@@ -42,7 +42,7 @@ export default async function MockCheckoutPage({ params }: { params: Params }) {
             <p className="text-ochre">This session is {session.status}.</p>
             <Link
               href="/paintings"
-              className="text-ui inline-block border-b border-bone hover:text-ochre hover:border-ochre transition-colors"
+              className="text-ui inline-block border-b border-ink hover:text-ochre hover:border-ochre transition-colors"
             >
               Back to the gallery
             </Link>

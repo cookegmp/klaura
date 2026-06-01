@@ -16,7 +16,7 @@ export default function TermsPage() {
         original-artwork market means we may need to remove a piece from sale at any
         time — if your order is affected, we&apos;ll refund you in full.
       </p>
-      <p className="text-caption text-ink-soft/80">
+      <p className="text-caption text-bone-deep/80">
         Placeholder copy — sourced from Sanity in Phase 2.
       </p>
     </LegalShell>

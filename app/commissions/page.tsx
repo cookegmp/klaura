@@ -45,11 +45,11 @@ export default async function CommissionsPage() {
       <section className="py-20 md:py-32">
         <Container>
           <header className="mb-16 max-w-3xl">
-            <p className="text-ui text-ink-soft mb-6">Commissions</p>
+            <p className="text-ui text-bone-deep mb-6">Commissions</p>
             <h1 className="font-display font-light text-[length:var(--text-display-lg)] leading-[1.02] tracking-[-0.02em]">
               A painting <span className="font-display-italic text-ochre-deep">for your place</span>.
             </h1>
-            <p className="mt-8 text-[length:var(--text-body-lg)] text-ink-soft leading-relaxed">
+            <p className="mt-8 text-[length:var(--text-body-lg)] text-bone-deep leading-relaxed">
               Landscapes of a place you love, painted from your photos or a visit. I take a
               limited number of commissions each season.
             </p>
@@ -62,18 +62,18 @@ export default async function CommissionsPage() {
                 <h3 className="font-display text-2xl leading-tight font-light mb-3">
                   {step.title}
                 </h3>
-                <p className="text-ink-soft leading-relaxed">{step.body}</p>
+                <p className="text-bone-deep leading-relaxed">{step.body}</p>
               </li>
             ))}
           </ol>
 
           <div className="mt-24 max-w-2xl">
-            <p className="text-ui text-ink-soft mb-4">A note on pricing</p>
-            <p className="text-[length:var(--text-body-lg)] text-ink-soft leading-relaxed">
+            <p className="text-ui text-bone-deep mb-4">A note on pricing</p>
+            <p className="text-[length:var(--text-body-lg)] text-bone-deep leading-relaxed">
               Commissions are quoted individually based on size, medium, and reference work
               required. Small soft-pastel commissions typically begin around{" "}
-              <span className="font-display-italic text-ink">$800</span>, with oil
-              commissions in the <span className="font-display-italic text-ink">$2,400&ndash;$8,000</span>{" "}
+              <span className="font-display-italic text-bone">$800</span>, with oil
+              commissions in the <span className="font-display-italic text-bone">$2,400&ndash;$8,000</span>{" "}
               range. We&apos;ll discuss specifics before any commitment.
             </p>
           </div>
@@ -81,7 +81,7 @@ export default async function CommissionsPage() {
       </section>
 
       {examples.length > 0 && (
-        <section className="py-24 md:py-32 bg-bone-deep">
+        <section className="py-24 md:py-32 bg-ink-soft">
           <Container width="wide">
             <h2 className="font-display text-[length:var(--text-display-md)] font-light tracking-[-0.02em] mb-12">
               Past <span className="font-display-italic">commissions</span>
@@ -104,7 +104,7 @@ export default async function CommissionsPage() {
                   </div>
                   <p className="mt-5 font-display text-xl">{ex.title}</p>
                   {ex.story && (
-                    <p className="mt-2 text-sm text-ink-soft leading-relaxed">{ex.story}</p>
+                    <p className="mt-2 text-sm text-bone-deep leading-relaxed">{ex.story}</p>
                   )}
                 </li>
               ))}
@@ -118,7 +118,7 @@ export default async function CommissionsPage() {
           <h2 className="font-display text-[length:var(--text-display-md)] font-light tracking-[-0.02em] mb-3">
             Begin an <span className="font-display-italic text-ochre-deep">inquiry</span>
           </h2>
-          <p className="text-ink-soft leading-relaxed mb-12">
+          <p className="text-bone-deep leading-relaxed mb-12">
             Tell me about the piece you have in mind. I&apos;ll reply within a week.
           </p>
           <CommissionForm />

@@ -54,7 +54,7 @@ export default async function StudioPage() {
           <div className="grid grid-cols-12 gap-y-16 md:gap-x-12 items-end">
             <div className="col-span-12 md:col-span-8">
               <Reveal delay={0} rise={40}>
-                <p className="text-ui text-ink-soft mb-10 md:mb-14">
+                <p className="text-ui text-bone-deep mb-10 md:mb-14">
                   § About · Montreal painter · based in Ohio · est. 2018
                 </p>
               </Reveal>
@@ -93,8 +93,8 @@ export default async function StudioPage() {
                         />
                       </div>
                     </Parallax>
-                    <div className="mt-4 flex items-baseline justify-between gap-6 font-[family-name:var(--font-mono)] text-[0.74rem] uppercase tracking-[0.06em] text-ink-soft">
-                      <span className="text-ink">{hero.title}</span>
+                    <div className="mt-4 flex items-baseline justify-between gap-6 font-[family-name:var(--font-mono)] text-[0.74rem] uppercase tracking-[0.06em] text-bone-deep">
+                      <span className="text-bone">{hero.title}</span>
                       <span>{hero.year}</span>
                     </div>
                   </Link>
@@ -121,7 +121,7 @@ export default async function StudioPage() {
               as="div"
               className="col-span-12 md:col-span-3 md:sticky md:top-32 md:self-start"
             >
-              <div className="flex items-baseline gap-4 font-[family-name:var(--font-mono)] text-[0.74rem] uppercase tracking-[0.08em] text-ink-soft">
+              <div className="flex items-baseline gap-4 font-[family-name:var(--font-mono)] text-[0.74rem] uppercase tracking-[0.08em] text-bone-deep">
                 <span>§ 01</span>
                 <span>The studio</span>
               </div>
@@ -140,11 +140,11 @@ export default async function StudioPage() {
               </Reveal>
               <Reveal delay={200} className="mt-10">
                 {about?.story ? (
-                  <div className="max-w-xl text-[length:var(--text-body-lg)] text-ink-soft leading-relaxed">
+                  <div className="max-w-xl text-[length:var(--text-body-lg)] text-bone-deep leading-relaxed">
                     <PortableContent value={about.story} />
                   </div>
                 ) : (
-                  <p className="max-w-xl text-[length:var(--text-body-lg)] text-ink-soft leading-relaxed">
+                  <p className="max-w-xl text-[length:var(--text-body-lg)] text-bone-deep leading-relaxed">
                     Kelly paints from a studio in Ohio, far from Montreal — long winters,
                     long looks at the same field.
                   </p>
@@ -156,12 +156,12 @@ export default async function StudioPage() {
       </section>
 
       {/* 5. THE ARTIST — sticky image column ------------------------- */}
-      <section className="py-32 md:py-48 border-t border-rule/60 bg-bone-deep">
+      <section className="py-32 md:py-48 border-t border-rule/60 bg-ink-soft">
         <Container width="wide">
           <div className="grid grid-cols-12 gap-y-16 md:gap-x-12">
             <div className="col-span-12 md:col-span-5">
               <Reveal>
-                <div className="flex items-baseline gap-4 font-[family-name:var(--font-mono)] text-[0.74rem] uppercase tracking-[0.08em] text-ink-soft mb-10">
+                <div className="flex items-baseline gap-4 font-[family-name:var(--font-mono)] text-[0.74rem] uppercase tracking-[0.08em] text-bone-deep mb-10">
                   <span>§ 02</span>
                   <span>The artist</span>
                 </div>
@@ -177,19 +177,19 @@ export default async function StudioPage() {
               </Reveal>
               <Reveal delay={220} className="mt-10 space-y-12">
                 {about?.pullQuote && (
-                  <p className="font-display italic text-2xl md:text-3xl leading-snug text-ink-soft max-w-md">
+                  <p className="font-display italic text-2xl md:text-3xl leading-snug text-bone-deep max-w-md">
                     &ldquo;{about.pullQuote}&rdquo;
                   </p>
                 )}
-                <dl className="grid grid-cols-2 gap-y-4 max-w-md font-[family-name:var(--font-mono)] text-[0.78rem] uppercase tracking-[0.06em] text-ink-soft">
+                <dl className="grid grid-cols-2 gap-y-4 max-w-md font-[family-name:var(--font-mono)] text-[0.78rem] uppercase tracking-[0.06em] text-bone-deep">
                   <dt>Working since</dt>
-                  <dd className="text-ink">2018</dd>
+                  <dd className="text-bone">2018</dd>
                   <dt>Studio</dt>
-                  <dd className="text-ink">Ohio</dd>
+                  <dd className="text-bone">Ohio</dd>
                   <dt>Born</dt>
-                  <dd className="text-ink">Montréal</dd>
+                  <dd className="text-bone">Montréal</dd>
                   <dt>Media</dt>
-                  <dd className="text-ink">Oil · Soft pastel</dd>
+                  <dd className="text-bone">Oil · Soft pastel</dd>
                 </dl>
               </Reveal>
             </div>
@@ -230,7 +230,7 @@ export default async function StudioPage() {
         <section className="py-32 md:py-44 border-t border-rule/60">
           <Container width="wide">
             <Reveal>
-              <div className="flex items-baseline gap-4 font-[family-name:var(--font-mono)] text-[0.74rem] uppercase tracking-[0.08em] text-ink-soft mb-12 md:mb-16">
+              <div className="flex items-baseline gap-4 font-[family-name:var(--font-mono)] text-[0.74rem] uppercase tracking-[0.08em] text-bone-deep mb-12 md:mb-16">
                 <span>§ 03</span>
                 <span>In the studio</span>
               </div>
@@ -261,7 +261,7 @@ export default async function StudioPage() {
       <section className="py-32 md:py-56 border-t border-rule/60 text-center">
         <Container width="wide">
           <Reveal rise={40}>
-            <p className="text-ui text-ink-soft mb-8">§ A painting for your place</p>
+            <p className="text-ui text-bone-deep mb-8">§ A painting for your place</p>
           </Reveal>
           <Reveal delay={100} rise={120}>
             <h2 className="font-display-caps font-light text-[length:var(--text-display-lg)] md:text-[length:var(--text-display-xl)] leading-[0.88] tracking-[-0.03em] max-w-5xl mx-auto">
@@ -274,13 +274,13 @@ export default async function StudioPage() {
             </h2>
           </Reveal>
           <Reveal delay={260}>
-            <p className="mt-10 md:mt-14 max-w-xl mx-auto text-[length:var(--text-body-lg)] text-ink-soft leading-relaxed">
+            <p className="mt-10 md:mt-14 max-w-xl mx-auto text-[length:var(--text-body-lg)] text-bone-deep leading-relaxed">
               Landscapes of a place you love, painted from your photos or a visit. A
               limited number of commissions each season.
             </p>
             <Link
               href="/commissions"
-              className="mt-12 inline-block text-ui px-9 py-5 bg-ink text-bone hover:bg-ochre-deep transition-colors"
+              className="mt-12 inline-block text-ui px-9 py-5 bg-bone text-ink hover:bg-ochre-deep transition-colors"
             >
               Begin an inquiry →
             </Link>

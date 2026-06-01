@@ -16,8 +16,8 @@ export default function GlobalError({
     <html>
       <body
         style={{
-          background: "#f4efe6",
-          color: "#1a1d24",
+          background: "#0d0d0f",
+          color: "#ebe4d6",
           fontFamily: "Georgia, serif",
           minHeight: "100vh",
           display: "flex",
@@ -29,10 +29,10 @@ export default function GlobalError({
           <p
             style={{
               fontFamily: "system-ui, -apple-system, sans-serif",
-              fontSize: "0.82rem",
-              letterSpacing: "0.12em",
+              fontSize: "0.78rem",
+              letterSpacing: "0.16em",
               textTransform: "uppercase",
-              color: "#3a3d44",
+              color: "#a8a094",
               marginBottom: "1.5rem",
             }}
           >
@@ -42,7 +42,7 @@ export default function GlobalError({
             style={{
               fontSize: "2.5rem",
               fontWeight: 300,
-              letterSpacing: "-0.02em",
+              letterSpacing: "-0.01em",
               lineHeight: 1.1,
             }}
           >
@@ -51,7 +51,7 @@ export default function GlobalError({
           <p
             style={{
               fontFamily: "system-ui, -apple-system, sans-serif",
-              color: "#3a3d44",
+              color: "#a8a094",
               marginTop: "1.5rem",
               lineHeight: 1.6,
             }}
@@ -63,7 +63,7 @@ export default function GlobalError({
               style={{
                 fontStyle: "italic",
                 fontSize: "0.78rem",
-                color: "rgba(58, 61, 68, 0.7)",
+                color: "rgba(168, 160, 148, 0.7)",
                 marginTop: "1.5rem",
               }}
             >
@@ -76,11 +76,11 @@ export default function GlobalError({
             style={{
               marginTop: "2rem",
               padding: "1rem 1.75rem",
-              background: "#1a1d24",
-              color: "#f4efe6",
+              background: "#ebe4d6",
+              color: "#0d0d0f",
               fontFamily: "system-ui, -apple-system, sans-serif",
-              fontSize: "0.82rem",
-              letterSpacing: "0.12em",
+              fontSize: "0.78rem",
+              letterSpacing: "0.16em",
               textTransform: "uppercase",
               border: "none",
               cursor: "pointer",

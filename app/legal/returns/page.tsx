@@ -16,7 +16,7 @@ export default function ReturnsPage() {
         Kelly works closely with you through proofs and progress photos to make sure the
         finished piece is what you wanted.
       </p>
-      <p className="text-caption text-ink-soft/80">
+      <p className="text-caption text-bone-deep/80">
         Placeholder copy — sourced from Sanity in Phase 2.
       </p>
     </LegalShell>

@@ -34,7 +34,7 @@ export function Marquee({ phrases }: { phrases: string[] }) {
     <div
       ref={containerRef}
       role="presentation"
-      className="overflow-hidden border-y border-rule/60 bg-bone py-8"
+      className="overflow-hidden border-y border-rule/60 bg-ink py-8"
       aria-hidden
     >
       <div
@@ -44,7 +44,7 @@ export function Marquee({ phrases }: { phrases: string[] }) {
         {doubled.map((phrase, i) => (
           <span
             key={i}
-            className="font-display text-[2.5rem] md:text-[3rem] leading-none text-ink-soft"
+            className="font-display text-[2.5rem] md:text-[3rem] leading-none text-bone-deep"
           >
             {phrase}
             <span className="font-display-italic text-ochre ml-16">·</span>

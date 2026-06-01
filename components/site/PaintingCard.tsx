@@ -36,7 +36,7 @@ export function PaintingCard({ painting, index = 0, sizes }: PaintingCardProps) 
           className="transition-transform duration-700 ease-[var(--ease-editorial)] group-hover:scale-[1.03]"
         />
         {sold && (
-          <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 text-ui text-bone bg-ink/85 px-4 py-2">
+          <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 text-ui text-ink bg-bone/85 px-4 py-2">
             Sold
           </span>
         )}
@@ -44,13 +44,13 @@ export function PaintingCard({ painting, index = 0, sizes }: PaintingCardProps) 
       <div className="mt-5 flex items-start justify-between gap-6">
         <div className="flex flex-col gap-1">
           <p className="font-display text-xl leading-tight">{painting.title}</p>
-          <p className="text-caption text-ink-soft">
+          <p className="text-caption text-bone-deep">
             {painting.medium} · {painting.dimensions.heightInches} ×{" "}
             {painting.dimensions.widthInches} in
           </p>
         </div>
         {!sold && (
-          <p className="text-ui text-ink shrink-0">
+          <p className="text-ui text-bone shrink-0">
             {formatPriceUSD(painting.price)}
           </p>
         )}

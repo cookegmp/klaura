@@ -29,7 +29,7 @@ export function BuyButton({
         type="button"
         disabled
         className={cn(
-          "text-ui px-8 py-5 bg-rule text-ink-soft cursor-not-allowed",
+          "text-ui px-8 py-5 bg-rule text-bone-deep cursor-not-allowed",
           className
         )}
       >
@@ -40,7 +40,7 @@ export function BuyButton({
 
   if (status === "nfs") {
     return (
-      <p className={cn("text-caption text-ink-soft italic", className)}>
+      <p className={cn("text-caption text-bone-deep italic", className)}>
         Not for sale — part of the studio collection.
       </p>
     );
@@ -52,7 +52,7 @@ export function BuyButton({
         type="button"
         disabled
         className={cn(
-          "text-ui px-8 py-5 bg-rule text-ink-soft cursor-not-allowed",
+          "text-ui px-8 py-5 bg-rule text-bone-deep cursor-not-allowed",
           className
         )}
       >
@@ -96,7 +96,7 @@ export function BuyButton({
         type="button"
         onClick={onClick}
         disabled={phase === "submitting" || phase === "redirecting"}
-        className="text-ui px-8 py-5 bg-ink text-bone hover:bg-ochre-deep transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+        className="text-ui px-8 py-5 bg-bone text-ink hover:bg-ochre-deep transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
       >
         {phase === "submitting"
           ? "Reserving…"

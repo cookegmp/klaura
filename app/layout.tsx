@@ -1,15 +1,18 @@
 import type { Metadata } from "next";
-import { Fraunces, Inter_Tight, Space_Mono } from "next/font/google";
+import { Cormorant_Garamond, Inter_Tight, Space_Mono } from "next/font/google";
 import { Footer } from "@/components/site/Footer";
 import { Nav } from "@/components/site/Nav";
 import { siteConfig } from "@/lib/site-config";
 import "./globals.css";
 
-const fraunces = Fraunces({
+// Cormorant Garamond — elegant Garamond revival driving the dark editorial
+// feel. Its true italic is the cursive accent the design system depends on.
+const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-fraunces",
-  axes: ["opsz", "SOFT"],
+  variable: "--font-cormorant",
+  weight: ["300", "400", "500", "600", "700"],
+  style: ["normal", "italic"],
 });
 
 const interTight = Inter_Tight({
@@ -57,9 +60,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${fraunces.variable} ${interTight.variable} ${spaceMono.variable}`}
+      className={`${cormorant.variable} ${interTight.variable} ${spaceMono.variable}`}
     >
-      <body className="bg-bone text-ink antialiased flex min-h-dvh flex-col">
+      <body className="bg-ink text-bone antialiased flex min-h-dvh flex-col">
         <Nav />
         <main className="flex-1">{children}</main>
         <Footer />

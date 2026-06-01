@@ -126,7 +126,7 @@ export function CommissionForm() {
           type="text"
           required
           autoComplete="name"
-          className="w-full bg-transparent border-b border-ink py-3 outline-none focus:border-ochre"
+          className="w-full bg-transparent border-b border-bone py-3 outline-none focus:border-ochre"
         />
       </Field>
 
@@ -135,7 +135,7 @@ export function CommissionForm() {
           type="email"
           required
           autoComplete="email"
-          className="w-full bg-transparent border-b border-ink py-3 outline-none focus:border-ochre"
+          className="w-full bg-transparent border-b border-bone py-3 outline-none focus:border-ochre"
         />
       </Field>
 
@@ -143,14 +143,14 @@ export function CommissionForm() {
         <input
           type="text"
           placeholder="e.g. our family farm, a coastal scene, a portrait of place"
-          className="w-full bg-transparent border-b border-ink py-3 outline-none focus:border-ochre placeholder:text-ink-soft/50"
+          className="w-full bg-transparent border-b border-bone py-3 outline-none focus:border-ochre placeholder:text-bone-deep/50"
         />
       </Field>
 
       <div className="grid md:grid-cols-2 gap-8">
         <Field name="budgetRange" label="Budget range" error={errors.budgetRange}>
           <select
-            className="w-full bg-transparent border-b border-ink py-3 outline-none focus:border-ochre"
+            className="w-full bg-transparent border-b border-bone py-3 outline-none focus:border-ochre"
             defaultValue=""
           >
             <option value="">Choose one</option>
@@ -163,7 +163,7 @@ export function CommissionForm() {
         </Field>
         <Field name="timeline" label="Timeline" error={errors.timeline}>
           <select
-            className="w-full bg-transparent border-b border-ink py-3 outline-none focus:border-ochre"
+            className="w-full bg-transparent border-b border-bone py-3 outline-none focus:border-ochre"
             defaultValue=""
           >
             <option value="">Choose one</option>
@@ -180,7 +180,7 @@ export function CommissionForm() {
         <textarea
           required
           rows={6}
-          className="w-full bg-transparent border border-ink p-4 outline-none focus:border-ochre resize-y"
+          className="w-full bg-transparent border border-bone p-4 outline-none focus:border-ochre resize-y"
           placeholder="What does the place feel like? Is this for a particular room? Any references you'd like to share?"
         />
       </Field>
@@ -189,7 +189,7 @@ export function CommissionForm() {
         <button
           type="submit"
           disabled={phase === "submitting"}
-          className="text-ui px-8 py-5 bg-ink text-bone hover:bg-ochre-deep transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+          className="text-ui px-8 py-5 bg-bone text-ink hover:bg-ochre-deep transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
         >
           {phase === "submitting" ? "Sending…" : "Send inquiry"}
         </button>
@@ -197,7 +197,7 @@ export function CommissionForm() {
           <p
             role="status"
             aria-live="polite"
-            className={`text-sm ${phase === "ok" ? "text-ink" : "text-ochre-deep"}`}
+            className={`text-sm ${phase === "ok" ? "text-bone" : "text-ochre-deep"}`}
           >
             {message}
           </p>
@@ -242,7 +242,7 @@ function Field({
 
   return (
     <div className="block">
-      <label htmlFor={inputId} className="text-ui text-ink-soft block mb-2">
+      <label htmlFor={inputId} className="text-ui text-bone-deep block mb-2">
         {label}
       </label>
       {enhancedChild}

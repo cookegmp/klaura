@@ -128,7 +128,7 @@ function GalleryItem({
       href={`/paintings/${painting.slug.current}`}
       className="group block shrink-0 w-[60vw] lg:w-[55vw]"
     >
-      <div className="flex items-end justify-between mb-4 font-[family-name:var(--font-mono)] text-[0.72rem] uppercase tracking-[0.08em] text-ink-soft">
+      <div className="flex items-end justify-between mb-4 font-[family-name:var(--font-mono)] text-[0.72rem] uppercase tracking-[0.08em] text-bone-deep">
         <span>{painting.year}</span>
         <span>
           {String(index).padStart(2, "0")} / {String(total).padStart(2, "0")}
@@ -148,7 +148,7 @@ function GalleryItem({
           className="transition-transform duration-[1200ms] ease-[var(--ease-editorial)] group-hover:scale-[1.04]"
         />
         {painting.status === "sold" && (
-          <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 text-ui text-bone bg-ink/85 px-5 py-3">
+          <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 text-ui text-ink bg-bone/85 px-5 py-3">
             Sold
           </span>
         )}
@@ -157,11 +157,11 @@ function GalleryItem({
         <h3 className="font-display text-3xl lg:text-4xl font-light leading-tight tracking-[-0.02em]">
           {painting.title}
         </h3>
-        <span className="font-[family-name:var(--font-mono)] text-[0.74rem] uppercase tracking-[0.06em] text-ink-soft">
+        <span className="font-[family-name:var(--font-mono)] text-[0.74rem] uppercase tracking-[0.06em] text-bone-deep">
           {painting.medium} · {formatDimensions(painting.dimensions)}
         </span>
       </div>
-      <p className="mt-2 font-[family-name:var(--font-mono)] text-[0.72rem] uppercase tracking-[0.08em] text-ink">
+      <p className="mt-2 font-[family-name:var(--font-mono)] text-[0.72rem] uppercase tracking-[0.08em] text-bone">
         {painting.status === "sold" ? "Sold" : formatPriceUSD(painting.price)}
       </p>
     </Link>
@@ -180,7 +180,7 @@ function MobileItem({
   const aspect = painting.dimensions.widthInches / painting.dimensions.heightInches;
   return (
     <Link href={`/paintings/${painting.slug.current}`} className="group block">
-      <div className="flex items-end justify-between mb-3 font-[family-name:var(--font-mono)] text-[0.7rem] uppercase tracking-[0.08em] text-ink-soft">
+      <div className="flex items-end justify-between mb-3 font-[family-name:var(--font-mono)] text-[0.7rem] uppercase tracking-[0.08em] text-bone-deep">
         <span>{painting.year}</span>
         <span>
           {String(index).padStart(2, "0")} / {String(total).padStart(2, "0")}
@@ -199,13 +199,13 @@ function MobileItem({
           sizes="100vw"
         />
         {painting.status === "sold" && (
-          <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 text-ui text-bone bg-ink/85 px-4 py-2">
+          <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 text-ui text-ink bg-bone/85 px-4 py-2">
             Sold
           </span>
         )}
       </div>
       <h3 className="mt-4 font-display text-2xl font-light">{painting.title}</h3>
-      <p className="mt-1 text-caption text-ink-soft">
+      <p className="mt-1 text-caption text-bone-deep">
         {painting.medium} · {formatDimensions(painting.dimensions)}
       </p>
     </Link>

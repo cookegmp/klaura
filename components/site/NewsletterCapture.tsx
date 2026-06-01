@@ -40,17 +40,17 @@ export function NewsletterCapture() {
   return (
     <div className="grid md:grid-cols-2 gap-12 md:gap-20 items-start">
       <div>
-        <p className="text-ui text-ink-soft mb-6">Letters from the studio</p>
+        <p className="text-ui text-bone-deep mb-6">Letters from the studio</p>
         <h2 className="font-display text-[length:var(--text-display-md)] md:text-[length:var(--text-display-lg)] leading-[1.05] font-light tracking-[-0.02em]">
           Slow updates,
           <span className="font-display-italic text-ochre-deep"> once a season</span>.
         </h2>
       </div>
       <form onSubmit={onSubmit} className="md:pt-12">
-        <label htmlFor="newsletter-email" className="text-ui text-ink-soft block mb-3">
+        <label htmlFor="newsletter-email" className="text-ui text-bone-deep block mb-3">
           Email
         </label>
-        <div className="flex border-b border-ink focus-within:border-ochre transition-colors">
+        <div className="flex border-b border-bone focus-within:border-ochre transition-colors">
           <input
             id="newsletter-email"
             name="email"
@@ -58,7 +58,7 @@ export function NewsletterCapture() {
             required
             placeholder="you@somewhere.com"
             autoComplete="email"
-            className="flex-1 bg-transparent py-3 outline-none placeholder:text-ink-soft"
+            className="flex-1 bg-transparent py-3 outline-none placeholder:text-bone-deep"
           />
           <button
             type="submit"
@@ -71,12 +71,12 @@ export function NewsletterCapture() {
         {message && (
           <p
             role="status"
-            className={`mt-4 text-sm ${state === "error" ? "text-ochre-deep" : "text-ink-soft"}`}
+            className={`mt-4 text-sm ${state === "error" ? "text-ochre-deep" : "text-bone-deep"}`}
           >
             {message}
           </p>
         )}
-        <p className="text-caption text-ink-soft mt-6">
+        <p className="text-caption text-bone-deep mt-6">
           No more than four a year. Unsubscribe whenever.
         </p>
       </form>
