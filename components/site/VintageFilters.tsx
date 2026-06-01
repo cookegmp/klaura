@@ -67,7 +67,7 @@ function FilterRow({
         className={cn(
           "text-ui inline-flex items-center py-3 min-h-11 border-b transition-colors capitalize",
           !current
-            ? "border-ochre-deep text-bone"
+            ? "border-bone text-bone"
             : "border-transparent text-bone-deep hover:text-bone"
         )}
       >
@@ -80,7 +80,7 @@ function FilterRow({
           className={cn(
             "text-ui inline-flex items-center py-3 min-h-11 border-b transition-colors capitalize",
             current === item
-              ? "border-ochre-deep text-bone"
+              ? "border-bone text-bone"
               : "border-transparent text-bone-deep hover:text-bone"
           )}
         >

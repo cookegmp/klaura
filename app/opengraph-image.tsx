@@ -6,7 +6,7 @@ export const contentType = "image/png";
 
 /**
  * Default Open Graph image. Matches the dark editorial palette: deep
- * charcoal surface, warm cream type, ochre italic accent. Hex values are
+ * charcoal surface, warm cream type, italic Cormorant accent. Hex values are
  * hand-mirrored from app/globals.css because satori does not read tokens.
  */
 export default async function OpenGraphImage() {
@@ -47,7 +47,7 @@ export default async function OpenGraphImage() {
             }}
           >
             <span>Kelly</span>
-            <span style={{ fontStyle: "italic", color: "#d6964a" }}>&nbsp;Laura</span>
+            <span style={{ fontStyle: "italic", color: "#ebe4d6" }}>&nbsp;Laura</span>
           </div>
           <div style={{ fontSize: 30, color: "#a8a094", maxWidth: 820, lineHeight: 1.35, fontFamily: "sans-serif" }}>
             Original paintings and one-of-a-kind vintage. Painted slowly, worn long after.
@@ -70,7 +70,7 @@ export default async function OpenGraphImage() {
             style={{
               fontSize: 26,
               fontStyle: "italic",
-              color: "#d6964a",
+              color: "#ebe4d6",
               fontFamily: "Georgia, serif",
             }}
           >

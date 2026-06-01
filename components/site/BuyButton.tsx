@@ -96,7 +96,7 @@ export function BuyButton({
         type="button"
         onClick={onClick}
         disabled={phase === "submitting" || phase === "redirecting"}
-        className="text-ui px-8 py-5 bg-bone text-ink hover:bg-ochre-deep transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+        className="text-ui px-8 py-5 bg-bone text-ink hover:bg-bone-deep transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
       >
         {phase === "submitting"
           ? "Reserving…"
@@ -105,7 +105,7 @@ export function BuyButton({
             : `Buy — ${priceLabel}`}
       </button>
       {message && (
-        <p role="status" className="mt-3 text-sm text-ochre-deep">
+        <p role="status" className="mt-3 text-sm">
           {message}
         </p>
       )}

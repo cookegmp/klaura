@@ -40,17 +40,17 @@ export function NewsletterCapture() {
   return (
     <div className="grid md:grid-cols-2 gap-12 md:gap-20 items-start">
       <div>
-        <p className="text-ui text-bone-deep mb-6">Letters from the studio</p>
+        <p className="text-meta mb-6">Letters from the studio</p>
         <h2 className="font-display text-[length:var(--text-display-md)] md:text-[length:var(--text-display-lg)] leading-[1.05] font-light tracking-[-0.02em]">
           Slow updates,
-          <span className="font-display-italic text-ochre-deep"> once a season</span>.
+          <span className="font-display-italic"> once a season</span>.
         </h2>
       </div>
       <form onSubmit={onSubmit} className="md:pt-12">
-        <label htmlFor="newsletter-email" className="text-ui text-bone-deep block mb-3">
+        <label htmlFor="newsletter-email" className="text-meta block mb-3">
           Email
         </label>
-        <div className="flex border-b border-bone focus-within:border-ochre transition-colors">
+        <div className="flex border-b border-bone focus-within:border-bone transition-colors">
           <input
             id="newsletter-email"
             name="email"
@@ -63,7 +63,7 @@ export function NewsletterCapture() {
           <button
             type="submit"
             disabled={state === "submitting"}
-            className="text-ui px-2 py-3 hover:text-ochre-deep transition-colors disabled:opacity-50"
+            className="text-ui px-2 py-3 disabled:opacity-50"
           >
             {state === "submitting" ? "Sending…" : "Subscribe →"}
           </button>
@@ -71,7 +71,7 @@ export function NewsletterCapture() {
         {message && (
           <p
             role="status"
-            className={`mt-4 text-sm ${state === "error" ? "text-ochre-deep" : "text-bone-deep"}`}
+            className={`mt-4 text-sm ${state === "error" ? "" : "text-bone-deep"}`}
           >
             {message}
           </p>

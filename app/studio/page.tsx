@@ -54,16 +54,16 @@ export default async function StudioPage() {
           <div className="grid grid-cols-12 gap-y-16 md:gap-x-12 items-end">
             <div className="col-span-12 md:col-span-8">
               <Reveal delay={0} rise={40}>
-                <p className="text-ui text-bone-deep mb-10 md:mb-14">
+                <p className="text-meta mb-10 md:mb-14">
                   § About · Montreal painter · based in Ohio · est. 2018
                 </p>
               </Reveal>
               <Reveal delay={120} rise={120}>
-                <h1 className="font-display-caps font-light text-[length:var(--text-display-lg)] md:text-[length:var(--text-display-xl)] leading-[0.85] tracking-[-0.03em]">
+                <h1 className="font-display-italic font-normal text-[length:var(--text-display-lg)] md:text-[length:var(--text-display-xl)] leading-[0.85] tracking-[-0.03em]">
                   A painter.
                   <br />
                   A{" "}
-                  <span className="font-display-italic text-ochre-deep normal-case">
+                  <span className="font-display-italic normal-case">
                     studio
                   </span>
                   <br />
@@ -93,7 +93,7 @@ export default async function StudioPage() {
                         />
                       </div>
                     </Parallax>
-                    <div className="mt-4 flex items-baseline justify-between gap-6 font-[family-name:var(--font-mono)] text-[0.74rem] uppercase tracking-[0.06em] text-bone-deep">
+                    <div className="mt-4 flex items-baseline justify-between gap-6 text-meta text-bone-deep">
                       <span className="text-bone">{hero.title}</span>
                       <span>{hero.year}</span>
                     </div>
@@ -121,17 +121,17 @@ export default async function StudioPage() {
               as="div"
               className="col-span-12 md:col-span-3 md:sticky md:top-32 md:self-start"
             >
-              <div className="flex items-baseline gap-4 font-[family-name:var(--font-mono)] text-[0.74rem] uppercase tracking-[0.08em] text-bone-deep">
+              <div className="flex items-baseline gap-4 text-meta text-bone-deep">
                 <span>§ 01</span>
                 <span>The studio</span>
               </div>
             </Reveal>
             <div className="col-span-12 md:col-span-9 max-w-3xl">
               <Reveal delay={100}>
-                <h2 className="font-display-caps font-light text-[length:var(--text-display-md)] md:text-[length:var(--text-display-lg)] leading-[0.95] tracking-[-0.025em]">
+                <h2 className="font-display-italic font-normal text-[length:var(--text-display-md)] md:text-[length:var(--text-display-lg)] leading-[0.95] tracking-[-0.025em]">
                   A practice rebuilt around
                   <br />
-                  <span className="font-display-italic text-ochre-deep normal-case">
+                  <span className="font-display-italic normal-case">
                     what the light is doing
                   </span>
                   <br />
@@ -161,16 +161,16 @@ export default async function StudioPage() {
           <div className="grid grid-cols-12 gap-y-16 md:gap-x-12">
             <div className="col-span-12 md:col-span-5">
               <Reveal>
-                <div className="flex items-baseline gap-4 font-[family-name:var(--font-mono)] text-[0.74rem] uppercase tracking-[0.08em] text-bone-deep mb-10">
+                <div className="flex items-baseline gap-4 text-meta text-bone-deep mb-10">
                   <span>§ 02</span>
                   <span>The artist</span>
                 </div>
               </Reveal>
               <Reveal delay={100} rise={100}>
-                <h2 className="font-display-caps font-light text-[length:var(--text-display-md)] md:text-[length:var(--text-display-lg)] leading-[0.95] tracking-[-0.025em]">
+                <h2 className="font-display-italic font-normal text-[length:var(--text-display-md)] md:text-[length:var(--text-display-lg)] leading-[0.95] tracking-[-0.025em]">
                   Kelly
                   <br />
-                  <span className="font-display-italic text-ochre-deep normal-case">
+                  <span className="font-display-italic normal-case">
                     Laura
                   </span>
                 </h2>
@@ -181,7 +181,7 @@ export default async function StudioPage() {
                     &ldquo;{about.pullQuote}&rdquo;
                   </p>
                 )}
-                <dl className="grid grid-cols-2 gap-y-4 max-w-md font-[family-name:var(--font-mono)] text-[0.78rem] uppercase tracking-[0.06em] text-bone-deep">
+                <dl className="grid grid-cols-2 gap-y-4 max-w-md text-meta text-bone-deep">
                   <dt>Working since</dt>
                   <dd className="text-bone">2018</dd>
                   <dt>Studio</dt>
@@ -230,7 +230,7 @@ export default async function StudioPage() {
         <section className="py-32 md:py-44 border-t border-rule/60">
           <Container width="wide">
             <Reveal>
-              <div className="flex items-baseline gap-4 font-[family-name:var(--font-mono)] text-[0.74rem] uppercase tracking-[0.08em] text-bone-deep mb-12 md:mb-16">
+              <div className="flex items-baseline gap-4 text-meta text-bone-deep mb-12 md:mb-16">
                 <span>§ 03</span>
                 <span>In the studio</span>
               </div>
@@ -261,13 +261,13 @@ export default async function StudioPage() {
       <section className="py-32 md:py-56 border-t border-rule/60 text-center">
         <Container width="wide">
           <Reveal rise={40}>
-            <p className="text-ui text-bone-deep mb-8">§ A painting for your place</p>
+            <p className="text-meta mb-8">§ A painting for your place</p>
           </Reveal>
           <Reveal delay={100} rise={120}>
-            <h2 className="font-display-caps font-light text-[length:var(--text-display-lg)] md:text-[length:var(--text-display-xl)] leading-[0.88] tracking-[-0.03em] max-w-5xl mx-auto">
+            <h2 className="font-display-italic font-normal text-[length:var(--text-display-lg)] md:text-[length:var(--text-display-xl)] leading-[0.88] tracking-[-0.03em] max-w-5xl mx-auto">
               Begin a
               <br />
-              <span className="font-display-italic text-ochre-deep normal-case">
+              <span className="font-display-italic normal-case">
                 commission
               </span>
               .
@@ -280,7 +280,7 @@ export default async function StudioPage() {
             </p>
             <Link
               href="/commissions"
-              className="mt-12 inline-block text-ui px-9 py-5 bg-bone text-ink hover:bg-ochre-deep transition-colors"
+              className="mt-12 inline-block text-ui px-9 py-5 bg-bone text-ink hover:bg-bone-deep transition-colors"
             >
               Begin an inquiry →
             </Link>

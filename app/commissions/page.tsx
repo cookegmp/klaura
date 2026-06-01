@@ -45,9 +45,9 @@ export default async function CommissionsPage() {
       <section className="py-20 md:py-32">
         <Container>
           <header className="mb-16 max-w-3xl">
-            <p className="text-ui text-bone-deep mb-6">Commissions</p>
+            <p className="text-meta mb-6">Commissions</p>
             <h1 className="font-display font-light text-[length:var(--text-display-lg)] leading-[1.02] tracking-[-0.02em]">
-              A painting <span className="font-display-italic text-ochre-deep">for your place</span>.
+              A painting <span className="font-display-italic">for your place</span>.
             </h1>
             <p className="mt-8 text-[length:var(--text-body-lg)] text-bone-deep leading-relaxed">
               Landscapes of a place you love, painted from your photos or a visit. I take a
@@ -58,7 +58,7 @@ export default async function CommissionsPage() {
           <ol className="mt-20 grid md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16">
             {PROCESS.map((step) => (
               <li key={step.n}>
-                <p className="text-ui text-ochre-deep mb-3">{step.n}</p>
+                <p className="text-roman block mb-3">{step.n}</p>
                 <h3 className="font-display text-2xl leading-tight font-light mb-3">
                   {step.title}
                 </h3>
@@ -68,7 +68,7 @@ export default async function CommissionsPage() {
           </ol>
 
           <div className="mt-24 max-w-2xl">
-            <p className="text-ui text-bone-deep mb-4">A note on pricing</p>
+            <p className="text-meta mb-4">A note on pricing</p>
             <p className="text-[length:var(--text-body-lg)] text-bone-deep leading-relaxed">
               Commissions are quoted individually based on size, medium, and reference work
               required. Small soft-pastel commissions typically begin around{" "}
@@ -116,7 +116,7 @@ export default async function CommissionsPage() {
       <section className="py-24 md:py-32">
         <Container width="narrow">
           <h2 className="font-display text-[length:var(--text-display-md)] font-light tracking-[-0.02em] mb-3">
-            Begin an <span className="font-display-italic text-ochre-deep">inquiry</span>
+            Begin an <span className="font-display-italic">inquiry</span>
           </h2>
           <p className="text-bone-deep leading-relaxed mb-12">
             Tell me about the piece you have in mind. I&apos;ll reply within a week.

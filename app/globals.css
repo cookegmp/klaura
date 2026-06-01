@@ -132,6 +132,31 @@
     font-size: var(--text-caption);
   }
 
+  /* Editorial metadata — italic Cormorant for the small caption-y strings
+     that used to be monospace allcaps. Reads like a museum plate label:
+     "Oil on linen · 16 × 12 in · 2024". The reference design uses italic
+     serif for these atmospheric labels, not a sans or mono. */
+  .text-meta {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 0.92rem;
+    letter-spacing: 0.005em;
+    color: var(--color-bone-deep);
+  }
+
+  /* Section / item indices — small caps Cormorant for Roman numerals
+     ("I", "II", "IX", "XII") and short markers. Non-italic, slightly
+     letter-spaced, set tightly so the index reads as a quiet label
+     beside the title. */
+  .text-roman {
+    font-family: var(--font-display);
+    font-style: normal;
+    font-weight: 500;
+    font-size: 0.82rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
   /* Sold-state overlay (charter §risks / §design) — darkening veil over
      the painting image so "sold" reads at a glance. */
   .sold-overlay::after {

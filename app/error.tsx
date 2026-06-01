@@ -18,9 +18,9 @@ export default function RouteError({
 
   return (
     <Container width="narrow" className="py-32 md:py-48 text-center">
-      <p className="text-ui text-bone-deep mb-6">500</p>
+      <p className="text-meta mb-6">500</p>
       <h1 className="font-display font-light text-[length:var(--text-display-md)] md:text-[length:var(--text-display-lg)] leading-[1.05] tracking-[-0.02em]">
-        Something <span className="font-display-italic text-ochre-deep">slipped</span>.
+        Something <span className="font-display-italic">slipped</span>.
       </h1>
       <p className="mt-8 text-[length:var(--text-body-lg)] text-bone-deep leading-relaxed">
         Sorry — the page didn&apos;t load. Try again, and if it keeps happening, write to
@@ -33,7 +33,7 @@ export default function RouteError({
         <button
           type="button"
           onClick={reset}
-          className="text-ui px-7 py-4 bg-bone text-ink hover:bg-ochre-deep transition-colors"
+          className="text-ui px-7 py-4 bg-bone text-ink hover:bg-bone-deep transition-colors"
         >
           Try again
         </button>

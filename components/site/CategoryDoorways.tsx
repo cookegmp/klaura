@@ -7,41 +7,21 @@ interface CategoryDoorwaysProps {
   summaries: CategorySummary[];
 }
 
+const ROMAN = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"];
+
 /**
- * The five gallery doorways. Editorial, asymmetric — every tile sits at a
- * deliberately different vertical baseline so the page reads as a layout,
- * not a uniform grid. 18+ gets a tonal veil instead of a fully-revealed
- * image; the age gate lives behind the click, not in front of it.
- *
- * Used on the home page and on /gallery.
+ * The five gallery doorways. Dense card grid — 2-col on mobile, 3-col on
+ * tablet, 5-col on wide desktop — modelled on the editorial reference at
+ * documentation/samples/Screenshot.png. Each tile is a small "museum plate":
+ * cover image, Roman numeral index, italic Cormorant title, quiet subtitle.
+ * No vertical offsets, no overlay captions — labels sit BELOW the image so
+ * the whole grid reads as a coherent index, not a stack of slides.
  */
 export function CategoryDoorways({ summaries }: CategoryDoorwaysProps) {
-  // Hand-tuned vertical offsets — five tiles, five baselines.
-  const offsets: Record<string, string> = {
-    landscapes: "md:mt-0",
-    houses: "md:mt-32",
-    animals: "md:mt-16",
-    "eighteen-plus": "md:mt-40",
-    miscellaneous: "md:mt-8",
-  };
-  // Column spans on the 12-col desktop grid.
-  const spans: Record<string, string> = {
-    landscapes: "md:col-span-7",
-    houses: "md:col-span-5",
-    animals: "md:col-span-5",
-    "eighteen-plus": "md:col-span-4",
-    miscellaneous: "md:col-span-3",
-  };
-
   return (
-    <div className="grid grid-cols-1 md:grid-cols-12 gap-y-20 md:gap-x-10 md:gap-y-32">
+    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-4 gap-y-10 md:gap-x-6 md:gap-y-14">
       {summaries.map((cat, i) => (
-        <Reveal
-          key={cat.slug}
-          delay={i * 90}
-          rise={64}
-          className={`${spans[cat.slug] ?? "md:col-span-6"} ${offsets[cat.slug] ?? ""}`}
-        >
+        <Reveal key={cat.slug} delay={i * 80} rise={40}>
           <DoorwayTile summary={cat} index={i} />
         </Reveal>
       ))}
@@ -57,87 +37,70 @@ function DoorwayTile({
   index: number;
 }) {
   const { slug, label, count, cover, mature } = summary;
-  // Tall portrait for the wide tiles, square for the narrowest one.
-  const aspect = slug === "miscellaneous" ? "aspect-square" : "aspect-[4/5]";
   const seed = cover?._id ?? `cat-${slug}`;
+  const numeral = ROMAN[index] ?? `${index + 1}`;
 
   return (
     <Link
       href={`/gallery/${slug}`}
-      className="group block focus:outline-none focus-visible:ring-2 focus-visible:ring-ochre focus-visible:ring-offset-4 focus-visible:ring-offset-ink"
+      className="group block focus:outline-none focus-visible:ring-1 focus-visible:ring-bone focus-visible:ring-offset-4 focus-visible:ring-offset-ink"
       aria-label={
         mature
           ? `${label} — age-restricted section, ${count} works`
           : `${label} — ${count} works`
       }
     >
-      <div className={`relative w-full ${aspect} overflow-hidden bg-ink-soft`}>
+      {/* Image plate — uniform 4/5 aspect across every tile so the grid
+          reads as an index, not a layout puzzle. */}
+      <div className="relative w-full aspect-[4/5] overflow-hidden bg-ink-soft border border-rule">
         {cover ? (
           <ProductImage
             image={cover.primaryImage}
             alt={cover.primaryImage?.alt ?? cover.title}
             seed={seed}
-            width={1100}
-            height={1375}
-            sizes="(min-width: 1024px) 45vw, 100vw"
+            width={800}
+            height={1000}
+            sizes="(min-width: 1024px) 20vw, (min-width: 640px) 33vw, 50vw"
             priority={index === 0}
-            className="transition-transform duration-[1100ms] ease-[var(--ease-editorial)] group-hover:scale-[1.04]"
+            className="transition-transform duration-[900ms] ease-[var(--ease-editorial)] group-hover:scale-[1.04]"
           />
         ) : (
           <div
             role="img"
             aria-label={`${label} — no works yet`}
-            className="absolute inset-0 bg-gradient-to-br from-ochre/30 via-ink-soft to-bone-deep/30"
+            className="absolute inset-0 bg-ink-soft"
           />
         )}
 
-        {/* Veil for the 18+ tile so the cover never feels exposed at the
-            doorway. The age gate handles the actual content beyond. */}
-        {mature && (
-          <div className="absolute inset-0 bg-ink/70" aria-hidden />
-        )}
+        {/* Age-veil: the 18+ cover is dimmed until the visitor opts in. */}
+        {mature && <div className="absolute inset-0 bg-ink/75" aria-hidden />}
 
-        {/* Mature badge */}
+        {/* Mature badge — small, top-left, italic so it sits in the same
+            voice as everything else. */}
         {mature && (
           <span
-            className="absolute top-5 left-5 inline-flex items-center text-ui text-ink bg-ochre/95 px-3 py-1.5"
+            className="absolute top-2 left-2 inline-flex items-center font-display-italic text-[0.78rem] text-bone bg-ink/70 backdrop-blur-sm px-2 py-0.5"
             aria-hidden
           >
-            18+
+            eighteen+
           </span>
         )}
+      </div>
 
-        {/* Section number — small mono, top-right. Cream on dark scrim for
-            consistent legibility regardless of cover tone. */}
-        <span
-          className="absolute top-5 right-5 font-[family-name:var(--font-mono)] text-[0.72rem] uppercase tracking-[0.08em] text-bone/90 bg-ink/40 backdrop-blur-sm px-2 py-1 rounded-sm"
-          aria-hidden
-        >
-          № 0{index + 1}
-        </span>
-
-        {/* Bottom block: label + enter affordance. Dark gradient → readable
-            cream caption, matches the dark editorial palette. */}
-        <div className="absolute inset-x-0 bottom-0 p-5 md:p-7 bg-gradient-to-t from-ink/95 via-ink/70 to-transparent">
-          <div className="flex items-end justify-between gap-6">
-            <div>
-              <h2 className="font-display-caps font-light text-bone text-3xl md:text-5xl leading-[0.9] tracking-[-0.02em]">
-                {label}
-              </h2>
-              <p className="mt-2 font-[family-name:var(--font-mono)] text-[0.72rem] uppercase tracking-[0.08em] text-bone-deep">
-                {count} {count === 1 ? "work" : "works"}
-                {mature ? " · age-restricted" : ""}
-              </p>
-            </div>
-            <span
-              className="inline-flex items-center gap-2 text-ui text-bone group-hover:text-ochre transition-colors"
-              aria-hidden
-            >
-              <span className="hidden sm:inline">Enter</span>
-              <span className="transition-transform group-hover:translate-x-1">→</span>
-            </span>
-          </div>
+      {/* Caption block — Roman numeral · italic title · count. Reads like
+          a small museum plate. */}
+      <div className="mt-3 md:mt-4 flex flex-col gap-1">
+        <div className="flex items-baseline justify-between gap-3">
+          <span className="text-roman text-bone-deep" aria-hidden>
+            {numeral}
+          </span>
+          <span className="text-meta text-bone-deep">
+            {count} {count === 1 ? "work" : "works"}
+          </span>
         </div>
+        <h2 className="font-display-italic text-bone text-2xl md:text-[1.65rem] leading-[1.05] tracking-tight">
+          {label}
+        </h2>
       </div>
     </Link>
   );

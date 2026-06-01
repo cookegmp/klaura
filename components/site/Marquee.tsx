@@ -47,7 +47,7 @@ export function Marquee({ phrases }: { phrases: string[] }) {
             className="font-display text-[2.5rem] md:text-[3rem] leading-none text-bone-deep"
           >
             {phrase}
-            <span className="font-display-italic text-ochre ml-16">·</span>
+            <span className="font-display-italic ml-16">·</span>
           </span>
         ))}
       </div>

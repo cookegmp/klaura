@@ -24,7 +24,7 @@ export function Disclosure({
         type="button"
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
-        className="w-full flex items-center justify-between text-ui text-bone hover:text-ochre-deep transition-colors"
+        className="w-full flex items-center justify-between text-ui text-bone"
       >
         <span>{label}</span>
         <span aria-hidden className="font-display text-2xl leading-none">

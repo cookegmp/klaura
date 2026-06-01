@@ -22,7 +22,7 @@ export default async function MockCheckoutPage({ params }: { params: Params }) {
   return (
     <div className="min-h-dvh bg-bone text-ink flex items-center">
       <div className="max-w-md mx-auto w-full p-6 md:p-10">
-        <p className="text-ui text-ink/60 mb-6">Mock checkout · dev only</p>
+        <p className="text-meta mb-6">Mock checkout · dev only</p>
         <h1 className="font-display text-3xl leading-tight mb-3">{session.productTitle}</h1>
         <p className="text-2xl mb-10">{formatPriceUSD(session.priceUSD)}</p>
 
@@ -39,10 +39,10 @@ export default async function MockCheckoutPage({ params }: { params: Params }) {
           <MockCheckoutForm sessionId={session.id} />
         ) : (
           <div className="space-y-4">
-            <p className="text-ochre">This session is {session.status}.</p>
+            <p className="">This session is {session.status}.</p>
             <Link
               href="/paintings"
-              className="text-ui inline-block border-b border-ink hover:text-ochre hover:border-ochre transition-colors"
+              className="text-ui inline-block border-b border-ink"
             >
               Back to the gallery
             </Link>

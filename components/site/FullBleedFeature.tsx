@@ -37,11 +37,11 @@ export function FullBleedFeature({ painting }: { painting: Painting }) {
         <div className="flex flex-wrap items-end justify-between gap-y-4 gap-x-12 text-bone">
           <Link
             href={`/paintings/${painting.slug.current}`}
-            className="font-display-caps font-light text-[length:var(--text-display-md)] md:text-[length:var(--text-display-lg)] leading-[0.95] tracking-[-0.02em] max-w-3xl"
+            className="font-display-italic font-normal text-[length:var(--text-display-md)] md:text-[length:var(--text-display-lg)] leading-[0.95] tracking-[-0.02em] max-w-3xl"
           >
             {painting.title}
           </Link>
-          <div className="font-[family-name:var(--font-mono)] text-[0.74rem] uppercase tracking-[0.08em] text-bone-deep flex flex-wrap items-baseline gap-x-8 gap-y-2">
+          <div className="text-meta text-bone-deep flex flex-wrap items-baseline gap-x-8 gap-y-2">
             <span>{painting.year}</span>
             <span>{painting.medium}</span>
             <span>{formatDimensions(painting.dimensions)}</span>
@@ -54,7 +54,7 @@ export function FullBleedFeature({ painting }: { painting: Painting }) {
 
       {/* Top tag */}
       <div className="absolute top-8 md:top-12 left-6 md:left-12 lg:left-20 z-10">
-        <p className="font-[family-name:var(--font-mono)] text-[0.72rem] uppercase tracking-[0.1em] text-bone-deep">
+        <p className="text-meta text-bone-deep">
           § Now on the wall · {painting.year}
         </p>
       </div>

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function CheckoutCancelPage() {
   return (
     <Container width="narrow" className="py-32 md:py-48 text-center">
-      <p className="text-ui text-bone-deep mb-6">No worries</p>
+      <p className="text-meta mb-6">No worries</p>
       <h1 className="font-display font-light text-[length:var(--text-display-md)] md:text-[length:var(--text-display-lg)] leading-[1.05] tracking-[-0.02em]">
         Checkout <span className="font-display-italic">paused</span>.
       </h1>
@@ -21,7 +21,7 @@ export default function CheckoutCancelPage() {
       <div className="mt-12 flex flex-wrap justify-center gap-4">
         <Link
           href="/paintings"
-          className="text-ui px-7 py-4 bg-bone text-ink hover:bg-ochre-deep transition-colors"
+          className="text-ui px-7 py-4 bg-bone text-ink hover:bg-bone-deep transition-colors"
         >
           Back to the gallery
         </Link>

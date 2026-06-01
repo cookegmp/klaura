@@ -11,11 +11,12 @@ interface VintageCardProps {
 export function VintageCard({ item, index = 0 }: VintageCardProps) {
   const sold = item.status === "sold";
 
+  void index;
+
   return (
     <Link
       href={`/vintage/${item.slug.current}`}
       className="group block"
-      style={{ transform: index % 3 === 2 ? "translateY(2rem)" : undefined }}
     >
       <div className={`relative overflow-hidden aspect-[4/5] ${sold ? "sold-overlay" : ""}`}>
         <ProductImage
@@ -33,15 +34,17 @@ export function VintageCard({ item, index = 0 }: VintageCardProps) {
           </span>
         )}
       </div>
-      <div className="mt-5 flex items-start justify-between gap-6">
-        <div className="flex flex-col gap-1">
-          <p className="font-display text-lg leading-tight">{item.title}</p>
-          <p className="text-caption text-bone-deep capitalize">
+      <div className="mt-4 flex items-start justify-between gap-6">
+        <div className="flex flex-col gap-0.5">
+          <p className="font-display-italic text-bone text-lg leading-tight">
+            {item.title}
+          </p>
+          <p className="text-meta capitalize">
             {item.era ?? "—"} · {item.category} · {item.condition.replace("-", " ")}
           </p>
         </div>
         {!sold && (
-          <p className="text-ui text-bone shrink-0">{formatPriceUSD(item.price)}</p>
+          <p className="text-meta text-bone shrink-0">{formatPriceUSD(item.price)}</p>
         )}
       </div>
     </Link>

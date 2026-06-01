@@ -128,7 +128,7 @@ function GalleryItem({
       href={`/paintings/${painting.slug.current}`}
       className="group block shrink-0 w-[60vw] lg:w-[55vw]"
     >
-      <div className="flex items-end justify-between mb-4 font-[family-name:var(--font-mono)] text-[0.72rem] uppercase tracking-[0.08em] text-bone-deep">
+      <div className="flex items-end justify-between mb-4 text-meta text-bone-deep">
         <span>{painting.year}</span>
         <span>
           {String(index).padStart(2, "0")} / {String(total).padStart(2, "0")}
@@ -157,11 +157,11 @@ function GalleryItem({
         <h3 className="font-display text-3xl lg:text-4xl font-light leading-tight tracking-[-0.02em]">
           {painting.title}
         </h3>
-        <span className="font-[family-name:var(--font-mono)] text-[0.74rem] uppercase tracking-[0.06em] text-bone-deep">
+        <span className="text-meta text-bone-deep">
           {painting.medium} · {formatDimensions(painting.dimensions)}
         </span>
       </div>
-      <p className="mt-2 font-[family-name:var(--font-mono)] text-[0.72rem] uppercase tracking-[0.08em] text-bone">
+      <p className="mt-2 text-meta text-bone">
         {painting.status === "sold" ? "Sold" : formatPriceUSD(painting.price)}
       </p>
     </Link>
@@ -180,7 +180,7 @@ function MobileItem({
   const aspect = painting.dimensions.widthInches / painting.dimensions.heightInches;
   return (
     <Link href={`/paintings/${painting.slug.current}`} className="group block">
-      <div className="flex items-end justify-between mb-3 font-[family-name:var(--font-mono)] text-[0.7rem] uppercase tracking-[0.08em] text-bone-deep">
+      <div className="flex items-end justify-between mb-3 text-meta text-bone-deep">
         <span>{painting.year}</span>
         <span>
           {String(index).padStart(2, "0")} / {String(total).padStart(2, "0")}

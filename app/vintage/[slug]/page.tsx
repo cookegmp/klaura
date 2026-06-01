@@ -101,7 +101,7 @@ export default async function VintageDetailPage({ params }: { params: Params }) 
           </div>
 
           <aside className="col-span-12 md:col-span-5 lg:col-span-4 md:sticky md:top-28 md:self-start">
-            <p className="text-ui text-bone-deep mb-4 capitalize">
+            <p className="text-meta mb-4 capitalize">
               {item.era ?? "Vintage"} · {item.category}
             </p>
             <h1 className="font-display font-light text-[length:var(--text-display-md)] leading-[1.05] tracking-[-0.02em]">
@@ -111,22 +111,22 @@ export default async function VintageDetailPage({ params }: { params: Params }) 
             <dl className="mt-8 space-y-2 text-bone-deep text-sm">
               {item.material && (
                 <div className="flex justify-between">
-                  <dt className="text-ui">Material</dt>
+                  <dt className="text-meta">Material</dt>
                   <dd className="text-right">{item.material}</dd>
                 </div>
               )}
               {item.labelSize && (
                 <div className="flex justify-between">
-                  <dt className="text-ui">Label size</dt>
+                  <dt className="text-meta">Label size</dt>
                   <dd className="text-right">{item.labelSize}</dd>
                 </div>
               )}
               <div className="flex justify-between">
-                <dt className="text-ui">Condition</dt>
+                <dt className="text-meta">Condition</dt>
                 <dd className="text-right capitalize">{item.condition.replace("-", " ")}</dd>
               </div>
               <div className="flex justify-between border-t border-rule mt-6 pt-6">
-                <dt className="text-ui">Price</dt>
+                <dt className="text-meta">Price</dt>
                 <dd className="text-right text-xl font-display text-bone">
                   {formatPriceUSD(item.price)}
                 </dd>
@@ -149,7 +149,7 @@ export default async function VintageDetailPage({ params }: { params: Params }) 
 
             {item.conditionNotes && (
               <div className="mt-8 p-5 bg-ink-soft">
-                <p className="text-ui text-bone-deep mb-2">Condition notes</p>
+                <p className="text-meta mb-2">Condition notes</p>
                 <p className="text-sm text-bone-deep leading-relaxed">{item.conditionNotes}</p>
               </div>
             )}

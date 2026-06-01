@@ -11,30 +11,30 @@ export function Footer() {
             <p className="font-display text-4xl md:text-5xl leading-[1] tracking-tight">
               Painted slowly.
               <br />
-              <span className="font-display-italic text-ochre">Worn long after.</span>
+              <span className="font-display-italic">Worn long after.</span>
             </p>
           </div>
 
           <div>
-            <h3 className="text-ui text-bone-deep mb-5">Explore</h3>
+            <h3 className="text-meta mb-5">Explore</h3>
             <ul className="space-y-3 text-[length:var(--text-body-lg)]">
               <li>
-                <Link href="/paintings" className="hover:text-ochre-deep transition-colors">
+                <Link href="/paintings" className="">
                   Full catalogue
                 </Link>
               </li>
               <li>
-                <Link href="/vintage" className="hover:text-ochre-deep transition-colors">
+                <Link href="/vintage" className="">
                   Shop
                 </Link>
               </li>
               <li>
-                <Link href="/commissions" className="hover:text-ochre-deep transition-colors">
+                <Link href="/commissions" className="">
                   Commissions
                 </Link>
               </li>
               <li>
-                <Link href="/studio" className="hover:text-ochre-deep transition-colors">
+                <Link href="/studio" className="">
                   Studio
                 </Link>
               </li>
@@ -42,12 +42,12 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="text-ui text-bone-deep mb-5">Elsewhere</h3>
+            <h3 className="text-meta mb-5">Elsewhere</h3>
             <ul className="space-y-3 text-[length:var(--text-body-lg)]">
               <li>
                 <a
                   href={`mailto:${siteConfig.contactEmail}`}
-                  className="hover:text-ochre-deep transition-colors"
+                  className=""
                 >
                   {siteConfig.contactEmail}
                 </a>
@@ -57,7 +57,7 @@ export function Footer() {
                   href={`https://instagram.com/${siteConfig.instagram}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-ochre-deep transition-colors"
+                  className=""
                 >
                   Instagram
                 </a>
@@ -70,24 +70,24 @@ export function Footer() {
           <p className="text-caption text-bone-deep">
             © {new Date().getFullYear()} Kelly Laura. All works original.
           </p>
-          <ul className="flex flex-wrap gap-x-8 gap-y-2 text-ui text-bone-deep">
+          <ul className="flex flex-wrap gap-x-8 gap-y-2 text-meta">
             <li>
-              <Link href="/legal/shipping" className="hover:text-ochre-deep transition-colors">
+              <Link href="/legal/shipping" className="">
                 Shipping
               </Link>
             </li>
             <li>
-              <Link href="/legal/returns" className="hover:text-ochre-deep transition-colors">
+              <Link href="/legal/returns" className="">
                 Returns
               </Link>
             </li>
             <li>
-              <Link href="/legal/privacy" className="hover:text-ochre-deep transition-colors">
+              <Link href="/legal/privacy" className="">
                 Privacy
               </Link>
             </li>
             <li>
-              <Link href="/legal/terms" className="hover:text-ochre-deep transition-colors">
+              <Link href="/legal/terms" className="">
                 Terms
               </Link>
             </li>

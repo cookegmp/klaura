@@ -106,22 +106,22 @@ function CategoryBody({
       <section className="pt-20 md:pt-32 pb-16 md:pb-24">
         <Container width="wide">
           <Reveal>
-            <p className="text-ui text-bone-deep mb-8 md:mb-10">
+            <p className="text-meta mb-8 md:mb-10">
               § Gallery / {definition.shortLabel}
             </p>
           </Reveal>
           <Reveal delay={120} rise={48}>
-            <h1 className="font-display-caps font-light text-[length:var(--text-display-lg)] md:text-[length:var(--text-display-xl)] leading-[0.85] tracking-[-0.03em] max-w-5xl">
+            <h1 className="font-display-italic font-normal text-[length:var(--text-display-lg)] md:text-[length:var(--text-display-xl)] leading-[0.85] tracking-[-0.03em] max-w-5xl">
               {definition.label}
             </h1>
           </Reveal>
           <Reveal delay={220}>
-            <div className="mt-12 flex flex-wrap items-baseline gap-x-8 gap-y-3 font-[family-name:var(--font-mono)] text-[0.78rem] uppercase tracking-[0.06em] text-bone-deep">
+            <div className="mt-12 flex flex-wrap items-baseline gap-x-8 gap-y-3 text-meta text-bone-deep">
               <span>{paintings.length.toString().padStart(2, "0")} works</span>
               <span>· {availableCount} available</span>
               <Link
                 href="/gallery"
-                className="ml-auto text-bone hover:text-ochre-deep transition-colors"
+                className="ml-auto text-bone"
               >
                 ← All rooms
               </Link>
@@ -172,7 +172,7 @@ function SeriesSection({
           <Reveal>
             <div className="grid grid-cols-12 gap-x-8 pt-16 md:pt-24 pb-10 md:pb-14">
               <div className="col-span-12 md:col-span-3 md:sticky md:top-32 md:self-start">
-                <div className="flex items-baseline gap-4 font-[family-name:var(--font-mono)] text-[0.74rem] uppercase tracking-[0.08em] text-bone-deep">
+                <div className="flex items-baseline gap-4 text-meta text-bone-deep">
                   <span>§ 0{sectionIdx + 1}</span>
                   <span>
                     {series
@@ -192,9 +192,9 @@ function SeriesSection({
           </Reveal>
         )}
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-20 md:gap-y-32 pt-4">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-10 md:gap-x-8 md:gap-y-16 pt-4">
           {items.map((p, i) => (
-            <Reveal key={p._id} delay={Math.min(i * 80, 480)} rise={40}>
+            <Reveal key={p._id} delay={Math.min(i * 60, 360)} rise={32}>
               <PaintingCard painting={p} index={i} />
             </Reveal>
           ))}
@@ -220,7 +220,7 @@ function EmptyState({ categorySlug }: { categorySlug: PaintingCategory }) {
             </p>
             <Link
               href="/gallery"
-              className="mt-8 inline-block text-ui border-b border-bone pb-1 hover:text-ochre-deep hover:border-ochre-deep transition-colors"
+              className="mt-8 inline-block text-ui border-b border-bone pb-1"
             >
               ← Back to rooms
             </Link>

@@ -15,12 +15,15 @@ export function PaintingCard({ painting, index = 0, sizes }: PaintingCardProps) 
   const aspect =
     painting.dimensions.widthInches / painting.dimensions.heightInches;
 
+  // index kept in the signature so callers can still pass it for future use
+  // (e.g., LCP priority); the editorial vertical offset was removed when
+  // the grid moved to a uniform 2-col dense layout matching the reference.
+  void index;
+
   return (
     <Link
       href={`/paintings/${painting.slug.current}`}
       className="group block"
-      // Editorial offset: every other card drops 2.5rem
-      style={{ transform: index % 2 === 1 ? "translateY(2.5rem)" : undefined }}
     >
       <div
         className={`relative overflow-hidden ${sold ? "sold-overlay" : ""}`}
@@ -41,16 +44,18 @@ export function PaintingCard({ painting, index = 0, sizes }: PaintingCardProps) 
           </span>
         )}
       </div>
-      <div className="mt-5 flex items-start justify-between gap-6">
-        <div className="flex flex-col gap-1">
-          <p className="font-display text-xl leading-tight">{painting.title}</p>
-          <p className="text-caption text-bone-deep">
+      <div className="mt-4 flex items-start justify-between gap-6">
+        <div className="flex flex-col gap-0.5">
+          <p className="font-display-italic text-bone text-xl leading-tight">
+            {painting.title}
+          </p>
+          <p className="text-meta">
             {painting.medium} · {painting.dimensions.heightInches} ×{" "}
             {painting.dimensions.widthInches} in
           </p>
         </div>
         {!sold && (
-          <p className="text-ui text-bone shrink-0">
+          <p className="text-meta text-bone shrink-0">
             {formatPriceUSD(painting.price)}
           </p>
         )}

@@ -16,31 +16,28 @@ export default async function HomePage() {
 
   return (
     <>
-      {/* 1. DOORWAY HERO --------------------------------------------- */}
-      <section className="pt-20 md:pt-32 pb-20 md:pb-28">
+      {/* 1. DOORWAY HERO — centred italic, voice of the reference design */}
+      <section className="pt-20 md:pt-28 pb-16 md:pb-24">
         <Container width="wide">
-          <Reveal>
-            <p className="text-ui text-bone-deep mb-8 md:mb-10">
-              § Kelly Laura · five rooms
-            </p>
-          </Reveal>
-          <Reveal delay={120} rise={48}>
-            <h1 className="font-display-caps font-light text-[length:var(--text-display-lg)] md:text-[length:var(--text-display-xl)] leading-[0.85] tracking-[-0.03em] max-w-5xl">
-              Choose a
-              <br />
-              <span className="font-display-italic text-ochre-deep normal-case">
-                doorway
-              </span>
-              .
-            </h1>
-          </Reveal>
-          <Reveal delay={220}>
-            <p className="mt-12 max-w-xl text-[length:var(--text-body-lg)] text-bone-deep leading-relaxed">
-              The work is grouped into five rooms. Each one keeps its own pace.
-              The Eighteen+ room is age-restricted; you&rsquo;ll be asked to
-              confirm before you enter.
-            </p>
-          </Reveal>
+          <div className="flex flex-col items-center text-center">
+            <Reveal>
+              <p className="text-roman text-bone-deep mb-6">
+                Kelly Laura — five rooms
+              </p>
+            </Reveal>
+            <Reveal delay={120} rise={40}>
+              <h1 className="font-display-italic text-[clamp(2.75rem,8vw,6rem)] leading-[1.05] tracking-tight max-w-4xl">
+                Choose a doorway.
+              </h1>
+            </Reveal>
+            <Reveal delay={220}>
+              <p className="mt-8 max-w-xl text-[length:var(--text-body-lg)] text-bone-deep leading-relaxed">
+                The work is grouped into five rooms. Each keeps its own pace.
+                The eighteen+ room is age-restricted; you&rsquo;ll be asked to
+                confirm before you enter.
+              </p>
+            </Reveal>
+          </div>
         </Container>
       </section>
 
@@ -57,22 +54,22 @@ export default async function HomePage() {
           <Reveal>
             <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-10">
               <div>
-                <p className="text-ui text-bone-deep mb-4">§ Also</p>
-                <p className="font-display text-2xl md:text-3xl leading-tight max-w-xl">
+                <p className="text-roman text-bone-deep mb-4">Also</p>
+                <p className="font-display-italic text-2xl md:text-3xl leading-tight max-w-xl">
                   See every available work in one long catalogue, or read about the
                   artist.
                 </p>
               </div>
-              <div className="flex flex-col sm:flex-row gap-5 sm:gap-10 self-start md:self-end">
+              <div className="flex flex-col sm:flex-row gap-4 sm:gap-10 self-start md:self-end">
                 <Link
                   href="/paintings"
-                  className="text-ui pb-1 border-b border-bone hover:text-ochre-deep hover:border-ochre-deep transition-colors"
+                  className="font-display-italic text-lg pb-1 border-b border-bone hover:text-bone-deep transition-colors"
                 >
                   Full catalogue →
                 </Link>
                 <Link
                   href="/studio"
-                  className="text-ui pb-1 border-b border-bone hover:text-ochre-deep hover:border-ochre-deep transition-colors"
+                  className="font-display-italic text-lg pb-1 border-b border-bone hover:text-bone-deep transition-colors"
                 >
                   About Kelly →
                 </Link>

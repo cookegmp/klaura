@@ -22,20 +22,20 @@ const components: PortableTextComponents = {
       <h3 className="font-display text-2xl leading-snug font-light mt-8">{children}</h3>
     ),
     blockquote: ({ children }) => (
-      <blockquote className="border-l-2 border-ochre pl-6 italic text-bone-deep my-8">
+      <blockquote className="border-l-2 border-bone-deep pl-6 italic text-bone-deep my-8">
         {children}
       </blockquote>
     ),
   },
   marks: {
-    em: ({ children }) => <span className="font-display-italic text-ochre-deep">{children}</span>,
+    em: ({ children }) => <span className="font-display-italic">{children}</span>,
     strong: ({ children }) => <strong className="font-medium text-bone">{children}</strong>,
     link: ({ value, children }) => (
       <a
         href={value?.href}
         target="_blank"
         rel="noopener noreferrer"
-        className="text-bone underline decoration-ochre underline-offset-2 hover:text-ochre-deep transition-colors"
+        className="text-bone underline underline-offset-2"
       >
         {children}
       </a>

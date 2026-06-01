@@ -22,13 +22,13 @@ export default async function PaintingsIndexPage() {
       <section className="pt-20 md:pt-32 pb-16 md:pb-24">
         <Container width="wide">
           <Reveal>
-            <p className="text-ui text-bone-deep mb-8 md:mb-10">§ Gallery · the catalogue</p>
+            <p className="text-meta mb-8 md:mb-10">§ Gallery · the catalogue</p>
           </Reveal>
           <Reveal delay={120} rise={48}>
-            <h1 className="font-display-caps font-light text-[length:var(--text-display-lg)] md:text-[length:var(--text-display-xl)] leading-[0.85] tracking-[-0.03em] max-w-5xl">
+            <h1 className="font-display-italic font-normal text-[length:var(--text-display-lg)] md:text-[length:var(--text-display-xl)] leading-[0.85] tracking-[-0.03em] max-w-5xl">
               Paintings,
               <br />
-              <span className="font-display-italic text-ochre-deep normal-case">in light</span>.
+              <span className="font-display-italic normal-case">in light</span>.
             </h1>
           </Reveal>
           <Reveal delay={220}>
@@ -78,11 +78,11 @@ function SectionMarker({
 }) {
   return (
     <div className="flex items-end justify-between pt-12 md:pt-20 pb-10 md:pb-16">
-      <div className="flex items-baseline gap-4 font-[family-name:var(--font-mono)] text-[0.74rem] uppercase tracking-[0.08em] text-bone-deep">
+      <div className="flex items-baseline gap-4 text-meta text-bone-deep">
         <span>§ {index}</span>
         <span>{label}</span>
       </div>
-      <span className="font-[family-name:var(--font-mono)] text-[0.74rem] uppercase tracking-[0.06em] text-bone-deep">
+      <span className="text-meta text-bone-deep">
         {count.toString().padStart(2, "0")} works
       </span>
     </div>
@@ -105,7 +105,7 @@ function CatalogueTable({
             className="group grid grid-cols-12 gap-x-6 items-center py-6 md:py-8 border-b border-rule/60 hover:bg-ink-soft/60 transition-colors px-2 -mx-2"
           >
             {/* Year — far left, mono, prominent */}
-            <span className="col-span-2 md:col-span-1 font-[family-name:var(--font-mono)] text-[0.78rem] uppercase tracking-[0.06em] text-bone-deep">
+            <span className="col-span-2 md:col-span-1 text-meta text-bone-deep">
               {p.year}
             </span>
 
@@ -142,7 +142,7 @@ function CatalogueTable({
             </span>
 
             {/* Price / Sold — far right */}
-            <span className="col-span-12 md:col-span-1 text-right font-[family-name:var(--font-mono)] text-[0.78rem] uppercase tracking-[0.06em] text-bone">
+            <span className="col-span-12 md:col-span-1 text-right text-meta text-bone">
               {p.status === "sold" ? "Sold" : formatPriceUSD(p.price)}
             </span>
           </Link>

@@ -119,27 +119,27 @@ export default async function PaintingDetailPage({ params }: { params: Params })
 
           {/* Metadata + buy */}
           <aside className="col-span-12 md:col-span-5 lg:col-span-4 md:sticky md:top-28 md:self-start">
-            <p className="text-ui text-bone-deep mb-4">{painting.year}</p>
+            <p className="text-meta mb-4">{painting.year}</p>
             <h1 className="font-display font-light text-[length:var(--text-display-md)] leading-[1.05] tracking-[-0.02em]">
               {painting.title}
             </h1>
             <dl className="mt-8 space-y-2 text-bone-deep">
               <div className="flex justify-between">
-                <dt className="text-ui">Medium</dt>
+                <dt className="text-meta">Medium</dt>
                 <dd className="text-right">{painting.medium}</dd>
               </div>
               <div className="flex justify-between">
-                <dt className="text-ui">Size</dt>
+                <dt className="text-meta">Size</dt>
                 <dd className="text-right">{formatDimensions(painting.dimensions)}</dd>
               </div>
               {painting.dimensions.framed !== undefined && (
                 <div className="flex justify-between">
-                  <dt className="text-ui">Frame</dt>
+                  <dt className="text-meta">Frame</dt>
                   <dd className="text-right">{painting.dimensions.framed ? "Framed" : "Unframed"}</dd>
                 </div>
               )}
               <div className="flex justify-between border-t border-rule mt-6 pt-6">
-                <dt className="text-ui">Price</dt>
+                <dt className="text-meta">Price</dt>
                 <dd className="text-right text-xl font-display text-bone">
                   {formatPriceUSD(painting.price)}
                 </dd>
