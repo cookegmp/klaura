@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Bodoni_Moda, Inter_Tight } from "next/font/google";
+import { Bodoni_Moda, Inter_Tight, Pinyon_Script } from "next/font/google";
 import { Footer } from "@/components/site/Footer";
 import { Nav } from "@/components/site/Nav";
 import { siteConfig } from "@/lib/site-config";
@@ -21,6 +21,16 @@ const interTight = Inter_Tight({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-inter-tight",
+});
+
+// Pinyon Script — copperplate cursive used only for the artist's name on
+// the intro hero. Romantic, slightly gothic in spirit. Never used for
+// body or section copy.
+const pinyon = Pinyon_Script({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-pinyon",
+  weight: ["400"],
 });
 
 export const metadata: Metadata = {
@@ -52,7 +62,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${bodoni.variable} ${interTight.variable}`}
+      className={`${bodoni.variable} ${interTight.variable} ${pinyon.variable}`}
     >
       <body className="bg-ink text-bone antialiased flex min-h-dvh flex-col">
         <Nav />

@@ -34,6 +34,7 @@
   --font-display: var(--font-bodoni), "Bodoni Moda", "Didot", Georgia, serif;
   --font-body: var(--font-bodoni), "Bodoni Moda", "Didot", Georgia, serif;
   --font-ui: var(--font-inter-tight), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-signature: var(--font-pinyon), "Pinyon Script", "Snell Roundhand", cursive;
 
   /* Type scale — Bodoni Moda is high-contrast Didone. Keep weights low
      (400) and let the hairline strokes carry the elegance. Display sizes
@@ -95,6 +96,15 @@
     text-transform: uppercase;
     letter-spacing: 0.02em;
     font-weight: 500;
+  }
+
+  /* Signature face — Pinyon Script copperplate. Reserved for the artist's
+     name on the home hero. Never used for body, nav, section headers, or
+     buttons. One job: the signature. */
+  .font-signature {
+    font-family: var(--font-signature);
+    font-weight: 400;
+    font-style: normal;
   }
 
   ::selection {

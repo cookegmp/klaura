@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { CategoryDoorways } from "@/components/site/CategoryDoorways";
 import { Container } from "@/components/site/Container";
@@ -5,14 +6,46 @@ import { Reveal } from "@/components/site/Reveal";
 import { getCategorySummaries } from "@/lib/sanity/read";
 
 /**
- * Home — Gallery doorways first, then Commissions, then catalogue/about.
- * Single narrow column, beige type on near-black.
+ * Home — full-bleed fabric intro with cursive signature, then Gallery
+ * doorways, Commissions, catalogue/about. Single narrow column elsewhere.
  */
 export default async function HomePage() {
   const summaries = await getCategorySummaries();
 
   return (
     <>
+      {/* 0. Signature intro — full-bleed fabric photograph --------- */}
+      <section className="relative w-full h-[78dvh] min-h-[460px] overflow-hidden">
+        <Image
+          src="/kateryna-hliznitsova-9Tre3EXnF0g-unsplash.jpg"
+          alt=""
+          aria-hidden
+          fill
+          priority
+          sizes="100vw"
+          quality={85}
+          className="object-cover"
+        />
+        {/* Warm-ink overlay — top vignette for nav legibility, bottom for footer transition */}
+        <div
+          aria-hidden
+          className="absolute inset-0 bg-gradient-to-b from-ink/55 via-ink/25 to-ink/80"
+        />
+        <div className="relative z-10 flex h-full items-center justify-center px-6">
+          <div className="text-center">
+            <p className="text-tag text-bone/75 mb-6 md:mb-8">
+              vol. i · est. 2018
+            </p>
+            <h1 className="font-signature text-bone text-[clamp(4.5rem,17vw,10rem)] leading-[0.9] tracking-tight drop-shadow-[0_2px_24px_rgba(0,0,0,0.45)]">
+              Kelly Laura
+            </h1>
+            <p className="font-display-italic text-bone-deep text-base md:text-lg mt-5 md:mt-7">
+              paintings · pastels · vintage
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* 1. Gallery doorways -------------------------------------- */}
       <section className="pt-12 md:pt-16 pb-16 md:pb-24">
         <Container>
