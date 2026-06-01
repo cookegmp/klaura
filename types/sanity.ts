@@ -186,14 +186,6 @@ export interface SiteSettings {
   shippingFlatRateIntl?: number;
 }
 
-export interface NewsletterSignup {
-  _id: string;
-  _rev: string;
-  email: string;
-  submittedAt: string;
-  source?: string;
-}
-
 /** Discriminated union of the two sellable product kinds. */
 export type Product =
   | ({ _type: "painting" } & Painting)

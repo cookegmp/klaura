@@ -55,9 +55,4 @@ export const structure: StructureResolver = (S) =>
         .title("Tags")
         .schemaType("tag")
         .child(S.documentTypeList("tag").title("Tags")),
-      S.divider(),
-      S.listItem()
-        .title("Newsletter signups")
-        .schemaType("newsletterSignup")
-        .child(S.documentTypeList("newsletterSignup").title("Signups")),
     ]);

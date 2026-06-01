@@ -3,7 +3,6 @@ import { aboutPageSchema } from "./aboutPage";
 import { blockContentSchema } from "./blockContent";
 import { commissionExampleSchema } from "./commissionExample";
 import { commissionInquirySchema } from "./commissionInquiry";
-import { newsletterSignupSchema } from "./newsletterSignup";
 import { paintingSchema } from "./painting";
 import { seriesSchema } from "./series";
 import { siteSettingsSchema } from "./siteSettings";
@@ -20,7 +19,6 @@ export const schemaTypes: SchemaTypeDefinition[] = [
   commissionExampleSchema,
   aboutPageSchema,
   siteSettingsSchema,
-  newsletterSignupSchema,
   // Shared types
   blockContentSchema,
 ];

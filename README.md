@@ -46,7 +46,7 @@ Three load-bearing tests live in `tests/`:
 | CMS | Sanity v4, mounted at `/studio-admin` | Mock-store backed dev mode |
 | Payments | Stripe Checkout (hosted) | **Currently mocked**; see `lib/payments/` |
 | Email | Resend + React Email | **Currently mocked**; artifacts at `/tmp/klaura-emails/` |
-| Forms | `react-hook-form`-style hand-rolled + Zod | Newsletter and commission inquiry |
+| Forms | `react-hook-form`-style hand-rolled + Zod | Commission inquiry |
 | Hosting | Vercel | Cron declared in `vercel.json` |
 
 ## Provider mode
@@ -91,7 +91,6 @@ app/                       # Next.js App Router pages, API routes
     webhooks/stripe/         # Inventory state authority
     cron/                    # Defense-in-depth stale reservation cleanup
     commission-inquiry/      # Commission form submission
-    newsletter/              # Email capture
     revalidate/              # Sanity webhook → tag-based revalidation
     dev/                     # Mock-only payment endpoints
   studio-admin/              # Sanity Studio mount

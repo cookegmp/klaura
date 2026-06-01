@@ -12,9 +12,9 @@ export default function PrivacyPage() {
         number).
       </p>
       <p>
-        We don&apos;t sell or share your information with third parties. Newsletter
-        subscribers can unsubscribe at any time. Order records are retained for tax
-        purposes and to honor any future warranty or condition questions.
+        We don&apos;t sell or share your information with third parties. Order records
+        are retained for tax purposes and to honor any future warranty or condition
+        questions.
       </p>
       <p className="text-caption text-bone-deep/80">
         Placeholder copy — sourced from Sanity in Phase 2.

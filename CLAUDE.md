@@ -111,14 +111,10 @@ The narrow column is the design's signature. Do not use `width="wide"` or write 
 
 `app/page.tsx` is the reference layout. Sections, in order:
 
-1. **Archival masthead** — `vol. i — kelly laura` / `est. 2018` with a hairline rule beneath.
-2. **Featured hero plate** — one large framed plate with caps Bodoni title + Roman numeral.
-3. **Satellite plate row** — two smaller plates (one `solid` variant, one `outline`) for paired-asymmetric feel.
-4. **Section header** — centred italic Bodoni `<h2>` with a `.text-tag` subtitle.
-5. **Plate grid** — 2-col framed plates.
-6. **Also row** — `.text-tag` + italic copy + two flat beige buttons.
-7. **Newsletter** — centred italic header + single beige Subscribe button.
-8. **Footer** — centred italic voice + two narrow link columns + tiny legal row.
+1. **Gallery** — centred italic Bodoni `<h2>` + `.text-tag` subtitle, then the framed doorway grid (`CategoryDoorways`).
+2. **Commissions** — `.text-tag` lede + centred italic Bodoni `<h2>` + italic body copy + single solid beige button to `/commissions`.
+3. **Also row** — `.text-tag` + italic copy + two flat beige buttons (catalogue, about).
+4. **Footer** — centred italic voice + two narrow link columns + tiny legal row.
 
 ## Charter principles to keep front-of-mind
 

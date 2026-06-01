@@ -34,22 +34,3 @@ export async function storeCommissionInquiry(input: {
   const result = await getWriteClient().create(payload);
   return { id: result._id };
 }
-
-export async function storeNewsletterSignup(input: {
-  email: string;
-  source?: string;
-}): Promise<{ id: string }> {
-  const payload = {
-    _type: "newsletterSignup" as const,
-    email: input.email,
-    submittedAt: new Date().toISOString(),
-    source: input.source,
-  };
-
-  if (!live()) {
-    const doc = mock.createDocument(payload);
-    return { id: doc._id };
-  }
-  const result = await getWriteClient().create(payload);
-  return { id: result._id };
-}

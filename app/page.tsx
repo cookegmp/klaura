@@ -1,13 +1,12 @@
 import Link from "next/link";
 import { CategoryDoorways } from "@/components/site/CategoryDoorways";
 import { Container } from "@/components/site/Container";
-import { NewsletterCapture } from "@/components/site/NewsletterCapture";
 import { Reveal } from "@/components/site/Reveal";
 import { getCategorySummaries } from "@/lib/sanity/read";
 
 /**
- * Home — Gallery doorways first, then Commissions, then catalogue/about,
- * then newsletter. Single narrow column, beige type on near-black.
+ * Home — Gallery doorways first, then Commissions, then catalogue/about.
+ * Single narrow column, beige type on near-black.
  */
 export default async function HomePage() {
   const summaries = await getCategorySummaries();
@@ -85,12 +84,6 @@ export default async function HomePage() {
         </Container>
       </section>
 
-      {/* 4. Newsletter --------------------------------------------- */}
-      <section className="pb-16 md:pb-24 border-t border-rule pt-14 md:pt-20">
-        <Container>
-          <NewsletterCapture />
-        </Container>
-      </section>
     </>
   );
 }

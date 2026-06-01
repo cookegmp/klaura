@@ -112,12 +112,6 @@ Edits go live immediately on publish (via the revalidate webhook).
 
 ---
 
-## Newsletter signups
-
-`/studio-admin` → **Newsletter signups**. Currently stored in Sanity only. When you choose an ESP (Mailchimp, Buttondown, etc.), wire `lib/email/index.ts` to also push the address — or export the list and import into the ESP manually.
-
----
-
 ## Bring up a preview branch
 
 1. Push a branch to `github.com/cookegmp/klaura`.
