@@ -4,93 +4,57 @@ import { siteConfig } from "@/lib/site-config";
 
 export function Footer() {
   return (
-    <footer className="bg-ink-soft text-bone border-t border-rule mt-32">
-      <Container width="wide" className="py-20">
-        <div className="grid gap-12 md:grid-cols-3 md:gap-16">
-          <div className="md:col-span-1">
-            <p className="font-display text-4xl md:text-5xl leading-[1] tracking-tight">
-              Painted slowly.
-              <br />
-              <span className="font-display-italic">Worn long after.</span>
-            </p>
-          </div>
+    <footer className="bg-ink border-t border-rule mt-24 md:mt-32">
+      <Container className="py-14 md:py-20">
+        {/* Voice line — centered italic, archival */}
+        <div className="text-center">
+          <p className="font-display-italic text-bone text-2xl md:text-3xl leading-snug">
+            Painted slowly.
+            <br />
+            Worn long after.
+          </p>
+        </div>
 
+        {/* Two columns of tiny links, centred under the voice */}
+        <div className="mt-10 grid grid-cols-2 gap-x-8 gap-y-6 text-center md:flex md:justify-center md:gap-x-12">
           <div>
-            <h3 className="text-meta mb-5">Explore</h3>
-            <ul className="space-y-3 text-[length:var(--text-body-lg)]">
-              <li>
-                <Link href="/paintings" className="">
-                  Full catalogue
-                </Link>
-              </li>
-              <li>
-                <Link href="/vintage" className="">
-                  Shop
-                </Link>
-              </li>
-              <li>
-                <Link href="/commissions" className="">
-                  Commissions
-                </Link>
-              </li>
-              <li>
-                <Link href="/studio" className="">
-                  Studio
-                </Link>
-              </li>
+            <p className="text-tag mb-3">explore</p>
+            <ul className="space-y-1.5 font-display-italic text-bone">
+              <li><Link href="/paintings">catalogue</Link></li>
+              <li><Link href="/vintage">shop</Link></li>
+              <li><Link href="/commissions">commissions</Link></li>
+              <li><Link href="/studio">studio</Link></li>
             </ul>
           </div>
-
           <div>
-            <h3 className="text-meta mb-5">Elsewhere</h3>
-            <ul className="space-y-3 text-[length:var(--text-body-lg)]">
+            <p className="text-tag mb-3">elsewhere</p>
+            <ul className="space-y-1.5 font-display-italic text-bone">
               <li>
-                <a
-                  href={`mailto:${siteConfig.contactEmail}`}
-                  className=""
-                >
-                  {siteConfig.contactEmail}
-                </a>
+                <a href={`mailto:${siteConfig.contactEmail}`}>email</a>
               </li>
               <li>
                 <a
                   href={`https://instagram.com/${siteConfig.instagram}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className=""
                 >
-                  Instagram
+                  instagram
                 </a>
               </li>
             </ul>
           </div>
         </div>
 
-        <div className="mt-20 pt-8 border-t border-rule flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-          <p className="text-caption text-bone-deep">
-            © {new Date().getFullYear()} Kelly Laura. All works original.
+        {/* Legal — tiny tag row, centred */}
+        <div className="mt-12 pt-6 border-t border-rule text-center">
+          <p className="text-tag mb-3">
+            © {new Date().getFullYear()} kelly laura · all works original
           </p>
-          <ul className="flex flex-wrap gap-x-8 gap-y-2 text-meta">
-            <li>
-              <Link href="/legal/shipping" className="">
-                Shipping
-              </Link>
-            </li>
-            <li>
-              <Link href="/legal/returns" className="">
-                Returns
-              </Link>
-            </li>
-            <li>
-              <Link href="/legal/privacy" className="">
-                Privacy
-              </Link>
-            </li>
-            <li>
-              <Link href="/legal/terms" className="">
-                Terms
-              </Link>
-            </li>
+          <ul className="flex flex-wrap justify-center gap-x-5 gap-y-1 text-tag">
+            <li><Link href="/legal/shipping">shipping</Link></li>
+            <li><Link href="/legal/returns">returns</Link></li>
+            <li><Link href="/legal/privacy">privacy</Link></li>
+            <li><Link href="/legal/terms">terms</Link></li>
           </ul>
         </div>
       </Container>

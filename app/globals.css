@@ -13,40 +13,44 @@
    utilities still compile; what changed is the role of each colour.
    ----------------------------------------------------------------------- */
 @theme {
-  /* Palette — deep charcoal surface, warm cream type, ochre accent. */
-  --color-ink: #0d0d0f;        /* page background */
-  --color-ink-soft: #16171b;   /* elevated cards / sections */
-  --color-bone: #ebe4d6;       /* primary text */
-  --color-bone-deep: #a8a094;  /* muted / secondary text */
-  --color-ochre: #d6964a;      /* brighter accent for dark contrast */
-  --color-ochre-deep: #b87333; /* primary warm accent */
-  --color-rule: #2a2a2e;       /* subtle hairlines on dark */
-  --color-sold-overlay: rgba(13, 13, 15, 0.62);
+  /* Palette — warm near-black surface, beige typography & borders.
+     Tuned for the archival-scrapbook feel: minimal, romantic, slightly
+     gothic, expensive. Beige is warm tan, not cream. */
+  --color-ink: #0a0908;        /* warm near-black page background */
+  --color-ink-soft: #131110;   /* slightly elevated dark for cards */
+  --color-bone: #d4c5a0;       /* warm beige — primary text + borders */
+  --color-bone-deep: #8a7d63;  /* muted aged beige — secondary text */
+  --color-ochre: #d4c5a0;      /* alias for beige — backgrounds only, never text */
+  --color-ochre-deep: #b8a984; /* deeper beige — flat beige button face */
+  --color-rule: #4a4030;       /* warm beige hairline border on dark */
+  --color-sold-overlay: rgba(10, 9, 8, 0.65);
 
   /* Typography — fonts are injected via next/font in app/layout.tsx.
-     Cormorant Garamond is a high-contrast Garamond revival with a
-     beautiful true italic. It carries the editorial / gallery feel the
-     dark surface needs. Inter Tight stays as the UI face for caps-tracked
-     labels and buttons where legibility wins over flourish. */
-  --font-display: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
-  --font-body: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+     Bodoni Moda is the high-contrast Didone serif the reference design
+     uses (documentation/samples/Screenshot.png — "MZIA", "Our Fragrances",
+     "Leather & Patchouli"). Dramatic stroke contrast, very thin hairlines,
+     elegant italic. Inter Tight stays as the UI face for tappable controls
+     where Bodoni's hairlines disappear at small sizes. */
+  --font-display: var(--font-bodoni), "Bodoni Moda", "Didot", Georgia, serif;
+  --font-body: var(--font-bodoni), "Bodoni Moda", "Didot", Georgia, serif;
   --font-ui: var(--font-inter-tight), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --font-mono: var(--font-space-mono), ui-monospace, "SF Mono", monospace;
 
-  /* Type scale — gallery-poster confidence. */
-  --text-display-xl: clamp(4rem, 11vw, 11rem);
-  --text-display-xl--line-height: 0.92;
-  --text-display-xl--letter-spacing: -0.015em;
-  --text-display-lg: clamp(3rem, 7vw, 6.5rem);
-  --text-display-lg--line-height: 0.98;
-  --text-display-lg--letter-spacing: -0.012em;
-  --text-display-md: clamp(2.25rem, 4.2vw, 4rem);
-  --text-display-md--line-height: 1.05;
-  --text-display-md--letter-spacing: -0.008em;
-  --text-body-lg: 1.125rem;
-  --text-body-lg--line-height: 1.7;
-  --text-ui: 0.78rem;
-  --text-ui--letter-spacing: 0.16em;
+  /* Type scale — Bodoni Moda is high-contrast Didone. Keep weights low
+     (400) and let the hairline strokes carry the elegance. Display sizes
+     don't need to be enormous — the reference is restrained. */
+  --text-display-xl: clamp(2.75rem, 8vw, 5rem);
+  --text-display-xl--line-height: 1.02;
+  --text-display-xl--letter-spacing: 0em;
+  --text-display-lg: clamp(2.25rem, 6vw, 3.75rem);
+  --text-display-lg--line-height: 1.05;
+  --text-display-lg--letter-spacing: 0em;
+  --text-display-md: clamp(1.75rem, 4vw, 2.5rem);
+  --text-display-md--line-height: 1.1;
+  --text-display-md--letter-spacing: 0em;
+  --text-body-lg: 1.05rem;
+  --text-body-lg--line-height: 1.65;
+  --text-ui: 0.7rem;
+  --text-ui--letter-spacing: 0.2em;
   --text-caption: 0.85rem;
 
   /* Motion (charter §motion) */
@@ -132,29 +136,51 @@
     font-size: var(--text-caption);
   }
 
-  /* Editorial metadata — italic Cormorant for the small caption-y strings
-     that used to be monospace allcaps. Reads like a museum plate label:
-     "Oil on linen · 16 × 12 in · 2024". The reference design uses italic
-     serif for these atmospheric labels, not a sans or mono. */
+  /* Editorial metadata — italic Bodoni for small caption strings.
+     "oil on linen · 16 × 12 in · 2024". Lowercase, no transformation. */
   .text-meta {
     font-family: var(--font-display);
     font-style: italic;
-    font-size: 0.92rem;
+    font-weight: 400;
+    font-size: 0.88rem;
     letter-spacing: 0.005em;
     color: var(--color-bone-deep);
   }
 
-  /* Section / item indices — small caps Cormorant for Roman numerals
-     ("I", "II", "IX", "XII") and short markers. Non-italic, slightly
-     letter-spaced, set tightly so the index reads as a quiet label
-     beside the title. */
+  /* Roman numerals & section indices — Bodoni caps, slightly heavier and
+     letter-spaced. The reference uses these as prominent tile markers
+     (XII, XI, X, IX, …). */
   .text-roman {
     font-family: var(--font-display);
     font-style: normal;
     font-weight: 500;
-    font-size: 0.82rem;
+    font-size: 0.9rem;
     letter-spacing: 0.18em;
     text-transform: uppercase;
+    color: var(--color-bone);
+  }
+
+  /* Tiny tag — sans caps tracked, for the "vol. I" / "no. 01" / "kelly
+     laura" archival tags at the top of cards or pages. The only sans on
+     the site besides functional buttons. */
+  .text-tag {
+    font-family: var(--font-ui);
+    font-size: 0.62rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--color-bone-deep);
+  }
+
+  /* Tiny italic subtitle — beneath a product/plate title. Reads like
+     the perfume-bottle subtitle in the reference: "eau de toilette 50ml". */
+  .text-subtle {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    color: var(--color-bone-deep);
   }
 
   /* Sold-state overlay (charter §risks / §design) — darkening veil over

@@ -30,7 +30,7 @@ export function Nav() {
 
   return (
     <header className="sticky top-0 z-40 bg-ink/85 backdrop-blur-md border-b border-rule/60">
-      <Container width="wide">
+      <Container>
         <div className="flex items-center justify-between py-5 md:py-6">
           <Link
             href="/"

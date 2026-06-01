@@ -38,19 +38,18 @@ export function NewsletterCapture() {
   }
 
   return (
-    <div className="grid md:grid-cols-2 gap-12 md:gap-20 items-start">
-      <div>
-        <p className="text-meta mb-6">Letters from the studio</p>
-        <h2 className="font-display text-[length:var(--text-display-md)] md:text-[length:var(--text-display-lg)] leading-[1.05] font-light tracking-[-0.02em]">
-          Slow updates,
-          <span className="font-display-italic"> once a season</span>.
-        </h2>
-      </div>
-      <form onSubmit={onSubmit} className="md:pt-12">
-        <label htmlFor="newsletter-email" className="text-meta block mb-3">
+    <div className="text-center">
+      <p className="text-tag mb-3">letters from the studio</p>
+      <h2 className="font-display-italic text-bone text-2xl md:text-3xl leading-snug">
+        Slow updates,
+        <br />
+        once a season.
+      </h2>
+      <form onSubmit={onSubmit} className="mt-8 max-w-sm mx-auto">
+        <label htmlFor="newsletter-email" className="sr-only">
           Email
         </label>
-        <div className="flex border-b border-bone focus-within:border-bone transition-colors">
+        <div className="flex border-b border-bone">
           <input
             id="newsletter-email"
             name="email"
@@ -58,26 +57,23 @@ export function NewsletterCapture() {
             required
             placeholder="you@somewhere.com"
             autoComplete="email"
-            className="flex-1 bg-transparent py-3 outline-none placeholder:text-bone-deep"
+            className="flex-1 bg-transparent py-3 text-center font-display-italic text-bone outline-none placeholder:text-bone-deep"
           />
-          <button
-            type="submit"
-            disabled={state === "submitting"}
-            className="text-ui px-2 py-3 disabled:opacity-50"
-          >
-            {state === "submitting" ? "Sending…" : "Subscribe →"}
-          </button>
         </div>
+        <button
+          type="submit"
+          disabled={state === "submitting"}
+          className="mt-5 text-ui px-6 py-3 bg-bone text-ink hover:bg-bone-deep transition-colors disabled:opacity-50"
+        >
+          {state === "submitting" ? "sending" : "subscribe"}
+        </button>
         {message && (
-          <p
-            role="status"
-            className={`mt-4 text-sm ${state === "error" ? "" : "text-bone-deep"}`}
-          >
+          <p role="status" className="mt-4 text-meta">
             {message}
           </p>
         )}
-        <p className="text-caption text-bone-deep mt-6">
-          No more than four a year. Unsubscribe whenever.
+        <p className="text-tag mt-5">
+          no more than four a year — unsubscribe whenever
         </p>
       </form>
     </div>

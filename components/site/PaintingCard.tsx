@@ -5,59 +5,61 @@ import type { Painting } from "@/types/sanity";
 
 interface PaintingCardProps {
   painting: Painting;
-  /** Index in the grid — drives vertical offset for the editorial layout. */
   index?: number;
   sizes?: string;
 }
 
+const ROMAN = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"];
+
+/**
+ * Framed plate. Image inside a thin beige border, hairline rule, italic
+ * title centered with a Roman numeral, tiny meta caption below. Matches
+ * the archival-scrapbook fragrance-card pattern in the reference design.
+ */
 export function PaintingCard({ painting, index = 0, sizes }: PaintingCardProps) {
   const sold = painting.status === "sold";
-  const aspect =
-    painting.dimensions.widthInches / painting.dimensions.heightInches;
-
-  // index kept in the signature so callers can still pass it for future use
-  // (e.g., LCP priority); the editorial vertical offset was removed when
-  // the grid moved to a uniform 2-col dense layout matching the reference.
-  void index;
+  const numeral = ROMAN[index] ?? `${index + 1}`;
 
   return (
     <Link
       href={`/paintings/${painting.slug.current}`}
-      className="group block"
+      className="group block border border-rule p-3 hover:border-bone transition-colors"
     >
+      <div className="flex items-baseline justify-between mb-2">
+        <span className="text-tag">no. {String(index + 1).padStart(2, "0")}</span>
+        <span className="text-roman" aria-hidden>{numeral}</span>
+      </div>
+
       <div
-        className={`relative overflow-hidden ${sold ? "sold-overlay" : ""}`}
-        style={{ aspectRatio: aspect }}
+        className={`relative w-full aspect-square overflow-hidden bg-ink ${sold ? "sold-overlay" : ""}`}
       >
         <ProductImage
           image={painting.primaryImage}
           alt={painting.primaryImage?.alt ?? painting.title}
           seed={painting._id}
-          width={800}
-          height={Math.round(800 / aspect)}
-          sizes={sizes ?? "(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"}
+          width={600}
+          height={600}
+          sizes={sizes ?? "(min-width: 768px) 18rem, 45vw"}
           className="transition-transform duration-700 ease-[var(--ease-editorial)] group-hover:scale-[1.03]"
         />
         {sold && (
-          <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 text-ui text-ink bg-bone/85 px-4 py-2">
-            Sold
+          <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 text-tag bg-bone text-ink px-3 py-1">
+            sold
           </span>
         )}
       </div>
-      <div className="mt-4 flex items-start justify-between gap-6">
-        <div className="flex flex-col gap-0.5">
-          <p className="font-display-italic text-bone text-xl leading-tight">
-            {painting.title}
-          </p>
-          <p className="text-meta">
-            {painting.medium} · {painting.dimensions.heightInches} ×{" "}
-            {painting.dimensions.widthInches} in
-          </p>
-        </div>
+
+      <hr className="my-3 border-0 border-t border-rule" aria-hidden />
+
+      <div className="text-center pb-1">
+        <h3 className="font-display-italic text-bone text-base md:text-lg leading-tight">
+          {painting.title}
+        </h3>
+        <p className="text-tag mt-1.5">
+          {painting.medium} · {painting.dimensions.heightInches}×{painting.dimensions.widthInches} in
+        </p>
         {!sold && (
-          <p className="text-meta text-bone shrink-0">
-            {formatPriceUSD(painting.price)}
-          </p>
+          <p className="text-meta mt-1.5">{formatPriceUSD(painting.price)}</p>
         )}
       </div>
     </Link>
