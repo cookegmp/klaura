@@ -393,30 +393,58 @@
       <color name="ink-soft" value="#16171b" role="elevated surface (cards, footer)" />
       <color name="bone" value="#ebe4d6" role="primary text on dark" />
       <color name="bone-deep" value="#a8a094" role="muted / secondary text" />
-      <color name="ochre" value="#d6964a" role="bright accent for dark contrast" />
-      <color name="ochre-deep" value="#b87333" role="primary warm accent, links, italic accents" />
+      <color name="ochre" value="#d6964a" role="background accent only — used for the 18+ tile badge and inside placeholder image gradients. NEVER as a text colour." />
+      <color name="ochre-deep" value="#b87333" role="background accent only. NEVER as a text colour, focus border, or link hover." />
       <color name="rule" value="#2a2a2e" role="hairlines, dividers" />
       <color name="sold-overlay" value="rgba(13, 13, 15, 0.62)" role="sold-state veil over product image" />
     </tokens>
 
+    <colour_rules>
+      <rule priority="firm">
+        Ochre never appears in text. No `text-ochre`, `text-ochre-deep`,
+        `hover:text-ochre*`, `group-hover:text-ochre*`, or `decoration-ochre`
+        in the codebase. Italic Cormorant is the accent — colour is not.
+      </rule>
+      <rule priority="firm">
+        Button hovers do not flash ochre either. Cream CTA buttons (bg-bone
+        text-ink) shift to bg-bone-deep on hover, not to ochre.
+      </rule>
+      <rule priority="firm">
+        Form focus borders use border-bone, not border-ochre. The ochre tokens
+        survive purely as decoration: the small 18+ badge background and the
+        tonal warmth inside the placeholder image gradients (ProductImage).
+      </rule>
+    </colour_rules>
+
     <typography>
       <scale base="16px">
-        <step name="display-xl" size="clamp(4rem, 11vw, 11rem)" family="Cormorant Garamond" weight="500" tracking="-0.015em" transform="uppercase via .font-display-caps" />
+        <step name="display-xl" size="clamp(4rem, 11vw, 11rem)" family="Cormorant Garamond" weight="500" tracking="-0.015em" />
         <step name="display-lg" size="clamp(3rem, 7vw, 6.5rem)" family="Cormorant Garamond" weight="500" tracking="-0.012em" />
         <step name="display-md" size="clamp(2.25rem, 4.2vw, 4rem)" family="Cormorant Garamond" weight="500" tracking="-0.008em" />
         <step name="body-lg" size="1.125rem" family="Cormorant Garamond" weight="400" leading="1.7" />
         <step name="body" size="1rem" family="Cormorant Garamond" weight="400" leading="1.6" />
-        <step name="ui" size="0.78rem" family="Inter Tight" weight="500" tracking="0.16em" transform="uppercase" />
+        <step name="meta" size="0.92rem" family="Cormorant Garamond" weight="400" style="italic" usage=".text-meta — small italic body for caption / metadata strings (medium, size, year, count). Replaces the old uppercase-mono atmosphere classes everywhere." />
+        <step name="roman" size="0.82rem" family="Cormorant Garamond" weight="500" tracking="0.18em" transform="uppercase" usage=".text-roman — small-caps Cormorant for Roman numerals (I, II, III…) and short section indices. Non-italic, slightly letter-spaced." />
+        <step name="ui" size="0.78rem" family="Inter Tight" weight="500" tracking="0.16em" transform="uppercase" usage=".text-ui — reserved for actual buttons / form submit / disclosure triggers only. NOT for section labels or list-group headers — those use .text-meta or .text-roman instead." />
         <step name="caption" size="0.85rem" family="Cormorant Garamond" weight="400" style="italic" />
       </scale>
       <pairing_rule>
-        Italic Cormorant Garamond is the deliberate cursive accent. Use for
-        captions, key phrases inside display headings ("doorway", "studio",
-        "in light"), and section labels. Inter Tight (.text-ui) is the
-        functional UI face for caps-tracked labels and buttons where Cormorant
-        would become spidery at small sizes — it is the only sans on the site,
-        and only at <1rem.
+        Italic Cormorant Garamond is the dominant voice, not a sparing accent.
+        Page headings, product titles, section labels, captions, field labels,
+        nav links, and inline accents inside headings all run italic Cormorant.
+        Inter Tight (.text-ui) is the only sans on the site and is used only
+        on actual buttons and tappable form controls — never on body copy,
+        labels, or section markers. If you find yourself reaching for
+        `text-ui` on a `<p>` or a `<dt>`, use `.text-meta` instead.
       </pairing_rule>
+      <case_voice>
+        Lowercase italic Cormorant is the gallery voice — "choose a doorway",
+        "vintage, found slowly", "letters from the studio". Roman numerals
+        (.text-roman) carry short capitalised indices when something needs a
+        marker. The old all-caps display style (`font-display-caps`) has been
+        removed from page headings; case-as-volume is no longer in the
+        rotation.
+      </case_voice>
     </typography>
 
     <spatial>
@@ -424,10 +452,22 @@
       <gutter>2rem desktop, 1.25rem mobile</gutter>
       <section_padding>8rem vertical desktop, 5rem mobile</section_padding>
       <philosophy>
-        Asymmetry over symmetry. Vertical offsets between adjacent items in
-        editorial grids. Generous negative space around hero imagery. Never
-        center-align large blocks of body text.
+        Dense card grids, uniform tiles. Product / category grids run 2-col
+        on mobile, 3-col tablet, up to 5-col on wide desktop — modelled on
+        documentation/samples/Screenshot.png. The old editorial vertical
+        offsets on PaintingCard / VintageCard were removed so the grid reads
+        as a coherent index, not a staircase. Generous negative space still
+        surrounds hero imagery, and body copy is never centre-aligned (but
+        short editorial headlines may be — e.g., the home hero).
       </philosophy>
+      <card_anatomy>
+        Product / doorway tiles all share the same anatomy: cover image
+        (uniform 4:5 aspect) above a caption block. The caption block is
+        Roman numeral (.text-roman) + count (.text-meta) on the same baseline
+        row, followed by an italic Cormorant title below. No overlay
+        captions; labels sit BELOW the image. See components/site/
+        CategoryDoorways.tsx for the canonical implementation.
+      </card_anatomy>
     </spatial>
 
     <motion>

@@ -36,20 +36,50 @@ These are load-bearing — violating any of them risks data corruption.
 ## Design system shortcuts
 
 **Surface mode: dark editorial** (pivot 2026-05-31, see charter §design_system / §surface_mode).
-Deep charcoal page bg, warm cream type, ochre accent. Token names were
-preserved from the original light palette — what changed is the role each
-colour plays.
+Deep charcoal page bg, warm cream type, italic Cormorant Garamond as the dominant voice.
+Token names were preserved from the original light palette — what changed is the role each colour plays.
 
 Tokens declared in `app/globals.css`:
 
 - **Surfaces** — `bg-ink` (page bg, `#0d0d0f`), `bg-ink-soft` (elevated cards / footer, `#16171b`).
 - **Text** — `text-bone` (primary cream, `#ebe4d6`), `text-bone-deep` (muted cream, `#a8a094`).
-- **Accent** — `text-ochre-deep` / `bg-ochre-deep` (`#b87333`) for links, italic accents, primary CTAs. `text-ochre` (`#d6964a`) for brighter on-dark hover states.
 - **Hairlines** — `border-rule` (`#2a2a2e`). Avoid `bg-white`, `bg-black`, or any hardcoded hex outside `globals.css` / `opengraph-image.tsx` / `global-error.tsx`.
-- **Type** — Cormorant Garamond (display + body) via `--font-cormorant`. Inter Tight (`--font-ui`) is reserved for `.text-ui` only — never use it for paragraph copy (charter §forbidden).
+- **Type families** — Cormorant Garamond (display + body) via `--font-cormorant`. Inter Tight (`--font-ui`) is reserved for `.text-ui` only — never use it for paragraph copy or section labels (charter §forbidden, §pairing_rule).
 - **Type scale tokens** — `--text-display-xl/lg/md`, `--text-body-lg`, `--text-ui`, `--text-caption`.
-- **Utilities** — `.text-ui` for caps-tracked labels (nav, button text). `.font-display-italic` for the cursive accent (charter §pairing_rule — italic is an accent, not a default).
-- **Sold pieces** — wrap image container with `relative sold-overlay`.
+
+### Typography utility decision matrix
+
+Pick the smallest utility that fits — never reach past it. `.text-ui` is for
+buttons only; everything else is italic Cormorant.
+
+| Need | Utility | Notes |
+| --- | --- | --- |
+| Page heading, section heading, product title, inline accent in a heading | `font-display-italic` | The dominant voice. Lowercase italic Cormorant. |
+| Hero / large display heading | `font-display-italic` + `text-[clamp(...)]` | The old `font-display-caps` class is gone — case-as-volume is no longer in the rotation. |
+| Section label / list-group header (e.g., "Letters from the studio") | `text-meta` (italic Cormorant ~0.92rem) | Replaces the old `text-ui text-bone-deep` pattern. |
+| Caption / field label / metadata string (medium · size · year · count) | `text-meta` | Also replaces the old uppercase-mono atmosphere strings. |
+| Roman numeral / short index marker (I, II, § 01, year stamps) | `text-roman` (small-caps Cormorant) | Non-italic, slightly letter-spaced. |
+| Button label / form submit / disclosure trigger | `text-ui` | The only place sans is allowed. Tappable controls only. |
+| Sold pieces | wrap image container with `relative sold-overlay` | |
+
+### Colour rules (firm)
+
+- **Ochre never appears in text.** No `text-ochre`, `text-ochre-deep`, `hover:text-ochre*`, `group-hover:text-ochre*`, or `decoration-ochre`. Italic Cormorant is the accent — colour is not.
+- **Button hovers don't flash ochre.** Cream CTAs (`bg-bone text-ink`) shift to `bg-bone-deep` on hover.
+- **Form focus borders use `border-bone`**, not `border-ochre`.
+- Ochre tokens survive only as decoration: the small `bg-ochre/95` 18+ tile badge (dark text on it) and the tonal warmth inside the placeholder image gradients in `ProductImage.tsx`.
+
+### Card / grid pattern
+
+Product and category grids are dense and uniform — 2-col on mobile, 3-col tablet, up to 5-col on wide desktop. Tile anatomy:
+
+```
+[ cover image, 4:5 aspect ]
+[ roman numeral · count ]   (both .text-roman / .text-meta on one baseline row)
+[ italic Cormorant title ]  (font-display-italic)
+```
+
+`components/site/CategoryDoorways.tsx` is the canonical implementation. `PaintingCard` and `VintageCard` follow the same anatomy with their own metadata strings. The old editorial vertical offsets (`translateY(2.5rem)` on odd indices) were removed — the grid is uniform.
 
 ## Charter principles to keep front-of-mind
 
