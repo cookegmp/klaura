@@ -35,58 +35,99 @@ These are load-bearing — violating any of them risks data corruption.
 
 ## Design system shortcuts
 
-**Surface mode: dark editorial** (pivot 2026-05-31, see charter §design_system / §surface_mode).
-Deep charcoal page bg, warm cream type, italic Cormorant Garamond as the dominant voice.
-Token names were preserved from the original light palette — what changed is the role each colour plays.
+**Surface mode: archival scrapbook** (2026-05-31 — see charter §design_system / §surface_mode).
+Narrow centred dark editorial column. Warm near-black bg, warm beige type **and** borders.
+High-contrast Bodoni Moda Didone is the voice. Reference image:
+[`documentation/samples/Screenshot.png`](./documentation/samples/Screenshot.png) — treat it as
+the source of truth. If a screen doesn't feel like a luxury perfume brand's archival
+scrapbook (minimal, romantic, slightly gothic, quiet, expensive), the screen is wrong.
 
 Tokens declared in `app/globals.css`:
 
-- **Surfaces** — `bg-ink` (page bg, `#0d0d0f`), `bg-ink-soft` (elevated cards / footer, `#16171b`).
-- **Text** — `text-bone` (primary cream, `#ebe4d6`), `text-bone-deep` (muted cream, `#a8a094`).
-- **Hairlines** — `border-rule` (`#2a2a2e`). Avoid `bg-white`, `bg-black`, or any hardcoded hex outside `globals.css` / `opengraph-image.tsx` / `global-error.tsx`.
-- **Type families** — Cormorant Garamond (display + body) via `--font-cormorant`. Inter Tight (`--font-ui`) is reserved for `.text-ui` only — never use it for paragraph copy or section labels (charter §forbidden, §pairing_rule).
-- **Type scale tokens** — `--text-display-xl/lg/md`, `--text-body-lg`, `--text-ui`, `--text-caption`.
+- **Surfaces** — `bg-ink` (warm near-black page, `#0a0908`), `bg-ink-soft` (faint card lift, `#131110`).
+- **Text & borders** — `text-bone` / `border-bone` (warm beige, `#d4c5a0`), `text-bone-deep` (aged beige, `#8a7d63`).
+- **Hairlines** — `border-rule` (`#4a4030`) — warm beige hairline on dark for card frames and dividers.
+- **Type families** — Bodoni Moda (display + body) via `--font-bodoni`. Inter Tight (`--font-ui`) is reserved for two utilities only: `.text-tag` (tiny archival labels) and `.text-ui` (flat beige buttons). Never use Inter Tight for paragraph copy, section markers, or nav.
 
 ### Typography utility decision matrix
 
-Pick the smallest utility that fits — never reach past it. `.text-ui` is for
-buttons only; everything else is italic Cormorant.
+Pick the smallest utility that fits. Bodoni is the default voice; sans appears only in `.text-tag` and `.text-ui`.
 
 | Need | Utility | Notes |
 | --- | --- | --- |
-| Page heading, section heading, product title, inline accent in a heading | `font-display-italic` | The dominant voice. Lowercase italic Cormorant. |
-| Hero / large display heading | `font-display-italic` + `text-[clamp(...)]` | The old `font-display-caps` class is gone — case-as-volume is no longer in the rotation. |
-| Section label / list-group header (e.g., "Letters from the studio") | `text-meta` (italic Cormorant ~0.92rem) | Replaces the old `text-ui text-bone-deep` pattern. |
-| Caption / field label / metadata string (medium · size · year · count) | `text-meta` | Also replaces the old uppercase-mono atmosphere strings. |
-| Roman numeral / short index marker (I, II, § 01, year stamps) | `text-roman` (small-caps Cormorant) | Non-italic, slightly letter-spaced. |
-| Button label / form submit / disclosure trigger | `text-ui` | The only place sans is allowed. Tappable controls only. |
+| Page / section heading, plate title, italic accent | `font-display-italic` | Italic Bodoni — the dominant voice. |
+| Featured-plate caps title (the "MZIA"-style title inside the hero plate) | `font-display` + `uppercase tracking-[0.04em]` | One of very few caps Bodoni usages; reserved for the hero. |
+| Caption / metadata string (medium · size · year · price) | `text-meta` | Small italic Bodoni, `bone-deep`. |
+| Roman numeral / short index marker (I, II, IX, XII) | `text-roman` | Bodoni small-caps, slightly letter-spaced. |
+| Archival tag — `vol. i`, `no. 01`, `est. 2018`, `explore`, `elsewhere`, footer legal row | `text-tag` | Tiny Inter Tight caps tracked; THE dominant small-label utility. |
+| Tiny italic subtitle directly under a plate title ("eau de toilette" voice) | `text-subtle` | Small italic Bodoni. |
+| Button label / form submit | `text-ui` | Inter Tight caps, only on tappable controls. |
 | Sold pieces | wrap image container with `relative sold-overlay` | |
 
 ### Colour rules (firm)
 
-- **Ochre never appears in text.** No `text-ochre`, `text-ochre-deep`, `hover:text-ochre*`, `group-hover:text-ochre*`, or `decoration-ochre`. Italic Cormorant is the accent — colour is not.
-- **Button hovers don't flash ochre.** Cream CTAs (`bg-bone text-ink`) shift to `bg-bone-deep` on hover.
-- **Form focus borders use `border-bone`**, not `border-ochre`.
-- Ochre tokens survive only as decoration: the small `bg-ochre/95` 18+ tile badge (dark text on it) and the tonal warmth inside the placeholder image gradients in `ProductImage.tsx`.
+- **Two colours only — beige on near-black.** No accent hues. The `ochre*` tokens are now aliases of beige and survive only as button backgrounds. Never `text-ochre*` or `decoration-ochre`.
+- **Borders are beige (`border-rule`), not subtle grey.** Card frames hover from `border-rule` to `border-bone` (faint → visible).
+- **Buttons are flat beige rectangles.** Solid: `bg-bone text-ink`. Outline: `border border-bone text-bone hover:bg-bone hover:text-ink`. No rounded corners, no gradients, no shadows. Solid hover dims fill to `bg-bone-deep`.
+- **No colour-flashing hovers anywhere.** Hover changes border, opacity, or image scale — not hue.
 
-### Card / grid pattern
+### Framed plate (the only card pattern)
 
-Product and category grids are dense and uniform — 2-col on mobile, 3-col tablet, up to 5-col on wide desktop. Tile anatomy:
+Every product / doorway / satellite tile is a framed plate with this exact anatomy:
 
+```tsx
+<a className="group block border border-rule p-3 hover:border-bone transition-colors">
+  <div className="flex items-baseline justify-between mb-2">
+    <span className="text-tag">no. 01</span>
+    <span className="text-roman">I</span>
+  </div>
+  <div className="relative w-full aspect-square overflow-hidden bg-ink">
+    <ProductImage … />
+  </div>
+  <hr className="my-3 border-0 border-t border-rule" />
+  <div className="text-center pb-1">
+    <h3 className="font-display-italic text-bone text-base md:text-lg leading-tight">{title}</h3>
+    <p className="text-tag mt-1.5">{subtitle}</p>
+  </div>
+</a>
 ```
-[ cover image, 4:5 aspect ]
-[ roman numeral · count ]   (both .text-roman / .text-meta on one baseline row)
-[ italic Cormorant title ]  (font-display-italic)
-```
 
-`components/site/CategoryDoorways.tsx` is the canonical implementation. `PaintingCard` and `VintageCard` follow the same anatomy with their own metadata strings. The old editorial vertical offsets (`translateY(2.5rem)` on odd indices) were removed — the grid is uniform.
+Canonical implementation: `components/site/CategoryDoorways.tsx` → `DoorwayPlate`. `PaintingCard` and `VintageCard` follow the same shape. The hero plate (`FeaturedHero` in `app/page.tsx`) is a larger variant with a `aspect-[4/5]` image and a left-aligned caps Bodoni title.
+
+### Layout column
+
+Sitewide narrow centred column via `<Container>` (in `components/site/Container.tsx`):
+
+| Width | max | Use for |
+| --- | --- | --- |
+| `narrow` | `34rem` | Form-only sections |
+| `default` | `40rem` | **Everything** — pages, Nav, Footer, doorway grid |
+| `wide` | `64rem` | Reserved for any future genuinely wide grid (rarely needed) |
+| `bleed` | none | Full-bleed imagery |
+
+The narrow column is the design's signature. Do not use `width="wide"` or write `max-w-screen-2xl` anywhere — wide layouts break the scrapbook feel.
+
+### Home page composition (canonical scrapbook order)
+
+`app/page.tsx` is the reference layout. Sections, in order:
+
+1. **Archival masthead** — `vol. i — kelly laura` / `est. 2018` with a hairline rule beneath.
+2. **Featured hero plate** — one large framed plate with caps Bodoni title + Roman numeral.
+3. **Satellite plate row** — two smaller plates (one `solid` variant, one `outline`) for paired-asymmetric feel.
+4. **Section header** — centred italic Bodoni `<h2>` with a `.text-tag` subtitle.
+5. **Plate grid** — 2-col framed plates.
+6. **Also row** — `.text-tag` + italic copy + two flat beige buttons.
+7. **Newsletter** — centred italic header + single beige Subscribe button.
+8. **Footer** — centred italic voice + two narrow link columns + tiny legal row.
 
 ## Charter principles to keep front-of-mind
 
-- **Asymmetry over symmetry.** Editorial offsets between grid items (see `PaintingCard` `transform: translateY(2.5rem)` on odd indices).
-- **Restraint in motion.** One well-orchestrated entrance per section. No bouncy springs, no parallax, no scroll-jacking. Honor `prefers-reduced-motion`.
-- **Image quality is non-negotiable.** Every image flows through `next/image` (the `ProductImage` component) with `sizes` set per layout. LCP image preloaded on detail pages.
-- **One of one.** Charter §inventory: every product is qty=1. Never introduce variants or stock counts.
+- **Narrow column always.** No wide layouts. The site is a single magazine column on every viewport.
+- **Two colours.** Beige on near-black. No accent hues.
+- **Framed plates.** Every card is bordered with internal padding, hairline, italic title, and tiny tag — never bare image + caption.
+- **Restraint in motion.** Reveal entrances on scroll, image-scale on hover, frame-tint on hover. No bouncy springs, no parallax, no scroll-jacking. Honor `prefers-reduced-motion`.
+- **Image quality is non-negotiable.** Every image flows through `next/image` (the `ProductImage` component) with `sizes` set per layout.
+- **One of one.** Charter §inventory: every product is qty=1.
 
 ## Useful entry points
 

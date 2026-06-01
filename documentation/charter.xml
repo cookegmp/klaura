@@ -51,8 +51,8 @@
       <css>Tailwind CSS v4</css>
       <components>shadcn/ui (selective; do not adopt wholesale)</components>
       <fonts>
-        <display>Cormorant Garamond (weights 300–700, regular + italic), via next/font/google. Its true italic carries the cursive editorial accent.</display>
-        <body>Cormorant Garamond for paragraph copy. Inter Tight is retained behind --font-ui for the small caps-tracked labels (.text-ui) where Cormorant becomes spidery.</body>
+        <display>Bodoni Moda (weights 400–800, regular + italic), via next/font/google. High-contrast Didone serif — dramatic hairline strokes, elegant italic. The actual font family of the reference design ("MZIA" / "Our Fragrances" / "Leather &amp; Patchouli").</display>
+        <body>Bodoni Moda for paragraph copy. Inter Tight is retained behind --font-ui for tappable controls (.text-ui — buttons, form submits) where Bodoni's hairlines disappear at small sizes.</body>
       </fonts>
     </styling>
 
@@ -96,7 +96,8 @@
 
     <forbidden>
       <item reason="Conflicts with stack decision">Shopify, BigCommerce, Snipcart, any commerce platform other than Stripe</item>
-      <item reason="Generic AI aesthetic">Inter, Roboto, or system fonts as the primary BODY face. Inter Tight is reserved for caps-tracked UI labels (.text-ui) only; do not use it for paragraph copy.</item>
+      <item reason="Generic AI aesthetic">Inter, Roboto, or system fonts as the primary BODY face. Inter Tight is reserved for caps-tracked UI labels on tappable controls only (.text-ui on buttons / form submits); do not use it for paragraph copy, section labels, or nav.</item>
+      <item reason="Breaks the scrapbook column">Wide layouts (max-w-screen-2xl, w-full sections). The site reads as a narrow archival column even on desktop — Container max widths cap at ~40rem / 64rem.</item>
       <item reason="Bundle bloat">Material UI, Chakra, Ant Design, Bootstrap</item>
       <item reason="Unnecessary at this scale">Redux, Zustand, MobX (React Server Components + URL state + form actions are sufficient)</item>
       <item reason="Wrong primitive">localStorage / sessionStorage for cart state (use cookies via server actions)</item>
@@ -376,113 +377,142 @@
 
   <design_system>
     <surface_mode>
-      Dark editorial. Deep charcoal surface, warm cream type, ochre accent.
-      Decided 2026-05-31 — explicit user pivot away from the original bone/light
-      surface to a Galleria-style dark gallery. Token names are preserved from
-      the original light palette so existing utilities still compile; what
-      changed is the role each colour plays:
-        • ink / ink-soft   → SURFACES (page background, elevated cards)
-        • bone / bone-deep → TEXT (primary, muted)
-        • ochre / ochre-deep → warm accent (kept warm, brightened slightly for
-          contrast on dark)
-        • rule              → subtle hairlines on dark
+      Archival scrapbook. Narrow centred dark editorial column with warm
+      beige typography and borders. Decided 2026-05-31 (cream/charcoal
+      Cormorant pivot) and refined further the same day to the current
+      "luxury perfume brand's archival scrapbook" brief — minimal,
+      romantic, slightly gothic, quiet, expensive. Token names preserved
+      from the original light palette so existing utilities compile; what
+      changed is the colour values + role mapping:
+        • ink / ink-soft       → SURFACES (warm near-black page + faint card lift)
+        • bone / bone-deep     → TEXT &amp; BORDERS (warm beige primary, aged secondary)
+        • ochre / ochre-deep   → background-only accents (flat beige button face)
+        • rule                 → warm beige hairlines on dark
     </surface_mode>
 
     <tokens>
-      <color name="ink" value="#0d0d0f" role="page background" />
-      <color name="ink-soft" value="#16171b" role="elevated surface (cards, footer)" />
-      <color name="bone" value="#ebe4d6" role="primary text on dark" />
-      <color name="bone-deep" value="#a8a094" role="muted / secondary text" />
-      <color name="ochre" value="#d6964a" role="background accent only — used for the 18+ tile badge and inside placeholder image gradients. NEVER as a text colour." />
-      <color name="ochre-deep" value="#b87333" role="background accent only. NEVER as a text colour, focus border, or link hover." />
-      <color name="rule" value="#2a2a2e" role="hairlines, dividers" />
-      <color name="sold-overlay" value="rgba(13, 13, 15, 0.62)" role="sold-state veil over product image" />
+      <color name="ink" value="#0a0908" role="warm near-black page background" />
+      <color name="ink-soft" value="#131110" role="faint card lift / elevated section" />
+      <color name="bone" value="#d4c5a0" role="primary warm beige — text AND borders" />
+      <color name="bone-deep" value="#8a7d63" role="aged beige — secondary text, tag labels" />
+      <color name="ochre" value="#d4c5a0" role="alias of bone — backgrounds only, never text" />
+      <color name="ochre-deep" value="#b8a984" role="deeper beige — flat-button face on hover" />
+      <color name="rule" value="#4a4030" role="warm beige hairline border on dark — card frames, dividers" />
+      <color name="sold-overlay" value="rgba(10, 9, 8, 0.65)" role="sold-state veil over product image" />
     </tokens>
 
     <colour_rules>
       <rule priority="firm">
-        Ochre never appears in text. No `text-ochre`, `text-ochre-deep`,
-        `hover:text-ochre*`, `group-hover:text-ochre*`, or `decoration-ochre`
-        in the codebase. Italic Cormorant is the accent — colour is not.
+        Two colours only — warm beige on warm near-black. There are no
+        accent hues. The ochre tokens are aliases of beige for backwards
+        compatibility and survive only as backgrounds (flat button face).
+        Never `text-ochre*` or `decoration-ochre`.
       </rule>
       <rule priority="firm">
-        Button hovers do not flash ochre either. Cream CTA buttons (bg-bone
-        text-ink) shift to bg-bone-deep on hover, not to ochre.
+        Borders are beige (bone), not subtle grey. Card frames use
+        `border border-rule` (warm beige hairline) and lift to
+        `border-bone` on hover.
       </rule>
       <rule priority="firm">
-        Form focus borders use border-bone, not border-ochre. The ochre tokens
-        survive purely as decoration: the small 18+ badge background and the
-        tonal warmth inside the placeholder image gradients (ProductImage).
+        Buttons are flat beige rectangles: `bg-bone text-ink` solid or
+        `border border-bone text-bone` outline. No rounded corners, no
+        gradients, no shadows. Hover dims the fill to bone-deep.
       </rule>
     </colour_rules>
 
     <typography>
       <scale base="16px">
-        <step name="display-xl" size="clamp(4rem, 11vw, 11rem)" family="Cormorant Garamond" weight="500" tracking="-0.015em" />
-        <step name="display-lg" size="clamp(3rem, 7vw, 6.5rem)" family="Cormorant Garamond" weight="500" tracking="-0.012em" />
-        <step name="display-md" size="clamp(2.25rem, 4.2vw, 4rem)" family="Cormorant Garamond" weight="500" tracking="-0.008em" />
-        <step name="body-lg" size="1.125rem" family="Cormorant Garamond" weight="400" leading="1.7" />
-        <step name="body" size="1rem" family="Cormorant Garamond" weight="400" leading="1.6" />
-        <step name="meta" size="0.92rem" family="Cormorant Garamond" weight="400" style="italic" usage=".text-meta — small italic body for caption / metadata strings (medium, size, year, count). Replaces the old uppercase-mono atmosphere classes everywhere." />
-        <step name="roman" size="0.82rem" family="Cormorant Garamond" weight="500" tracking="0.18em" transform="uppercase" usage=".text-roman — small-caps Cormorant for Roman numerals (I, II, III…) and short section indices. Non-italic, slightly letter-spaced." />
-        <step name="ui" size="0.78rem" family="Inter Tight" weight="500" tracking="0.16em" transform="uppercase" usage=".text-ui — reserved for actual buttons / form submit / disclosure triggers only. NOT for section labels or list-group headers — those use .text-meta or .text-roman instead." />
-        <step name="caption" size="0.85rem" family="Cormorant Garamond" weight="400" style="italic" />
+        <step name="display-xl" size="clamp(2.75rem, 8vw, 5rem)" family="Bodoni Moda" weight="400" tracking="0em" usage="Largest display — sparing, e.g. featured-plate caps title (MZIA-style)." />
+        <step name="display-lg" size="clamp(2.25rem, 6vw, 3.75rem)" family="Bodoni Moda" weight="400" tracking="0em" />
+        <step name="display-md" size="clamp(1.75rem, 4vw, 2.5rem)" family="Bodoni Moda" weight="400" tracking="0em" usage="Section headings (Our Rooms, Letters from the studio)." />
+        <step name="body-lg" size="1.05rem" family="Bodoni Moda" weight="400" leading="1.65" />
+        <step name="body" size="1rem" family="Bodoni Moda" weight="400" leading="1.6" />
+        <step name="meta" size="0.88rem" family="Bodoni Moda" weight="400" style="italic" usage=".text-meta — small italic body for caption / metadata strings (medium, size, year, count, price)." />
+        <step name="roman" size="0.9rem" family="Bodoni Moda" weight="500" tracking="0.18em" transform="uppercase" usage=".text-roman — Bodoni small-caps for Roman numerals (I, II, III, …, XII) on plate cards." />
+        <step name="tag" size="0.62rem" family="Inter Tight" weight="500" tracking="0.24em" transform="uppercase" usage=".text-tag — tiny caps-tracked sans for the archival tags (vol. i, no. 01, est. 2018, kelly laura, explore, elsewhere). The dominant small-label utility on the site." />
+        <step name="subtle" size="0.72rem" family="Bodoni Moda" weight="400" style="italic" usage=".text-subtle — tiny italic subtitle directly beneath a plate title (eau-de-toilette voice)." />
+        <step name="ui" size="0.7rem" family="Inter Tight" weight="500" tracking="0.2em" transform="uppercase" usage=".text-ui — reserved for actual buttons / form submit only. Not for labels or section markers." />
+        <step name="caption" size="0.85rem" family="Bodoni Moda" weight="400" style="italic" />
       </scale>
       <pairing_rule>
-        Italic Cormorant Garamond is the dominant voice, not a sparing accent.
-        Page headings, product titles, section labels, captions, field labels,
-        nav links, and inline accents inside headings all run italic Cormorant.
-        Inter Tight (.text-ui) is the only sans on the site and is used only
-        on actual buttons and tappable form controls — never on body copy,
-        labels, or section markers. If you find yourself reaching for
-        `text-ui` on a `<p>` or a `<dt>`, use `.text-meta` instead.
+        Italic Bodoni Moda is the dominant voice — page headings, plate
+        titles, section labels, captions, nav links, footer voice line.
+        Caps Bodoni is reserved for big featured-plate titles (the
+        "MZIA"-style centred caps inside the hero card) and Roman
+        numerals. Inter Tight appears only in two utilities: `.text-tag`
+        (the tiny archival labels — vol. i, no. 01, explore, elsewhere)
+        and `.text-ui` (the flat beige buttons). Body copy and section
+        markers never use Inter Tight.
       </pairing_rule>
       <case_voice>
-        Lowercase italic Cormorant is the gallery voice — "choose a doorway",
-        "vintage, found slowly", "letters from the studio". Roman numerals
-        (.text-roman) carry short capitalised indices when something needs a
-        marker. The old all-caps display style (`font-display-caps`) has been
-        removed from page headings; case-as-volume is no longer in the
-        rotation.
+        Lowercase italic Bodoni is the everyday gallery voice. Caps
+        Bodoni for distinctive plate names. Caps tracked Inter Tight
+        for archival tags. The combination of italic display serif +
+        tiny caps tag is the perfume-bottle signature of the design.
       </case_voice>
     </typography>
 
     <spatial>
-      <grid>12-column desktop, 4-column mobile</grid>
-      <gutter>2rem desktop, 1.25rem mobile</gutter>
-      <section_padding>8rem vertical desktop, 5rem mobile</section_padding>
+      <column>
+        Narrow centred column on every viewport. Container max widths:
+        narrow=34rem, default=40rem, wide=64rem, bleed=full. "default"
+        is the page column and is what Nav, Footer, page sections, and
+        the doorway grid all use. The whole site reads as a single tight
+        magazine column, not a responsive web app.
+      </column>
+      <grid>2-column inside the column. The doorway grid, the satellite
+        plate row, and product grids are all 2-col with small gaps
+        (gap-3 mobile, gap-4 desktop). No 3+ column grids.</grid>
+      <section_padding>~3.5rem mobile / ~5rem desktop between sections.
+        Tighter than a typical web layout — scrapbook pages are dense.</section_padding>
       <philosophy>
-        Dense card grids, uniform tiles. Product / category grids run 2-col
-        on mobile, 3-col tablet, up to 5-col on wide desktop — modelled on
-        documentation/samples/Screenshot.png. The old editorial vertical
-        offsets on PaintingCard / VintageCard were removed so the grid reads
-        as a coherent index, not a staircase. Generous negative space still
-        surrounds hero imagery, and body copy is never centre-aligned (but
-        short editorial headlines may be — e.g., the home hero).
+        Asymmetric compositions inside the narrow column: archival
+        masthead with rule under it, featured hero plate, two satellite
+        plates (one solid, one outline) for paired-but-uneven feel,
+        centred section header, then a 2-col plate grid. The reference
+        (documentation/samples/Screenshot.png) is the source of truth
+        for which sections appear in what order.
       </philosophy>
       <card_anatomy>
-        Product / doorway tiles all share the same anatomy: cover image
-        (uniform 4:5 aspect) above a caption block. The caption block is
-        Roman numeral (.text-roman) + count (.text-meta) on the same baseline
-        row, followed by an italic Cormorant title below. No overlay
-        captions; labels sit BELOW the image. See components/site/
-        CategoryDoorways.tsx for the canonical implementation.
+        Every product / doorway / satellite tile is a FRAMED PLATE with
+        the same anatomy:
+
+          [ border border-rule + p-3 ]
+          [ tag row: text-tag (no. 01) ……… text-roman (I) ]
+          [ square image (aspect-square, overflow-hidden, bg-ink) ]
+          [ hr.border-rule (the archival hairline) ]
+          [ text-center caption: italic title + text-tag subtitle ]
+
+        The frame hovers from border-rule (faint) to border-bone
+        (visible) on hover. Canonical implementation:
+        components/site/CategoryDoorways.tsx → DoorwayPlate.
+        PaintingCard and VintageCard follow the same shape.
       </card_anatomy>
+      <featured_hero>
+        The home page opens with a single large FeaturedHero plate
+        (aspect-[4/5] image) followed by a hairline and a left-aligned
+        caps Bodoni title with a Roman numeral on the right — the
+        "MZIA" composition from the reference. See app/page.tsx.
+      </featured_hero>
     </spatial>
 
     <motion>
       <principle>Restraint. One well-orchestrated entrance per section beats five micro-interactions.</principle>
-      <hero_entrance>Staggered fade-up on load, 150ms increments, cubic-bezier(0.2, 0.6, 0.2, 1)</hero_entrance>
-      <hover>Image scale 1.03 on 600ms ease for product cards; underline-grow on nav links</hover>
-      <forbidden>Bouncy springs, page-load spinners on Server Component routes, parallax scrolling, scroll-jacking</forbidden>
+      <hero_entrance>Staggered fade-up on scroll-into-view via the Reveal component (IntersectionObserver). 80ms increments between siblings, cubic-bezier(0.16, 0.84, 0.32, 1).</hero_entrance>
+      <hover>Image scale 1.03–1.04 on 900–1100ms ease inside plates; plate frames shift from border-rule to border-bone on hover.</hover>
+      <forbidden>Bouncy springs, page-load spinners on Server Component routes, parallax scrolling, scroll-jacking, colour-flashing hovers (no orange/ochre shift on hover).</forbidden>
     </motion>
 
     <reference>
-      Visual direction is set by documentation/samples/Screenshot.png — a dark
-      editorial gallery layout with small museum-plaque tiles on a near-black
-      surface, Roman-numeral indices, and elegant serif headlines. Treat it as
-      the source of truth for surface tone, tile rhythm, and caption style.
-      Where earlier mockups used a bone/light surface, those are superseded.
+      Visual direction is set by documentation/samples/Screenshot.png — a
+      narrow, centred, dark editorial scrapbook page. Near-black bg, warm
+      beige type and borders, asymmetrical grids, vintage botanical imagery,
+      old-photo textures, Roman numerals, tiny italic labels, flat beige
+      buttons. Treat it as the source of truth. If a screen does not feel
+      like a luxury perfume brand's archival scrapbook — minimal, romantic,
+      slightly gothic, quiet, expensive — the screen is wrong, not the brief.
+      All earlier mockups (Galleria, bone/light surface, dense uniform grid)
+      are superseded.
     </reference>
   </design_system>
 
@@ -521,7 +551,7 @@
         <task>Configure ESLint + Prettier + strict TS settings</task>
         <task>Set up Vercel project, connect repo, configure preview deploys</task>
         <task>Add design tokens to globals.css via @theme directive (Tailwind v4)</task>
-        <task>Wire next/font for Cormorant Garamond (display + body) and Inter Tight (UI labels only)</task>
+        <task>Wire next/font for Bodoni Moda (display + body) and Inter Tight (UI labels only)</task>
         <task>Scaffold all routes from information_architecture as empty pages</task>
         <task>Build shared Nav and Footer components matching the mockup</task>
       </tasks>
