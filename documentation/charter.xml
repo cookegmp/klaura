@@ -51,8 +51,8 @@
       <css>Tailwind CSS v4</css>
       <components>shadcn/ui (selective; do not adopt wholesale)</components>
       <fonts>
-        <display>Fraunces (variable, opsz + SOFT axes), self-hosted via next/font/google</display>
-        <body>Inter Tight, self-hosted via next/font/google</body>
+        <display>Cormorant Garamond (weights 300–700, regular + italic), via next/font/google. Its true italic carries the cursive editorial accent.</display>
+        <body>Cormorant Garamond for paragraph copy. Inter Tight is retained behind --font-ui for the small caps-tracked labels (.text-ui) where Cormorant becomes spidery.</body>
       </fonts>
     </styling>
 
@@ -96,7 +96,7 @@
 
     <forbidden>
       <item reason="Conflicts with stack decision">Shopify, BigCommerce, Snipcart, any commerce platform other than Stripe</item>
-      <item reason="Generic AI aesthetic">Inter (UI body), Roboto, system fonts as primary</item>
+      <item reason="Generic AI aesthetic">Inter, Roboto, or system fonts as the primary BODY face. Inter Tight is reserved for caps-tracked UI labels (.text-ui) only; do not use it for paragraph copy.</item>
       <item reason="Bundle bloat">Material UI, Chakra, Ant Design, Bootstrap</item>
       <item reason="Unnecessary at this scale">Redux, Zustand, MobX (React Server Components + URL state + form actions are sufficient)</item>
       <item reason="Wrong primitive">localStorage / sessionStorage for cart state (use cookies via server actions)</item>
@@ -375,28 +375,48 @@
   </inventory_and_checkout_flow>
 
   <design_system>
+    <surface_mode>
+      Dark editorial. Deep charcoal surface, warm cream type, ochre accent.
+      Decided 2026-05-31 — explicit user pivot away from the original bone/light
+      surface to a Galleria-style dark gallery. Token names are preserved from
+      the original light palette so existing utilities still compile; what
+      changed is the role each colour plays:
+        • ink / ink-soft   → SURFACES (page background, elevated cards)
+        • bone / bone-deep → TEXT (primary, muted)
+        • ochre / ochre-deep → warm accent (kept warm, brightened slightly for
+          contrast on dark)
+        • rule              → subtle hairlines on dark
+    </surface_mode>
+
     <tokens>
-      <color name="bone" value="#f4efe6" role="page background" />
-      <color name="bone-deep" value="#ebe4d6" role="secondary surface" />
-      <color name="ink" value="#1a1d24" role="primary text, dark sections" />
-      <color name="ink-soft" value="#3a3d44" role="secondary text" />
-      <color name="ochre" value="#b87333" role="accent" />
-      <color name="ochre-deep" value="#8a5424" role="accent hover, links" />
-      <color name="rule" value="#d9d1bf" role="hairlines, dividers" />
-      <color name="sold-overlay" value="rgba(26, 29, 36, 0.55)" role="sold-state veil" />
+      <color name="ink" value="#0d0d0f" role="page background" />
+      <color name="ink-soft" value="#16171b" role="elevated surface (cards, footer)" />
+      <color name="bone" value="#ebe4d6" role="primary text on dark" />
+      <color name="bone-deep" value="#a8a094" role="muted / secondary text" />
+      <color name="ochre" value="#d6964a" role="bright accent for dark contrast" />
+      <color name="ochre-deep" value="#b87333" role="primary warm accent, links, italic accents" />
+      <color name="rule" value="#2a2a2e" role="hairlines, dividers" />
+      <color name="sold-overlay" value="rgba(13, 13, 15, 0.62)" role="sold-state veil over product image" />
     </tokens>
 
     <typography>
       <scale base="16px">
-        <step name="display-xl" size="clamp(3.5rem, 8.5vw, 8.5rem)" family="Fraunces" weight="300" tracking="-0.02em" />
-        <step name="display-lg" size="clamp(2.5rem, 5vw, 4.5rem)" family="Fraunces" weight="300" tracking="-0.02em" />
-        <step name="display-md" size="2.5rem" family="Fraunces" weight="300" />
-        <step name="body-lg" size="1.05rem" family="Inter Tight" weight="400" leading="1.65" />
-        <step name="body" size="1rem" family="Inter Tight" weight="400" leading="1.6" />
-        <step name="ui" size="0.82rem" family="Inter Tight" weight="500" tracking="0.12em" transform="uppercase" />
-        <step name="caption" size="0.78rem" family="Fraunces" weight="400" style="italic" />
+        <step name="display-xl" size="clamp(4rem, 11vw, 11rem)" family="Cormorant Garamond" weight="500" tracking="-0.015em" transform="uppercase via .font-display-caps" />
+        <step name="display-lg" size="clamp(3rem, 7vw, 6.5rem)" family="Cormorant Garamond" weight="500" tracking="-0.012em" />
+        <step name="display-md" size="clamp(2.25rem, 4.2vw, 4rem)" family="Cormorant Garamond" weight="500" tracking="-0.008em" />
+        <step name="body-lg" size="1.125rem" family="Cormorant Garamond" weight="400" leading="1.7" />
+        <step name="body" size="1rem" family="Cormorant Garamond" weight="400" leading="1.6" />
+        <step name="ui" size="0.78rem" family="Inter Tight" weight="500" tracking="0.16em" transform="uppercase" />
+        <step name="caption" size="0.85rem" family="Cormorant Garamond" weight="400" style="italic" />
       </scale>
-      <pairing_rule>Italic Fraunces is a deliberate accent, not a default. Use for captions, key phrases inside display headings, and section labels.</pairing_rule>
+      <pairing_rule>
+        Italic Cormorant Garamond is the deliberate cursive accent. Use for
+        captions, key phrases inside display headings ("doorway", "studio",
+        "in light"), and section labels. Inter Tight (.text-ui) is the
+        functional UI face for caps-tracked labels and buttons where Cormorant
+        would become spidery at small sizes — it is the only sans on the site,
+        and only at <1rem.
+      </pairing_rule>
     </typography>
 
     <spatial>
@@ -418,10 +438,11 @@
     </motion>
 
     <reference>
-      A working static mockup of the homepage exists and reflects the agreed-upon
-      direction. Treat it as the source of truth for visual decisions. Where the
-      mockup uses inline SVG placeholders, the production build uses Sanity
-      images through next/image.
+      Visual direction is set by documentation/samples/Screenshot.png — a dark
+      editorial gallery layout with small museum-plaque tiles on a near-black
+      surface, Roman-numeral indices, and elegant serif headlines. Treat it as
+      the source of truth for surface tone, tile rhythm, and caption style.
+      Where earlier mockups used a bone/light surface, those are superseded.
     </reference>
   </design_system>
 
@@ -460,7 +481,7 @@
         <task>Configure ESLint + Prettier + strict TS settings</task>
         <task>Set up Vercel project, connect repo, configure preview deploys</task>
         <task>Add design tokens to globals.css via @theme directive (Tailwind v4)</task>
-        <task>Wire next/font for Fraunces and Inter Tight</task>
+        <task>Wire next/font for Cormorant Garamond (display + body) and Inter Tight (UI labels only)</task>
         <task>Scaffold all routes from information_architecture as empty pages</task>
         <task>Build shared Nav and Footer components matching the mockup</task>
       </tasks>

@@ -35,14 +35,21 @@ These are load-bearing — violating any of them risks data corruption.
 
 ## Design system shortcuts
 
+**Surface mode: dark editorial** (pivot 2026-05-31, see charter §design_system / §surface_mode).
+Deep charcoal page bg, warm cream type, ochre accent. Token names were
+preserved from the original light palette — what changed is the role each
+colour plays.
+
 Tokens declared in `app/globals.css`:
 
-- Palette: `bone`, `bone-deep`, `ink`, `ink-soft`, `ochre`, `ochre-deep`, `rule`, `sold-overlay`
-- Type: `font-display` (Fraunces) and `font-body` (Inter Tight) via `next/font`
-- Type scale tokens: `--text-display-xl/lg/md`, `--text-body-lg`, `--text-ui`, `--text-caption`
-- Use `text-ui` utility for the uppercase-tracked label style (nav, button text)
-- Use `font-display-italic` for the deliberate italic accent (charter §pairing_rule — italic is an accent, not a default)
-- Sold pieces: wrap image container with `relative sold-overlay`
+- **Surfaces** — `bg-ink` (page bg, `#0d0d0f`), `bg-ink-soft` (elevated cards / footer, `#16171b`).
+- **Text** — `text-bone` (primary cream, `#ebe4d6`), `text-bone-deep` (muted cream, `#a8a094`).
+- **Accent** — `text-ochre-deep` / `bg-ochre-deep` (`#b87333`) for links, italic accents, primary CTAs. `text-ochre` (`#d6964a`) for brighter on-dark hover states.
+- **Hairlines** — `border-rule` (`#2a2a2e`). Avoid `bg-white`, `bg-black`, or any hardcoded hex outside `globals.css` / `opengraph-image.tsx` / `global-error.tsx`.
+- **Type** — Cormorant Garamond (display + body) via `--font-cormorant`. Inter Tight (`--font-ui`) is reserved for `.text-ui` only — never use it for paragraph copy (charter §forbidden).
+- **Type scale tokens** — `--text-display-xl/lg/md`, `--text-body-lg`, `--text-ui`, `--text-caption`.
+- **Utilities** — `.text-ui` for caps-tracked labels (nav, button text). `.font-display-italic` for the cursive accent (charter §pairing_rule — italic is an accent, not a default).
+- **Sold pieces** — wrap image container with `relative sold-overlay`.
 
 ## Charter principles to keep front-of-mind
 
