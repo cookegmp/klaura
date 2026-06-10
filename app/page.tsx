@@ -33,14 +33,11 @@ export default async function HomePage() {
         />
         <div className="relative z-10 flex h-full items-center justify-center px-6">
           <div className="text-center">
-            <p className="text-tag text-bone/75 mb-6 md:mb-8">
-              vol. i · est. 2018
-            </p>
             <h1 className="font-signature text-bone text-[clamp(4.5rem,17vw,10rem)] leading-[0.9] tracking-tight drop-shadow-[0_2px_24px_rgba(0,0,0,0.45)]">
               Kelly Laura
             </h1>
             <p className="font-display-italic text-bone-deep text-base md:text-lg mt-5 md:mt-7">
-              paintings · pastels · vintage
+              Contemporary Fine Art
             </p>
           </div>
         </div>
