@@ -3,7 +3,14 @@
     "allow": [
       "Bash(git add *)",
       "Bash(git commit -m ' *)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "Bash(npm -v)",
+      "Bash(pnpm -v)",
+      "Bash(corepack -v)",
+      "Bash(brew -v)",
+      "Bash(yarn -v)",
+      "Bash(curl -fsSL https://get.pnpm.io/install.sh)",
+      "Bash(sh -)"
     ]
   }
 }

@@ -46,13 +46,24 @@ export default async function CategoryPage({ params }: { params: Params }) {
   const def = findCategory(category);
   if (!def) notFound();
 
+  // The 18+ room is gated and, for now, shows a "commissions coming soon"
+  // notice with no examples instead of the gallery. The age check still runs
+  // first via AgeGate.
+  if (def.mature) {
+    return (
+      <AgeGate declineHref="/gallery">
+        <ComingSoon definition={def} />
+      </AgeGate>
+    );
+  }
+
   const categorySlug = def.slug;
   const [paintings, allSeries] = await Promise.all([
     getPaintingsByCategory(categorySlug),
     getAllSeries(),
   ]);
 
-  const body = (
+  return (
     <CategoryBody
       definition={def}
       paintings={paintings}
@@ -60,11 +71,41 @@ export default async function CategoryPage({ params }: { params: Params }) {
       categorySlug={categorySlug}
     />
   );
+}
 
-  if (def.mature) {
-    return <AgeGate declineHref="/gallery">{body}</AgeGate>;
-  }
-  return body;
+function ComingSoon({
+  definition,
+}: {
+  definition: (typeof PAINTING_CATEGORIES)[number];
+}) {
+  return (
+    <section className="pt-20 md:pt-32 pb-32 md:pb-44">
+      <Container width="wide">
+        <Reveal>
+          <p className="text-meta mb-8 md:mb-10">
+            § Gallery / {definition.shortLabel}
+          </p>
+        </Reveal>
+        <Reveal delay={120} rise={48}>
+          <h1 className="font-display-italic font-normal text-[length:var(--text-display-lg)] md:text-[length:var(--text-display-xl)] leading-[0.85] tracking-[-0.03em] max-w-5xl">
+            Commissions coming soon
+          </h1>
+        </Reveal>
+        <Reveal delay={220}>
+          <p className="mt-12 max-w-2xl text-[length:var(--text-body-lg)] text-bone-deep leading-relaxed">
+            Figure and commissioned work for this room is in progress. Please
+            check back soon.
+          </p>
+          <Link
+            href="/gallery"
+            className="mt-10 inline-block text-ui border-b border-bone pb-1"
+          >
+            ← All rooms
+          </Link>
+        </Reveal>
+      </Container>
+    </section>
+  );
 }
 
 function CategoryBody({
