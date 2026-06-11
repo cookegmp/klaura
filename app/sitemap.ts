@@ -7,7 +7,6 @@ const STATIC_ROUTES = [
   "",
   "/gallery",
   "/vintage",
-  "/commissions",
   "/studio",
 ] as const;
 

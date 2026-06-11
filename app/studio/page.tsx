@@ -257,36 +257,6 @@ export default async function StudioPage() {
         </section>
       )}
 
-      {/* 7. CLOSING CTA — commissions ------------------------------- */}
-      <section className="py-32 md:py-56 border-t border-rule/60 text-center">
-        <Container width="wide">
-          <Reveal rise={40}>
-            <p className="text-meta mb-8">§ A painting for your place</p>
-          </Reveal>
-          <Reveal delay={100} rise={120}>
-            <h2 className="font-display-italic font-normal text-[length:var(--text-display-lg)] md:text-[length:var(--text-display-xl)] leading-[0.88] tracking-[-0.03em] max-w-5xl mx-auto">
-              Begin a
-              <br />
-              <span className="font-display-italic normal-case">
-                commission
-              </span>
-              .
-            </h2>
-          </Reveal>
-          <Reveal delay={260}>
-            <p className="mt-10 md:mt-14 max-w-xl mx-auto text-[length:var(--text-body-lg)] text-bone-deep leading-relaxed">
-              Landscapes of a place you love, painted from your photos or a visit. A
-              limited number of commissions each season.
-            </p>
-            <Link
-              href="/commissions"
-              className="mt-12 inline-block text-ui px-9 py-5 bg-bone text-ink hover:bg-bone-deep transition-colors"
-            >
-              Begin an inquiry →
-            </Link>
-          </Reveal>
-        </Container>
-      </section>
     </>
   );
 }

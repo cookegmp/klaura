@@ -13,7 +13,6 @@ type NavLink = { href: string; label: string };
 // /gallery redirects to / for any in-flight bookmarks. "About" surfaces
 // the rich practice / process content at /studio.
 const links: NavLink[] = [
-  { href: "/commissions", label: "Commissions" },
   { href: "/", label: "Gallery" },
   { href: "/vintage", label: "Shop" },
   { href: "/studio", label: "About" },

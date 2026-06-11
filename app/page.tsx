@@ -7,8 +7,8 @@ import { getCategorySummaries } from "@/lib/sanity/read";
 
 /**
  * Home — full-bleed fabric intro with cursive signature, then the two
- * Gallery doorways (full collection + gated 18+), Commissions, catalogue/
- * about. Single narrow column elsewhere.
+ * Gallery doorways (full collection + gated 18+), a commissions-coming-soon
+ * note, and an about-the-artist link. Single narrow column elsewhere.
  */
 export default async function HomePage() {
   const summaries = await getCategorySummaries();
