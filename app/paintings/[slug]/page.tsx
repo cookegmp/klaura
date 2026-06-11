@@ -3,15 +3,12 @@ import { notFound } from "next/navigation";
 import { Container } from "@/components/site/Container";
 import { ProductImage } from "@/components/site/ProductImage";
 import { PortableContent } from "@/components/site/PortableContent";
-import { Disclosure } from "@/components/site/Disclosure";
 import { PaintingCard } from "@/components/site/PaintingCard";
 import {
   getPaintingBySlug,
   getRelatedPaintings,
-  getSiteSettings,
 } from "@/lib/sanity/read";
 import { siteConfig } from "@/lib/site-config";
-import { formatPriceUSD } from "@/lib/utils";
 
 type Params = Promise<{ slug: string }>;
 
@@ -36,10 +33,7 @@ export default async function PaintingDetailPage({ params }: { params: Params })
   if (!painting) notFound();
 
   const tagIds = (painting.tags ?? []).map((t) => t._ref);
-  const [related, settings] = await Promise.all([
-    getRelatedPaintings(slug, tagIds),
-    getSiteSettings(),
-  ]);
+  const related = await getRelatedPaintings(slug, tagIds);
 
   const productJsonLd = {
     "@context": "https://schema.org",
@@ -145,26 +139,6 @@ export default async function PaintingDetailPage({ params }: { params: Params })
                 <PortableContent value={painting.story} />
               </div>
             )}
-
-            <div className="mt-12">
-              <Disclosure label="Shipping & care">
-                <div className="space-y-3 mt-3 text-sm">
-                  <p>
-                    Ships from the studio in Ohio via insured ground service. Most pieces
-                    arrive in 7–10 business days. Larger or framed works may require
-                    additional crating time.
-                  </p>
-                  {painting.shippingNotes && (
-                    <p className="text-caption text-bone-deep">{painting.shippingNotes}</p>
-                  )}
-                  {settings?.shippingFlatRateUS != null && (
-                    <p className="text-caption text-bone-deep">
-                      Flat US rate: {formatPriceUSD(settings.shippingFlatRateUS)}
-                    </p>
-                  )}
-                </div>
-              </Disclosure>
-            </div>
           </aside>
         </div>
       </Container>
