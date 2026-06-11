@@ -47,9 +47,9 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* 1. Gallery doorways -------------------------------------- */}
+      {/* 1. Gallery doorways — wider two-up on desktop ------------- */}
       <section className="pt-12 md:pt-16 pb-16 md:pb-24">
-        <Container>
+        <Container width="wide">
           <Reveal>
             <div className="text-center mb-8 md:mb-10">
               <h2 className="font-display-italic text-bone text-3xl md:text-4xl leading-tight">

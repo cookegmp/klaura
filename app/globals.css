@@ -239,4 +239,32 @@
       animation: none;
     }
   }
+
+  /* Vintage molding frame — a stepped beige picture-frame profile on ink,
+     used on the home gallery doorways. A thick aged-beige outer molding with
+     a brighter inner lip (the bevel), paired with an inset mat hairline on
+     the element inside. Pure borders, no shadows; stays two-colour. */
+  .frame-molding {
+    position: relative;
+    border-style: solid;
+    border-width: 6px;
+    border-color: var(--color-bone-deep);
+    transition: border-color 300ms var(--ease-editorial);
+  }
+  .frame-molding::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border: 1px solid color-mix(in srgb, var(--color-bone) 55%, transparent);
+    pointer-events: none;
+  }
+  .frame-molding:hover,
+  .frame-molding:focus-visible {
+    border-color: var(--color-bone);
+  }
+  @media (min-width: 768px) {
+    .frame-molding {
+      border-width: 10px;
+    }
+  }
 }
