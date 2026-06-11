@@ -1,18 +1,17 @@
 import type { MetadataRoute } from "next";
 import { siteConfig } from "@/lib/site-config";
-import { getAllPaintings, getAllVintage } from "@/lib/sanity/read";
+import { getAllPaintings } from "@/lib/sanity/read";
 import { PAINTING_CATEGORIES } from "@/types/sanity";
 
 const STATIC_ROUTES = [
   "",
   "/gallery",
-  "/vintage",
   "/studio",
 ] as const;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
-  const [paintings, vintage] = await Promise.all([getAllPaintings(), getAllVintage()]);
+  const paintings = await getAllPaintings();
 
   const staticEntries: MetadataRoute.Sitemap = STATIC_ROUTES.map((path) => ({
     url: `${siteConfig.url}${path}`,
@@ -30,13 +29,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: p.status === "available" ? 0.9 : 0.5,
     }));
 
-  const vintageEntries: MetadataRoute.Sitemap = vintage.map((v) => ({
-    url: `${siteConfig.url}/vintage/${v.slug.current}`,
-    lastModified: v.createdAt ? new Date(v.createdAt) : now,
-    changeFrequency: "monthly",
-    priority: v.status === "available" ? 0.9 : 0.5,
-  }));
-
   // Per-category gallery rooms. The Eighteen+ room is marked noindex via
   // route metadata, so we deliberately omit it from the sitemap.
   const categoryEntries: MetadataRoute.Sitemap = PAINTING_CATEGORIES.filter(
@@ -48,5 +40,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
-  return [...staticEntries, ...categoryEntries, ...paintingEntries, ...vintageEntries];
+  return [...staticEntries, ...categoryEntries, ...paintingEntries];
 }

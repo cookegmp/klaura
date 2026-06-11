@@ -119,10 +119,6 @@ function CategoryBody({
   allSeries: Series[];
   categorySlug: PaintingCategory;
 }) {
-  const availableCount = paintings.filter(
-    (p) => p.status === "available" || p.status === "reserved"
-  ).length;
-
   return (
     <>
       <section className="pt-20 md:pt-32 pb-16 md:pb-24">
@@ -140,7 +136,6 @@ function CategoryBody({
           <Reveal delay={220}>
             <div className="mt-12 flex flex-wrap items-baseline gap-x-8 gap-y-3 text-meta text-bone-deep">
               <span>{paintings.length.toString().padStart(2, "0")} works</span>
-              <span>· {availableCount} available</span>
               <Link
                 href="/gallery"
                 className="ml-auto text-bone"

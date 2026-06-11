@@ -10,6 +10,7 @@ export function Footer() {
   return (
     <footer className="bg-ink border-t border-rule mt-24 md:mt-32">
       <Container className="py-14 md:py-20">
+        <p className="text-tag text-center mb-5">contact &amp; socials</p>
         <div className="flex items-center justify-center gap-10">
           <a
             href={`mailto:${siteConfig.contactEmail}`}

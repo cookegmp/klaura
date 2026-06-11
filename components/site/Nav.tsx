@@ -14,7 +14,6 @@ type NavLink = { href: string; label: string };
 // the rich practice / process content at /studio.
 const links: NavLink[] = [
   { href: "/", label: "Gallery" },
-  { href: "/vintage", label: "Shop" },
   { href: "/studio", label: "About" },
 ];
 
