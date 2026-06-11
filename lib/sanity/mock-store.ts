@@ -202,29 +202,24 @@ function seed(): void {
     _rev: rev(),
     title: "Places",
     slug: { current: "places" },
-    description:
-      "Studio practice from a single winter — the same field, the same hour, painted thirty different ways.",
   };
   const nighttimeSeries: Series = {
     _id: "series.nighttime",
     _rev: rev(),
     title: "Nighttime",
     slug: { current: "nighttime" },
-    description: "Landscapes after dusk — long looks at how the dark behaves.",
   };
   const anticipationSeries: Series = {
     _id: "series.anticipation",
     _rev: rev(),
     title: "Anticipation",
     slug: { current: "anticipation" },
-    description: "Figure work — the moment before.",
   };
   const gatewaySeries: Series = {
     _id: "series.gateway",
     _rev: rev(),
     title: "Gateway",
     slug: { current: "gateway" },
-    description: "Closer studies. Explicit by intention.",
   };
   for (const s of [placesSeries, nighttimeSeries, anticipationSeries, gatewaySeries]) {
     store.documents[s._id] = { ...s, _type: "series" };

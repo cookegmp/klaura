@@ -41,7 +41,7 @@ export default async function MockCheckoutPage({ params }: { params: Params }) {
           <div className="space-y-4">
             <p className="">This session is {session.status}.</p>
             <Link
-              href="/paintings"
+              href="/gallery"
               className="text-ui inline-block border-b border-ink"
             >
               Back to the gallery

@@ -20,7 +20,7 @@ export function Footer() {
           <div>
             <p className="text-tag mb-3">explore</p>
             <ul className="space-y-1.5 font-display-italic text-bone">
-              <li><Link href="/paintings">catalogue</Link></li>
+              <li><Link href="/gallery">gallery</Link></li>
               <li><Link href="/vintage">shop</Link></li>
               <li><Link href="/commissions">commissions</Link></li>
               <li><Link href="/studio">studio</Link></li>

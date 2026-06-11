@@ -14,7 +14,7 @@ export default function NotFound() {
       </p>
       <div className="mt-12 flex flex-wrap justify-center gap-4">
         <Link
-          href="/paintings"
+          href="/gallery"
           className="text-ui px-7 py-4 bg-bone text-ink hover:bg-bone-deep transition-colors"
         >
           See the paintings

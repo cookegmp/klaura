@@ -94,22 +94,16 @@ export default async function HomePage() {
         </Container>
       </section>
 
-      {/* 3. Also: catalogue + about -------------------------------- */}
+      {/* 3. Also: about the artist -------------------------------- */}
       <section className="pb-16 md:pb-20 border-t border-rule pt-10 md:pt-14">
         <Container>
           <Reveal>
             <div className="text-center">
-              <p className="text-tag mb-3">also in the archive</p>
+              <p className="text-tag mb-3">elsewhere</p>
               <p className="font-display-italic text-bone text-xl md:text-2xl leading-snug max-w-md mx-auto">
-                See every available work in one long catalogue, or read about the artist.
+                Read about the artist and her practice.
               </p>
-              <div className="mt-7 flex flex-col sm:flex-row justify-center gap-3">
-                <Link
-                  href="/paintings"
-                  className="inline-block text-ui px-6 py-3 bg-bone text-ink hover:bg-bone-deep transition-colors"
-                >
-                  the catalogue
-                </Link>
+              <div className="mt-7 flex justify-center">
                 <Link
                   href="/studio"
                   className="inline-block text-ui px-6 py-3 border border-bone text-bone hover:bg-bone hover:text-ink transition-colors"

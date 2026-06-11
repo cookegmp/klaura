@@ -6,7 +6,6 @@ import { PAINTING_CATEGORIES } from "@/types/sanity";
 const STATIC_ROUTES = [
   "",
   "/gallery",
-  "/paintings",
   "/vintage",
   "/commissions",
   "/studio",

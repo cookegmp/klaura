@@ -67,7 +67,7 @@ export default async function CheckoutSuccessPage({
 
       <div className="mt-12 flex justify-center gap-4">
         <Link
-          href="/paintings"
+          href="/gallery"
           className="text-ui px-7 py-4 bg-bone text-ink hover:bg-bone-deep transition-colors"
         >
           Back to the gallery
