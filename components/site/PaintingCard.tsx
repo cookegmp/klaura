@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { ProductImage } from "@/components/site/ProductImage";
-import { formatPriceUSD } from "@/lib/utils";
 import type { Painting } from "@/types/sanity";
 
 interface PaintingCardProps {
@@ -9,27 +8,19 @@ interface PaintingCardProps {
   sizes?: string;
 }
 
-const ROMAN = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"];
-
 /**
- * Framed plate. Image inside a thin beige border, hairline rule, italic
- * title centered with a Roman numeral, tiny meta caption below. Matches
- * the archival-scrapbook fragrance-card pattern in the reference design.
+ * Framed plate. Image inside a thin beige border, a hairline rule, then the
+ * italic title — and nothing else. Medium, dimensions and price are kept off
+ * the card; they live on the painting detail page.
  */
-export function PaintingCard({ painting, index = 0, sizes }: PaintingCardProps) {
+export function PaintingCard({ painting, sizes }: PaintingCardProps) {
   const sold = painting.status === "sold";
-  const numeral = ROMAN[index] ?? `${index + 1}`;
 
   return (
     <Link
       href={`/paintings/${painting.slug.current}`}
       className="group block border border-rule p-3 hover:border-bone transition-colors"
     >
-      <div className="flex items-baseline justify-between mb-2">
-        <span className="text-tag">no. {String(index + 1).padStart(2, "0")}</span>
-        <span className="text-roman" aria-hidden>{numeral}</span>
-      </div>
-
       <div
         className={`relative w-full aspect-square overflow-hidden bg-ink ${sold ? "sold-overlay" : ""}`}
       >
@@ -55,12 +46,6 @@ export function PaintingCard({ painting, index = 0, sizes }: PaintingCardProps) 
         <h3 className="font-display-italic text-bone text-base md:text-lg leading-tight">
           {painting.title}
         </h3>
-        <p className="text-tag mt-1.5">
-          {painting.medium} · {painting.dimensions.heightInches}×{painting.dimensions.widthInches} in
-        </p>
-        {!sold && (
-          <p className="text-meta mt-1.5">{formatPriceUSD(painting.price)}</p>
-        )}
       </div>
     </Link>
   );
