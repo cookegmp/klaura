@@ -1,16 +1,21 @@
 import Image from "next/image";
 import Link from "next/link";
-import { CategoryDoorways } from "@/components/site/CategoryDoorways";
 import { Container } from "@/components/site/Container";
+import { GalleryDoorways } from "@/components/site/GalleryDoorways";
 import { Reveal } from "@/components/site/Reveal";
 import { getCategorySummaries } from "@/lib/sanity/read";
 
 /**
- * Home — full-bleed fabric intro with cursive signature, then Gallery
- * doorways, Commissions, catalogue/about. Single narrow column elsewhere.
+ * Home — full-bleed fabric intro with cursive signature, then the two
+ * Gallery doorways (full collection + gated 18+), Commissions, catalogue/
+ * about. Single narrow column elsewhere.
  */
 export default async function HomePage() {
   const summaries = await getCategorySummaries();
+  const matureSummary = summaries.find((s) => s.mature) ?? null;
+  const gallerySummaries = summaries.filter((s) => !s.mature);
+  const galleryCount = gallerySummaries.reduce((n, c) => n + c.count, 0);
+  const galleryCover = gallerySummaries.find((c) => c.cover)?.cover ?? null;
 
   return (
     <>
@@ -52,11 +57,14 @@ export default async function HomePage() {
                 Gallery
               </h2>
               <p className="text-tag mt-3">
-                five doorways · enter at your pace
+                two doorways · enter at your pace
               </p>
             </div>
           </Reveal>
-          <CategoryDoorways summaries={summaries} />
+          <GalleryDoorways
+            gallery={{ count: galleryCount, cover: galleryCover }}
+            mature={{ cover: matureSummary?.cover ?? null }}
+          />
         </Container>
       </section>
 
