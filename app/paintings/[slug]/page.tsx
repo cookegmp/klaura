@@ -51,8 +51,6 @@ export default async function PaintingDetailPage({ params }: { params: Params })
     brand: { "@type": "Person", name: "Kelly Laura" },
     offers: {
       "@type": "Offer",
-      price: painting.price,
-      priceCurrency: "USD",
       availability:
         painting.status === "available"
           ? "https://schema.org/InStock"
