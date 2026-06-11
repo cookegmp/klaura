@@ -14,7 +14,6 @@ export default async function HomePage() {
   const summaries = await getCategorySummaries();
   const matureSummary = summaries.find((s) => s.mature) ?? null;
   const gallerySummaries = summaries.filter((s) => !s.mature);
-  const galleryCount = gallerySummaries.reduce((n, c) => n + c.count, 0);
   const galleryCover = gallerySummaries.find((c) => c.cover)?.cover ?? null;
 
   return (
@@ -56,13 +55,10 @@ export default async function HomePage() {
               <h2 className="font-display-italic text-bone text-3xl md:text-4xl leading-tight">
                 Gallery
               </h2>
-              <p className="text-tag mt-3">
-                two doorways · enter at your pace
-              </p>
             </div>
           </Reveal>
           <GalleryDoorways
-            gallery={{ count: galleryCount, cover: galleryCover }}
+            gallery={{ cover: galleryCover }}
             mature={{ cover: matureSummary?.cover ?? null }}
           />
         </Container>

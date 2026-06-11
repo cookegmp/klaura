@@ -4,16 +4,17 @@ import { Reveal } from "@/components/site/Reveal";
 import type { Painting } from "@/types/sanity";
 
 interface GalleryDoorwaysProps {
-  /** Combined non-mature collection — cover + total work count. */
-  gallery: { count: number; cover: Painting | null };
-  /** The gated Eighteen+ room — its own cover. */
+  /** Combined non-mature collection cover. */
+  gallery: { cover: Painting | null };
+  /** The gated Eighteen+ room cover. */
   mature: { cover: Painting | null };
 }
 
 /**
  * Two large framed-plate doorways, side by side: the full Gallery on the
- * left, the gated Eighteen+ room on the right. Same archival-plate anatomy
- * as CategoryDoorways' DoorwayPlate, scaled up for a two-up layout.
+ * left, the gated intimate room on the right. Same archival-plate frame as
+ * CategoryDoorways' DoorwayPlate, scaled up and stripped of the museum-plate
+ * number row.
  */
 export function GalleryDoorways({ gallery, mature }: GalleryDoorwaysProps) {
   return (
@@ -21,11 +22,9 @@ export function GalleryDoorways({ gallery, mature }: GalleryDoorwaysProps) {
       <Reveal rise={32}>
         <BigPlate
           href="/gallery"
-          numeral="I"
-          tag="no. 01"
           cover={gallery.cover}
           title="Gallery"
-          subtitle={`${gallery.count} ${gallery.count === 1 ? "work" : "works"} · the collection`}
+          subtitle="landscapes, buildings, animals, misc."
           fallbackLabel="Gallery"
           priority
         />
@@ -33,12 +32,10 @@ export function GalleryDoorways({ gallery, mature }: GalleryDoorwaysProps) {
       <Reveal delay={90} rise={32}>
         <BigPlate
           href="/gallery/eighteen-plus"
-          numeral="II"
-          tag="no. 02"
           cover={mature.cover}
-          title="18+"
-          subtitle="age-restricted · enter with care"
-          fallbackLabel="Eighteen+"
+          title="Intimate contemporary fine art"
+          subtitle="18+, age restricted"
+          fallbackLabel="Intimate contemporary fine art"
           mature
         />
       </Reveal>
@@ -48,8 +45,6 @@ export function GalleryDoorways({ gallery, mature }: GalleryDoorwaysProps) {
 
 function BigPlate({
   href,
-  numeral,
-  tag,
   cover,
   title,
   subtitle,
@@ -58,8 +53,6 @@ function BigPlate({
   priority = false,
 }: {
   href: string;
-  numeral: string;
-  tag: string;
   cover: Painting | null;
   title: string;
   subtitle: string;
@@ -79,14 +72,6 @@ function BigPlate({
           : `${fallbackLabel} — the full collection`
       }
     >
-      {/* Tag row — tiny tag top-left, Roman numeral top-right. */}
-      <div className="flex items-baseline justify-between mb-3">
-        <span className="text-tag">{tag}</span>
-        <span className="text-roman" aria-hidden>
-          {numeral}
-        </span>
-      </div>
-
       {/* Cover image — taller portrait plate for the larger two-up layout. */}
       <div className="relative w-full aspect-[4/5] overflow-hidden bg-ink">
         {cover ? (
