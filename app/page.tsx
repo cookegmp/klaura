@@ -61,52 +61,25 @@ export default async function HomePage() {
             gallery={{ cover: galleryCover }}
             mature={{ cover: matureSummary?.cover ?? null }}
           />
-        </Container>
-      </section>
-
-      {/* 2. Commissions ------------------------------------------- */}
-      <section className="pb-16 md:pb-24 border-t border-rule pt-14 md:pt-20">
-        <Container>
-          <Reveal>
-            <div className="text-center">
-              <p className="text-tag mb-3">by invitation</p>
-              <h2 className="font-display-italic text-bone text-3xl md:text-4xl leading-tight">
-                Commissions
-              </h2>
-              <p className="font-display-italic text-bone-deep text-lg md:text-xl leading-snug max-w-md mx-auto mt-5">
-                A painting of a place you love, made from your photos or a visit. A limited
-                number each season.
-              </p>
-              <div className="mt-7">
-                <Link
-                  href="/commissions"
-                  className="inline-block text-ui px-6 py-3 bg-bone text-ink hover:bg-bone-deep transition-colors"
-                >
-                  begin an inquiry
-                </Link>
-              </div>
-            </div>
+          <Reveal delay={180}>
+            <p className="font-display-italic text-bone-deep text-center text-base md:text-lg mt-8 md:mt-10">
+              Commissions coming soon
+            </p>
           </Reveal>
         </Container>
       </section>
 
-      {/* 3. Also: about the artist -------------------------------- */}
+      {/* 2. About the artist — single button -------------------- */}
       <section className="pb-16 md:pb-20 border-t border-rule pt-10 md:pt-14">
         <Container>
           <Reveal>
-            <div className="text-center">
-              <p className="text-tag mb-3">elsewhere</p>
-              <p className="font-display-italic text-bone text-xl md:text-2xl leading-snug max-w-md mx-auto">
-                Read about the artist and her practice.
-              </p>
-              <div className="mt-7 flex justify-center">
-                <Link
-                  href="/studio"
-                  className="inline-block text-ui px-6 py-3 border border-bone text-bone hover:bg-bone hover:text-ink transition-colors"
-                >
-                  about kelly
-                </Link>
-              </div>
+            <div className="flex justify-center">
+              <Link
+                href="/studio"
+                className="inline-block text-ui px-6 py-3 border border-bone text-bone hover:bg-bone hover:text-ink transition-colors"
+              >
+                about kelly
+              </Link>
             </div>
           </Reveal>
         </Container>
