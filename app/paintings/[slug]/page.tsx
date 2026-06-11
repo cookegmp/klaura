@@ -3,7 +3,6 @@ import { notFound } from "next/navigation";
 import { Container } from "@/components/site/Container";
 import { ProductImage } from "@/components/site/ProductImage";
 import { PortableContent } from "@/components/site/PortableContent";
-import { BuyButton } from "@/components/site/BuyButton";
 import { Disclosure } from "@/components/site/Disclosure";
 import { PaintingCard } from "@/components/site/PaintingCard";
 import {
@@ -12,7 +11,7 @@ import {
   getSiteSettings,
 } from "@/lib/sanity/read";
 import { siteConfig } from "@/lib/site-config";
-import { formatDimensions, formatPriceUSD } from "@/lib/utils";
+import { formatPriceUSD } from "@/lib/utils";
 
 type Params = Promise<{ slug: string }>;
 
@@ -123,36 +122,25 @@ export default async function PaintingDetailPage({ params }: { params: Params })
             <h1 className="font-display font-light text-[length:var(--text-display-md)] leading-[1.05] tracking-[-0.02em]">
               {painting.title}
             </h1>
-            <dl className="mt-8 space-y-2 text-bone-deep">
-              <div className="flex justify-between">
-                <dt className="text-meta">Medium</dt>
-                <dd className="text-right">{painting.medium}</dd>
-              </div>
-              <div className="flex justify-between">
-                <dt className="text-meta">Size</dt>
-                <dd className="text-right">{formatDimensions(painting.dimensions)}</dd>
-              </div>
-              {painting.dimensions.framed !== undefined && (
-                <div className="flex justify-between">
-                  <dt className="text-meta">Frame</dt>
-                  <dd className="text-right">{painting.dimensions.framed ? "Framed" : "Unframed"}</dd>
-                </div>
-              )}
-              <div className="flex justify-between border-t border-rule mt-6 pt-6">
-                <dt className="text-meta">Price</dt>
-                <dd className="text-right text-xl font-display text-bone">
-                  {formatPriceUSD(painting.price)}
-                </dd>
-              </div>
-            </dl>
 
-            <BuyButton
-              productType="painting"
-              productId={painting._id}
-              status={painting.status}
-              priceLabel={formatPriceUSD(painting.price)}
-              className="mt-8"
-            />
+            {painting.status === "sold" ? (
+              <p className="mt-8 inline-block text-ui px-8 py-5 bg-rule text-bone-deep">
+                Sold
+              </p>
+            ) : painting.status === "nfs" ? (
+              <p className="mt-8 text-caption text-bone-deep italic">
+                Not for sale — part of the studio collection.
+              </p>
+            ) : (
+              <a
+                href={`mailto:${siteConfig.contactEmail}?subject=${encodeURIComponent(
+                  `Inquiry about "${painting.title}"`
+                )}`}
+                className="mt-8 inline-block text-ui px-8 py-5 bg-bone text-ink hover:bg-bone-deep transition-colors"
+              >
+                Inquire about purchase
+              </a>
+            )}
 
             {painting.story && painting.story.length > 0 && (
               <div className="mt-12 space-y-4 text-[length:var(--text-body-lg)] leading-relaxed">

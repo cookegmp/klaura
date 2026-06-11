@@ -98,7 +98,6 @@ function SeriesSection({
             <div className="grid grid-cols-12 gap-x-8 pt-16 md:pt-24 pb-10 md:pb-14">
               <div className="col-span-12 md:col-span-3 md:sticky md:top-32 md:self-start">
                 <div className="flex items-baseline gap-4 text-meta text-bone-deep">
-                  <span>§ 0{sectionIdx + 1}</span>
                   <span>
                     {series
                       ? series.title
