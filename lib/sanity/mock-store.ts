@@ -941,15 +941,15 @@ function seed(): void {
     {
       _id: "painting.forest-river",
       _rev: rev(),
-      title: "Forest River",
-      slug: { current: "forest-river" },
+      title: "Sam",
+      slug: { current: "sam" },
       category: "landscapes",
       imageAspect: 0.704,
       price: 0,
       status: "available",
       primaryImage: localImage(
         "forest-river.jpg",
-        "Forest River — painting by Kelly Laura."
+        "Sam — painting by Kelly Laura."
       ),
       createdAt: nowIso(),
     },
