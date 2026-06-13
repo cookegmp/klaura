@@ -59,14 +59,19 @@ export interface Painting {
   title: string;
   slug: { current: string };
   category: PaintingCategory;
-  year: number;
-  medium: string;
-  dimensions: {
+  /** Painted year — omitted for works where it isn't recorded. */
+  year?: number;
+  /** Medium — omitted for works without recorded media. */
+  medium?: string;
+  /** Physical size — omitted for works without recorded dimensions. */
+  dimensions?: {
     widthInches: number;
     heightInches: number;
     depthInches?: number;
     framed?: boolean;
   };
+  /** Photo aspect ratio (width / height) — drives the detail-page frame. */
+  imageAspect?: number;
   weightOz?: number;
   price: number;
   status: ProductStatus;

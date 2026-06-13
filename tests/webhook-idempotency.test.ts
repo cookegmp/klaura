@@ -13,7 +13,7 @@ describe("webhook idempotency", () => {
   });
 
   it("duplicate completion does not double-process", async () => {
-    const productId = "painting.cottage-with-geese";
+    const productId = "painting.cottage";
     const handle = await reserveProduct("painting", productId);
     await handle.attachSessionId("cs_mock_idemp_1");
 

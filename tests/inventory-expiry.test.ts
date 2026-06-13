@@ -19,7 +19,7 @@ describe("stale reservation cleanup", () => {
   });
 
   it("releases reservations whose reservedUntil is in the past", async () => {
-    const productId = "painting.three-cattle";
+    const productId = "painting.deer";
     const handle = await reserveProduct("painting", productId);
     await handle.attachSessionId("cs_mock_stale_1");
 

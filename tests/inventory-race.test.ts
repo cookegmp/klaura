@@ -13,7 +13,7 @@ describe("inventory race condition", () => {
   });
 
   it("exactly one of two concurrent reservations succeeds", async () => {
-    const productId = "painting.first-snow";
+    const productId = "painting.aspens";
 
     const results = await Promise.allSettled([
       reserveProduct("painting", productId),
@@ -33,7 +33,7 @@ describe("inventory race condition", () => {
   });
 
   it("attempting to reserve an already-sold piece returns CONFLICT", async () => {
-    const productId = "painting.first-snow";
+    const productId = "painting.aspens";
     const handle = await reserveProduct("painting", productId);
     expect(handle).toBeTruthy();
 

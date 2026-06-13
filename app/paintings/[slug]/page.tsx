@@ -17,9 +17,12 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const painting = await getPaintingBySlug(slug);
   if (!painting) return { title: "Painting" };
 
+  const facts = [painting.medium, painting.year].filter(Boolean).join(", ");
   return {
     title: painting.title,
-    description: `${painting.title} — ${painting.medium}, ${painting.year}, by Kelly Laura.`,
+    description: facts
+      ? `${painting.title} — ${facts}, by Kelly Laura.`
+      : `${painting.title} — an original work by Kelly Laura.`,
     openGraph: {
       title: painting.title,
       type: "website",
@@ -35,11 +38,28 @@ export default async function PaintingDetailPage({ params }: { params: Params })
   const tagIds = (painting.tags ?? []).map((t) => t._ref);
   const related = await getRelatedPaintings(slug, tagIds);
 
+  // Frame the hero from the photo's own ratio when known, falling back to the
+  // recorded physical proportions, then to a square.
+  const heroRatio =
+    painting.imageAspect ??
+    (painting.dimensions
+      ? painting.dimensions.widthInches / painting.dimensions.heightInches
+      : 1);
+
+  const jsonLdFacts = [
+    painting.medium,
+    painting.dimensions
+      ? `${painting.dimensions.heightInches}×${painting.dimensions.widthInches} in`
+      : null,
+    painting.year ? String(painting.year) : null,
+  ].filter(Boolean);
   const productJsonLd = {
     "@context": "https://schema.org",
     "@type": "Product",
     name: painting.title,
-    description: `${painting.medium}, ${painting.dimensions.heightInches}×${painting.dimensions.widthInches} in, ${painting.year}.`,
+    description: jsonLdFacts.length
+      ? `${jsonLdFacts.join(", ")}.`
+      : `An original work by Kelly Laura.`,
     image: painting.primaryImage?.asset?._ref,
     sku: painting._id,
     brand: { "@type": "Person", name: "Kelly Laura" },
@@ -66,20 +86,14 @@ export default async function PaintingDetailPage({ params }: { params: Params })
           <div className="col-span-12 md:col-span-7 lg:col-span-8">
             <div
               className="relative overflow-hidden"
-              style={{
-                aspectRatio:
-                  painting.dimensions.widthInches / painting.dimensions.heightInches,
-              }}
+              style={{ aspectRatio: heroRatio }}
             >
               <ProductImage
                 image={painting.primaryImage}
                 alt={painting.primaryImage?.alt ?? painting.title}
                 seed={painting._id}
                 width={1600}
-                height={Math.round(
-                  1600 *
-                    (painting.dimensions.heightInches / painting.dimensions.widthInches)
-                )}
+                height={Math.round(1600 / heroRatio)}
                 sizes="(min-width: 1024px) 66vw, 100vw"
                 priority
               />
@@ -110,7 +124,7 @@ export default async function PaintingDetailPage({ params }: { params: Params })
 
           {/* Metadata + buy */}
           <aside className="col-span-12 md:col-span-5 lg:col-span-4 md:sticky md:top-28 md:self-start">
-            <p className="text-meta mb-4">{painting.year}</p>
+            {painting.year && <p className="text-meta mb-4">{painting.year}</p>}
             <h1 className="font-display font-light text-[length:var(--text-display-md)] leading-[1.05] tracking-[-0.02em]">
               {painting.title}
             </h1>

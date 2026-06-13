@@ -32,6 +32,10 @@ tsconfig.tsbuildinfo
 /tmp/klaura-emails
 .klaura-mock-state.json
 
+# Kelly's original HEIC/JPG art photos — kept locally as the source of truth.
+# Web-ready versions are converted into public/sample-art/ and committed.
+/public/gallery/
+
 # transient artifacts from local dev tooling
 .playwright-mcp/
 *.png
