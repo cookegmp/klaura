@@ -9,6 +9,7 @@ import {
   getRelatedPaintings,
 } from "@/lib/sanity/read";
 import { siteConfig } from "@/lib/site-config";
+import { formatDimensions } from "@/lib/utils";
 
 type Params = Promise<{ slug: string }>;
 
@@ -128,6 +129,17 @@ export default async function PaintingDetailPage({ params }: { params: Params })
             <h1 className="font-display font-light text-[length:var(--text-display-md)] leading-[1.05] tracking-[-0.02em]">
               {painting.title}
             </h1>
+
+            {(painting.medium || painting.dimensions) && (
+              <p className="text-meta mt-4 text-bone-deep">
+                {[
+                  painting.medium,
+                  painting.dimensions && formatDimensions(painting.dimensions),
+                ]
+                  .filter(Boolean)
+                  .join(" · ")}
+              </p>
+            )}
 
             {painting.status === "sold" ? (
               <p className="mt-8 inline-block text-ui px-8 py-5 bg-rule text-bone-deep">
