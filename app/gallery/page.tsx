@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { CategoryGallery } from "@/components/site/CategoryGallery";
 import { Container } from "@/components/site/Container";
 import { Reveal } from "@/components/site/Reveal";
-import { SeriesGallery } from "@/components/site/SeriesGallery";
-import { getAllPaintings, getAllSeries } from "@/lib/sanity/read";
+import { getAllPaintings } from "@/lib/sanity/read";
 import { PAINTING_CATEGORIES } from "@/types/sanity";
 
 export const metadata: Metadata = {
@@ -18,10 +18,7 @@ const MATURE_SLUGS = new Set(
 );
 
 export default async function GalleryIndexPage() {
-  const [all, allSeries] = await Promise.all([
-    getAllPaintings(),
-    getAllSeries(),
-  ]);
+  const all = await getAllPaintings();
   const paintings = all.filter((p) => !MATURE_SLUGS.has(p.category));
 
   return (
@@ -44,9 +41,8 @@ export default async function GalleryIndexPage() {
         </Container>
       </section>
 
-      <SeriesGallery
+      <CategoryGallery
         paintings={paintings}
-        allSeries={allSeries}
         emptyTitle="No works to show yet."
         emptyBody="Kelly is working on the next pieces. Please check back soon."
         backHref="/"
