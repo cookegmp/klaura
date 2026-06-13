@@ -74,7 +74,7 @@ export default async function OpenGraphImage() {
               fontFamily: "Georgia, serif",
             }}
           >
-            currently based in Ohio
+            now in the United States
           </div>
         </div>
       </div>

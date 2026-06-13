@@ -8,6 +8,9 @@ import type { SanityImage } from "@/types/sanity";
  *
  *   - `local-image:<filename>`     → served from `/sample-art/<filename>`
  *                                    (used by the mock-store seed paintings)
+ *   - `local-image:/<path>`        → served from `/<path>` verbatim, for
+ *                                    assets that live at the public root
+ *                                    (e.g. the artist portrait `/kelly.jpg`)
  *   - `image-placeholder-…`        → no image at all; ProductImage falls back
  *                                    to a tonal gradient placeholder
  */
@@ -45,5 +48,7 @@ export function localImageUrl(image: SanityImage | undefined | null): string | n
   const ref = image.asset?._ref ?? "";
   if (!ref.startsWith(LOCAL_PREFIX)) return null;
   const filename = ref.slice(LOCAL_PREFIX.length);
+  // A leading slash means the asset lives at the public root, not in sample-art.
+  if (filename.startsWith("/")) return filename;
   return `/sample-art/${filename}`;
 }

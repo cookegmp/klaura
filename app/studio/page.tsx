@@ -17,7 +17,7 @@ import {
 export const metadata: Metadata = {
   title: "About",
   description:
-    "About Kelly Laura — practice, place, and process. A studio in Ohio, landscapes painted from long looks at the same field.",
+    "About Kelly Laura — a painter from Montréal, Québec, now working in the United States across oil, pastel, and acrylic.",
 };
 
 /**
@@ -55,19 +55,19 @@ export default async function StudioPage() {
             <div className="col-span-12 md:col-span-8">
               <Reveal delay={0} rise={40}>
                 <p className="text-meta mb-10 md:mb-14">
-                  § About · Montreal painter · based in Ohio · est. 2018
+                  § About · from Montréal, Québec · now in the United States
                 </p>
               </Reveal>
               <Reveal delay={120} rise={120}>
                 <h1 className="font-display-italic font-normal text-[length:var(--text-display-lg)] md:text-[length:var(--text-display-xl)] leading-[0.85] tracking-[-0.03em]">
                   A painter.
                   <br />
-                  A{" "}
+                  From{" "}
                   <span className="font-display-italic normal-case">
-                    studio
+                    Montréal,
                   </span>
                   <br />
-                  in Ohio.
+                  Québec.
                 </h1>
               </Reveal>
             </div>
@@ -129,13 +129,13 @@ export default async function StudioPage() {
             <div className="col-span-12 md:col-span-9 max-w-3xl">
               <Reveal delay={100}>
                 <h2 className="font-display-italic font-normal text-[length:var(--text-display-md)] md:text-[length:var(--text-display-lg)] leading-[0.95] tracking-[-0.025em]">
-                  A practice rebuilt around
+                  Nothing makes me feel
                   <br />
                   <span className="font-display-italic normal-case">
-                    what the light is doing
+                    the way painting does
                   </span>
                   <br />
-                  at four in the afternoon.
+                  — it&rsquo;s my therapy.
                 </h2>
               </Reveal>
               <Reveal delay={200} className="mt-10">
@@ -145,8 +145,8 @@ export default async function StudioPage() {
                   </div>
                 ) : (
                   <p className="max-w-xl text-[length:var(--text-body-lg)] text-bone-deep leading-relaxed">
-                    Kelly paints from a studio in Ohio, far from Montreal — long winters,
-                    long looks at the same field.
+                    Kelly is a painter from Montréal, Québec, now working in the
+                    United States across oil pastel, soft pastel, acrylic, and oil paint.
                   </p>
                 )}
               </Reveal>
@@ -182,14 +182,12 @@ export default async function StudioPage() {
                   </p>
                 )}
                 <dl className="grid grid-cols-2 gap-y-4 max-w-md text-meta text-bone-deep">
-                  <dt>Working since</dt>
-                  <dd className="text-bone">2018</dd>
-                  <dt>Studio</dt>
-                  <dd className="text-bone">Ohio</dd>
                   <dt>Born</dt>
-                  <dd className="text-bone">Montréal</dd>
+                  <dd className="text-bone">Montréal, Québec</dd>
+                  <dt>Based</dt>
+                  <dd className="text-bone">United States</dd>
                   <dt>Media</dt>
-                  <dd className="text-bone">Oil · Soft pastel</dd>
+                  <dd className="text-bone">Oil · Pastel · Acrylic</dd>
                 </dl>
               </Reveal>
             </div>
@@ -200,10 +198,10 @@ export default async function StudioPage() {
                   {about?.hero ? (
                     <ProductImage
                       image={about.hero}
-                      alt={about.hero.alt ?? "Kelly Laura in the studio"}
+                      alt={about.hero.alt ?? "Kelly Laura"}
                       seed="about-hero"
-                      width={1000}
-                      height={1250}
+                      width={1200}
+                      height={900}
                       sizes="(min-width: 1024px) 45vw, 100vw"
                       className="w-full"
                     />

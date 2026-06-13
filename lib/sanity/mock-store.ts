@@ -658,6 +658,11 @@ function seed(): void {
   const about: AboutPage = {
     _id: "aboutPage.singleton",
     _rev: rev(),
+    hero: {
+      _type: "image",
+      asset: { _ref: "local-image:/kelly.jpg", _type: "reference" },
+      alt: "Kelly Laura",
+    },
     story: [
       {
         _type: "block",
@@ -666,7 +671,46 @@ function seed(): void {
           {
             _type: "span",
             _key: "s1",
-            text: "Kelly is a Montreal-born painter currently working from a studio in Ohio. The light here moves slowly through long winters, and slowness is the practice.",
+            text: "Hi! My name is Kelly.",
+          },
+        ],
+        markDefs: [],
+        style: "normal",
+      },
+      {
+        _type: "block",
+        _key: "k2",
+        children: [
+          {
+            _type: "span",
+            _key: "s2",
+            text: "I'm from Montréal, Québec. I now live in the states.",
+          },
+        ],
+        markDefs: [],
+        style: "normal",
+      },
+      {
+        _type: "block",
+        _key: "k3",
+        children: [
+          {
+            _type: "span",
+            _key: "s3",
+            text: "I think it all started with one of those complete art sets a lot of girls had in the early 2000's. Nothing makes me feel the way painting does, it's my therapy. I've experimented with different mediums, but I mostly enjoy oil pastels, soft pastels, acrylic and oil paint.",
+          },
+        ],
+        markDefs: [],
+        style: "normal",
+      },
+      {
+        _type: "block",
+        _key: "k4",
+        children: [
+          {
+            _type: "span",
+            _key: "s4",
+            text: "I plan on commissioning nude figure works soon. They will be faceless so the focus will be on the body!",
           },
         ],
         markDefs: [],
@@ -674,7 +718,7 @@ function seed(): void {
       },
     ],
     pullQuote:
-      "Same field, same hour, painted thirty different ways — that's how I know I've seen it.",
+      "Nothing makes me feel the way painting does — it's my therapy.",
   };
   store.documents[about._id] = { ...about, _type: "aboutPage" };
 
