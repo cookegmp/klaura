@@ -941,30 +941,30 @@ function seed(): void {
     {
       _id: "painting.forest-river",
       _rev: rev(),
-      title: "Sam",
-      slug: { current: "sam" },
+      title: "Forest River",
+      slug: { current: "forest-river" },
       category: "landscapes",
-      imageAspect: 0.704,
+      imageAspect: 1.378,
       price: 0,
       status: "available",
       primaryImage: localImage(
         "forest-river.jpg",
-        "Sam — painting by Kelly Laura."
+        "Forest River — painting by Kelly Laura."
       ),
       createdAt: nowIso(),
     },
     {
-      _id: "painting.companion",
+      _id: "painting.sam",
       _rev: rev(),
-      title: "Companion",
-      slug: { current: "companion" },
+      title: "Sam",
+      slug: { current: "sam" },
       category: "animals",
-      imageAspect: 1.356,
+      imageAspect: 0.704,
       price: 0,
       status: "available",
       primaryImage: localImage(
-        "companion.jpg",
-        "Companion — painting by Kelly Laura."
+        "sam.jpg",
+        "Sam — painting by Kelly Laura."
       ),
       createdAt: nowIso(),
     },
@@ -974,7 +974,7 @@ function seed(): void {
       title: "Tuxedo",
       slug: { current: "tuxedo" },
       category: "animals",
-      imageAspect: 0.8,
+      imageAspect: 1.356,
       price: 0,
       status: "available",
       primaryImage: localImage(
@@ -989,7 +989,7 @@ function seed(): void {
       title: "Summer Shade",
       slug: { current: "summer-shade" },
       category: "landscapes",
-      imageAspect: 1.379,
+      imageAspect: 0.8,
       price: 0,
       status: "available",
       primaryImage: localImage(
@@ -1004,7 +1004,7 @@ function seed(): void {
       title: "Mountain River",
       slug: { current: "mountain-river" },
       category: "landscapes",
-      imageAspect: 0.799,
+      imageAspect: 1.379,
       price: 0,
       status: "available",
       primaryImage: localImage(
@@ -1036,7 +1036,7 @@ function seed(): void {
       title: "Cliff Lavender",
       slug: { current: "cliff-lavender" },
       category: "landscapes",
-      imageAspect: 1.346,
+      imageAspect: 1.416,
       price: 0,
       status: "available",
       primaryImage: localImage(
@@ -1051,12 +1051,27 @@ function seed(): void {
       title: "Marshland",
       slug: { current: "marshland" },
       category: "landscapes",
-      imageAspect: 1.431,
+      imageAspect: 1.346,
       price: 0,
       status: "available",
       primaryImage: localImage(
         "marshland.jpg",
         "Marshland — painting by Kelly Laura."
+      ),
+      createdAt: nowIso(),
+    },
+    {
+      _id: "painting.indigo-field",
+      _rev: rev(),
+      title: "Indigo Field",
+      slug: { current: "indigo-field" },
+      category: "landscapes",
+      imageAspect: 1.431,
+      price: 0,
+      status: "available",
+      primaryImage: localImage(
+        "indigo-field.jpg",
+        "Indigo Field — painting by Kelly Laura."
       ),
       createdAt: nowIso(),
     },
