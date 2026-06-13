@@ -939,17 +939,19 @@ function seed(): void {
       createdAt: nowIso(),
     },
     {
-      _id: "painting.forest-river",
+      _id: "painting.sun-glint",
       _rev: rev(),
-      title: "Forest River",
-      slug: { current: "forest-river" },
+      title: "Sun Glint",
+      slug: { current: "sun-glint" },
       category: "landscapes",
+      medium: "Soft Pastel",
+      dimensions: { widthInches: 12, heightInches: 9 },
       imageAspect: 1.378,
       price: 0,
       status: "available",
       primaryImage: localImage(
         "forest-river.jpg",
-        "Forest River — painting by Kelly Laura."
+        "Sun Glint — Soft Pastel painting by Kelly Laura."
       ),
       createdAt: nowIso(),
     },
@@ -984,17 +986,19 @@ function seed(): void {
       createdAt: nowIso(),
     },
     {
-      _id: "painting.summer-shade",
+      _id: "painting.shade",
       _rev: rev(),
-      title: "Summer Shade",
-      slug: { current: "summer-shade" },
+      title: "Shade",
+      slug: { current: "shade" },
       category: "landscapes",
+      medium: "Oil Pastel",
+      dimensions: { widthInches: 9, heightInches: 12 },
       imageAspect: 0.8,
       price: 0,
       status: "available",
       primaryImage: localImage(
         "summer-shade.jpg",
-        "Summer Shade — painting by Kelly Laura."
+        "Shade — Oil Pastel painting by Kelly Laura."
       ),
       createdAt: nowIso(),
     },
@@ -1016,32 +1020,36 @@ function seed(): void {
       createdAt: nowIso(),
     },
     {
-      _id: "painting.threshold",
+      _id: "painting.liminal",
       _rev: rev(),
-      title: "Threshold",
-      slug: { current: "threshold" },
+      title: "Liminal",
+      slug: { current: "liminal" },
       category: "miscellaneous",
+      medium: "Soft Pastel",
+      dimensions: { widthInches: 9, heightInches: 12 },
       imageAspect: 0.799,
       price: 0,
       status: "available",
       primaryImage: localImage(
         "threshold.jpg",
-        "Threshold — painting by Kelly Laura."
+        "Liminal — Soft Pastel painting by Kelly Laura."
       ),
       createdAt: nowIso(),
     },
     {
-      _id: "painting.cliff-lavender",
+      _id: "painting.lavender",
       _rev: rev(),
-      title: "Cliff Lavender",
-      slug: { current: "cliff-lavender" },
+      title: "Lavender",
+      slug: { current: "lavender" },
       category: "landscapes",
+      medium: "Acrylic",
+      dimensions: { widthInches: 7, heightInches: 5 },
       imageAspect: 1.416,
       price: 0,
       status: "available",
       primaryImage: localImage(
         "cliff-lavender.jpg",
-        "Cliff Lavender — painting by Kelly Laura."
+        "Lavender — Acrylic painting by Kelly Laura."
       ),
       createdAt: nowIso(),
     },
@@ -1061,17 +1069,19 @@ function seed(): void {
       createdAt: nowIso(),
     },
     {
-      _id: "painting.indigo-field",
+      _id: "painting.indigo",
       _rev: rev(),
-      title: "Indigo Field",
-      slug: { current: "indigo-field" },
+      title: "Indigo",
+      slug: { current: "indigo" },
       category: "landscapes",
+      medium: "Oil Pastel",
+      dimensions: { widthInches: 12, heightInches: 9 },
       imageAspect: 1.431,
       price: 0,
       status: "available",
       primaryImage: localImage(
         "indigo-field.jpg",
-        "Indigo Field — painting by Kelly Laura."
+        "Indigo — Oil Pastel painting by Kelly Laura."
       ),
       createdAt: nowIso(),
     },
@@ -1093,17 +1103,19 @@ function seed(): void {
       createdAt: nowIso(),
     },
     {
-      _id: "painting.autumn-blaze",
+      _id: "painting.crisp",
       _rev: rev(),
-      title: "Autumn Blaze",
-      slug: { current: "autumn-blaze" },
+      title: "Crisp",
+      slug: { current: "crisp" },
       category: "landscapes",
+      medium: "Oil Pastel",
+      dimensions: { widthInches: 12, heightInches: 9 },
       imageAspect: 1.4,
       price: 0,
       status: "available",
       primaryImage: localImage(
         "autumn-blaze.jpg",
-        "Autumn Blaze — painting by Kelly Laura."
+        "Crisp — Oil Pastel painting by Kelly Laura."
       ),
       featured: true,
       featuredOrder: 1,
@@ -1215,17 +1227,19 @@ function seed(): void {
       createdAt: nowIso(),
     },
     {
-      _id: "painting.fracture",
+      _id: "painting.pool",
       _rev: rev(),
-      title: "Fracture",
-      slug: { current: "fracture" },
+      title: "Pool",
+      slug: { current: "pool" },
       category: "miscellaneous",
+      medium: "Oil Pastel",
+      dimensions: { widthInches: 9, heightInches: 12 },
       imageAspect: 0.996,
       price: 0,
       status: "available",
       primaryImage: localImage(
         "fracture.jpg",
-        "Fracture — painting by Kelly Laura."
+        "Pool — Oil Pastel painting by Kelly Laura."
       ),
       createdAt: nowIso(),
     },
@@ -1260,17 +1274,19 @@ function seed(): void {
       createdAt: nowIso(),
     },
     {
-      _id: "painting.first-light-winter",
+      _id: "painting.exploring",
       _rev: rev(),
-      title: "First Light, Winter",
-      slug: { current: "first-light-winter" },
+      title: "Exploring",
+      slug: { current: "exploring" },
       category: "landscapes",
+      medium: "Oil Pastel",
+      dimensions: { widthInches: 9, heightInches: 12 },
       imageAspect: 0.729,
       price: 0,
       status: "available",
       primaryImage: localImage(
         "first-light-winter.jpg",
-        "First Light, Winter — painting by Kelly Laura."
+        "Exploring — Oil Pastel painting by Kelly Laura."
       ),
       createdAt: nowIso(),
     },
@@ -1305,17 +1321,19 @@ function seed(): void {
       createdAt: nowIso(),
     },
     {
-      _id: "painting.cascade",
+      _id: "painting.fresh-waters",
       _rev: rev(),
-      title: "Cascade",
-      slug: { current: "cascade" },
+      title: "Fresh Waters",
+      slug: { current: "fresh-waters" },
       category: "landscapes",
+      medium: "Oil Pastel",
+      dimensions: { widthInches: 12, heightInches: 9 },
       imageAspect: 1.41,
       price: 0,
       status: "available",
       primaryImage: localImage(
         "cascade.jpg",
-        "Cascade — painting by Kelly Laura."
+        "Fresh Waters — Oil Pastel painting by Kelly Laura."
       ),
       createdAt: nowIso(),
     },
@@ -1335,17 +1353,19 @@ function seed(): void {
       createdAt: nowIso(),
     },
     {
-      _id: "painting.marmalade",
+      _id: "painting.bear-cat",
       _rev: rev(),
-      title: "Marmalade",
-      slug: { current: "marmalade" },
+      title: "Bear",
+      slug: { current: "bear-cat" },
       category: "animals",
+      medium: "Soft Pastel",
+      dimensions: { widthInches: 12, heightInches: 9 },
       imageAspect: 1.314,
       price: 0,
       status: "available",
       primaryImage: localImage(
         "marmalade.jpg",
-        "Marmalade — painting by Kelly Laura."
+        "Bear — Soft Pastel painting by Kelly Laura."
       ),
       createdAt: nowIso(),
     },
