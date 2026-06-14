@@ -237,7 +237,7 @@ function seed(): void {
       slug: { current: "mountain-forest" },
       category: "landscapes",
       medium: "Acrylic on stretched canvas",
-      dimensions: { widthInches: 11, heightInches: 16 },
+      dimensions: { widthInches: 12, heightInches: 16 },
       imageAspect: 0.791,
       price: 0,
       status: "available",
