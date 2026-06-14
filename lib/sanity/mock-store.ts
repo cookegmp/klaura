@@ -1534,6 +1534,23 @@ function seed(): void {
       ),
       createdAt: nowIso(),
     },
+    {
+      _id: "painting.church-bells",
+      _rev: rev(),
+      title: "Church Bells",
+      slug: { current: "church-bells" },
+      category: "houses",
+      medium: "Acrylic",
+      dimensions: { widthInches: 9, heightInches: 12 },
+      imageAspect: 0.766,
+      price: 0,
+      status: "available",
+      primaryImage: localImage(
+        "church-bells.jpg",
+        "Church Bells — Acrylic painting by Kelly Laura."
+      ),
+      createdAt: nowIso(),
+    },
   ];
   for (const p of paintings) {
     store.documents[p._id] = { ...p, _type: "painting" };
